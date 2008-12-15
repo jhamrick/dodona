@@ -13,19 +13,18 @@ for line in t:
         topics[part[0]] = part[2]
 
 #print topics
-
 def send(mess):
-    zephyr.ZNotice(cls='jhamrick-test', fields=["", mess], sender='jhamrick-bot@ATHENA.MIT.EDU').send()
+    zephyr.ZNotice(cls='dodona-test', fields=["", mess], sender='dodona@ATHENA.MIT.EDU').send()
 
 #init
 zephyr.init()
-zephyr.Subscriptions().add(('jhamrick-test', '*', '*'))
-send('jhamrick-bot is now running.  If you find\nthat a topic you wish answered is not accounted for, please send mail\nto jhamrick AT mit DOT edu')
+zephyr.Subscriptions().add(('dodona-test', '*', '*'))
+send('dodona is now running.  If you find\nthat a topic you wish answered is not accounted for, please send mail\nto dodona AT mit DOT edu')
 
 #receive a zephyr not from yourself
 def receive_from_subs():
     m = zephyr.receive(True)
-    while m.sender == 'jhamrick-bot@ATHENA.MIT.EDU':
+    while m.sender == 'dodona@ATHENA.MIT.EDU':
         m = zephyr.receive(True)
     print "From: ", m.sender
     print "Class: ", m.cls
@@ -46,7 +45,7 @@ def question():
         send('Sorry, I don\'t understand what you are asking me.')
 
 #keep-alive loop
-send('Welcome, I am jhamrick-bot!  What would you like to ask me about?')
+send('Welcome, I am dodonab-bot!  What would you like to ask me about?')
 while True:
     question()
     send('Would you like to ask me another question?')
