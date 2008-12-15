@@ -14,11 +14,11 @@ for line in t:
 
 #print topics
 def send(mess):
-    zephyr.ZNotice(cls='dodona-test', fields=["", mess], sender='dodona@ATHENA.MIT.EDU').send()
+    zephyr.ZNotice(cls='dodona', fields=["", mess], sender='dodona@ATHENA.MIT.EDU').send()
 
 #init
 zephyr.init()
-zephyr.Subscriptions().add(('dodona-test', '*', '*'))
+zephyr.Subscriptions().add(('dodona', '*', '*'))
 send('dodona is now running.  If you find\nthat a topic you wish answered is not accounted for, please send mail\nto dodona AT mit DOT edu')
 
 #receive a zephyr not from yourself
@@ -45,7 +45,7 @@ def question():
         send('Sorry, I don\'t understand what you are asking me.')
 
 #keep-alive loop
-send('Welcome, I am dodonab-bot!  What would you like to ask me about?')
+send('Welcome, I am dodona-bot!  What would you like to ask me about?')
 while True:
     question()
     send('Would you like to ask me another question?')
