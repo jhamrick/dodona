@@ -1,1 +1,31 @@
-NEWTOPIC password: NEVER write your password down anywhere, nor share your password with anyone, including your best friend, your academic advisor, or an on-line consultant!
+BEGINSECTION emacs
+BEGINANSWER version
+Several versions of Emacs are available on Athena. GNU Emacs 21 (version 21.1.1) is the default version as of Athena 9.1. If you login to an older Athena 9.0 workstation, the default Emacs will be GNU Emacs 20 (version 20.7) Other versions of GNU Emacs are often available in the emacs locker.
+Additionally, there is another version of emacs, XEmacs available on Athena. It traditionally has had a nicer X interface, and also a different set of lisp. To run it, use the commands:
+add xemacs
+xemacs &
+ENDANSWER
+BEGINANSWER disable menu
+To disable the menu bar, place the following line in your .emacs file:
+(menu-bar-mode -1)
+To disable the scrollbar, use the following line:
+(toggle-scroll-bar -1)
+ENDANSWER
+BEGINANSWER window size
+There are several ways to choose the size of your Emacs window.
+If you start Emacs by just typing:
+emacs &
+and you are using mwm (the default window manager), you use the mouse or keyboard to choose the window's placement, and then use the keyboard to select the size.  The mouse pointer will change to an inverted "L" with a rectangle attached to it, and a little box will pop up in the middle of the screen telling you the position of the L, and the current size of the window, something like this:
+(120,115)
+80x24
+Move the mouse pointer to where you want the upper-left corner of the new window to be.  Now, you can either hit the left mouse button or return to place the window, if that's the size you want.  You can also hit the space bar, which will freeze the upper left corner, and any motion you make with the mouse will change the size of the rectangle. After you select the size you want, hit Return or the left mouse button, and the window will appear.
+Note: If your workstation's mouse only has two buttons, pressing both buttons simultaneously has the same effect as pressing the middle button.
+If you want, you can specify the window's size by providing a "geometry specification".  For example, if you type:
+emacs -geometry 132x48 &
+...and press the left mouse button, the Emacs window will be 132 columns wide and 48 rows high.
+You can also specify the position of the window relative to the upper-left corner of the screen.  For example:
+emacs -geometry 132x48+50+100 &
+...will create your Emacs window with its upper-left corner located 50 pixels across from the left edge of the screen and 100 pixels down from the top of the screen.  In this case, the window appears automatically (you don't need to press any mouse buttons).
+You can also resize the window after placing it: see the stock answer `How to MOVE or resize windows' under the XWINDOWS topic in the olc_answers program.
+ENDASNWER
+ENDSECTION
