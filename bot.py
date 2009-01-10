@@ -2,51 +2,35 @@ import site
 site.addsitedir('/mit/broder/lib/python2.5/site-packages')
 import zephyr
 from textwrap import fill
+from xml.dom import minidom  
 
-#from pysqlite2 import dbapi2 as sqlite
-# uses a basic parsing method:
-#   BEGINSECTION begins a section, can contain multiple answers.
-#                must end with ENDSECTION, and must be followed
-#                by a section name
-#   BEGINANSWER  begins an answer, may only contain one answer.
-#                it must end with ENDANSWER, and must be followed
-#                by an answer name
-def load_answers(file):
-    topics = {}
-    t = open(file)
-    section = None
-    answer = None
-    for line in t:
-        if line.startswith("BEGINSECTION"):
-            section = line.partition("SECTION ")[2].strip()
-            topics[section] = {}
-        elif line.startswith("BEGINANSWER"):
-            answer = line.partition("BEGINANSWER ")[2].strip()
-            if section != None:
-                topics[section][answer] = ""
-            else:
-                topics[answer] = ""
-        elif line.startswith("ENDANSWER"):
-            answer = None
-        elif line.startswith("ENDSECTION"):
-            section = None
-        elif line.startswith("#"):
-            pass
-        else:
-            if section != None:
-                if topics[section][answer] == "":
-                    topics[section][answer] = line
-                else:
-                    topics[section][answer] += "\n" + line
-            else:
-                if topics[answer] == "":
-                    topics[answer] = line
-                else:
-                    topics[answer] += "\n" + line
-    print topics
-    return topics
+def load_topics(file):
+	topics = {}  
+	xmldoc = minidom.parse(file)
+	topicsNode = xmldoc.firstChild
+	for topic in topicsNode.childNodes:
+		if topic.nodeType == topic.ELEMENT_NODE and topic.localName == "topic":
+			topic_name = topic.attributes["name"].value
+			topic_file = topic.attributes["file"].value			
+			topics[topic_name.encode('ascii')] = load_topic(topic_file)
+	print topics
+	return topics
 
-topics = load_answers("topics")
+def load_topic(file):
+	answers = {} 
+	xmldoc = minidom.parse(file)
+	topicNode = xmldoc.firstChild
+	for answer in topicNode.childNodes:
+		if answer.nodeType == answer.ELEMENT_NODE:
+			if answer.localName == "answer":
+				answer_question = answer.attributes["question"].value
+				answers[answer_question.encode('ascii')] = answer.firstChild.data
+			elif answer.localName == "default":
+				default_answer = answer.firstChild.data
+				#answers["DEFAULT"] = default_answer 
+	return answers
+
+topics = load_topics("topics.xml")
 
 def send(mess):
     try:
