@@ -13,7 +13,13 @@ def load_topics(file):
 			topic_name = topic.attributes["name"].value
 			topic_file = topic.attributes["file"].value			
 			topics[topic_name.encode('ascii')] = load_topic(topic_file)
-	print topics
+	for topic in topicsNode.childNodes:
+		if topic.nodeType == topic.ELEMENT_NODE and topic.localName == "alias":
+			topic_name = topic.attributes["name"].value
+			topic_file = topic.attributes["to"].value			
+			topics[topic_name.encode('ascii')] = topics[(topic_file)]
+
+#	print topics
 	return topics
 
 def load_topic(file):
@@ -30,7 +36,7 @@ def load_topic(file):
 				#answers["DEFAULT"] = default_answer 
 	return answers
 
-topics = load_topics("topics.xml")
+topics = load_topics("doctopics/topics.xml")
 
 def send(mess):
     try:
