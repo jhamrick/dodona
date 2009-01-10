@@ -2,6 +2,7 @@ import site
 site.addsitedir('/mit/broder/lib/python2.5/site-packages')
 import zephyr
 from textwrap import fill
+
 #from pysqlite2 import dbapi2 as sqlite
 # uses a basic parsing method:
 #   BEGINSECTION begins a section, can contain multiple answers.
@@ -42,13 +43,17 @@ def load_answers(file):
                     topics[answer] = line
                 else:
                     topics[answer] += "\n" + line
-    #print topics
+    print topics
     return topics
 
 topics = load_answers("topics")
 
 def send(mess):
-    zephyr.ZNotice(cls='dodona-test', fields=["", mess], sender='dodona@ATHENA.MIT.EDU').send()
+    try:
+        #zephyr.ZNotice(cls='dodona-test', fields=["", mess], sender='dodona@ATHENA.MIT.EDU').send()
+        print "dodona: " + mess
+    except:
+        print "There was an error sending the last message."
 
 #init
 zephyr.init()
@@ -57,18 +62,19 @@ send(fill('Dodona is now running.  If you find that a topic you wish answered is
 
 #receive a zephyr not from yourself
 def receive_from_subs():
-    try:
-        m = zephyr.receive(True)
-    except:
-        return receive_from_subs()
+    # try:
+#         m = zephyr.receive(True)
+#     except:
+#         return receive_from_subs()
 
-    while m.sender == 'dodona@ATHENA.MIT.EDU':
-        m = zephyr.receive(True)
-    print "From: ", m.sender
-    print "Class: ", m.cls
-    print "Instance: ", m.instance
-    print "Message: ", m.__dict__['fields'][1]
-    return m
+#     while m.sender == 'dodona@ATHENA.MIT.EDU':
+#         m = zephyr.receive(True)
+#     print "From: ", m.sender
+#     print "Class: ", m.cls
+#     print "Instance: ", m.instance
+#     print "Message: ", m.__dict__['fields'][1]
+#     return m
+    return raw_input("--> ")
 
 #same as fill, except it preserves newlines
 def custom_fill(s):
@@ -81,17 +87,15 @@ def custom_fill(s):
 
 #get and answer a question
 def question():
-    m = receive_from_subs()
-    mess = m.__dict__['fields'][1]
-    mess = mess.strip()
-    #send('You asked me about: ' + mess)
-    #print topics.keys()
+    mess = receive_from_subs()
+    #mess = m.__dict__['fields'][1]
+    #mess = mess.strip()
     if topics.has_key(mess):
         if isinstance(topics[mess], dict):
             send('There are multiple topics under ' + mess + '.\nWhich of the following would you like to know about?\n\n' + str(topics[mess].keys()))
-            m2 = receive_from_subs()
-            mess2 = m2.__dict__['fields'][1]
-            mess2 = mess2.strip()
+            mess2 = receive_from_subs()
+            #mess2 = m2.__dict__['fields'][1]
+            #mess2 = mess2.strip()
             if topics[mess].has_key(mess2):
                 send(custom_fill(topics[mess][mess2]))
             else:
@@ -105,13 +109,11 @@ def question():
 send('Welcome, I am dodona!  What would you like to ask me about?')
 while True:
     question()
-    send('Would you like to ask me another question?')
-    m = receive_from_subs().__dict__['fields'][1].strip()
+    send('Please ask me another question, or type \"exit\" to leave.')
+    m = receive_from_subs()#.__dict__['fields'][1].strip()
     print m
-    if m.lower() == 'no' or m.lower() == 'n':
+    if m.lower() == 'exit':
         send('Goodbye, then.')
         break
-    elif m.lower() == 'yes' or m.lower() == 'y':
-        send('Well, ask me, then!')
     else:
-        send('Please ask me your question again.')
+        continue
