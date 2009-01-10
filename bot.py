@@ -1,5 +1,5 @@
 import site
-site.addsitedir('/mit/broder/lib/python2.5/site-packages')
+site.addsitedir('/mit/broder/lib/python2.4/site-packages')
 import zephyr
 from textwrap import fill
 from xml.dom import minidom  
@@ -119,6 +119,8 @@ def question():
     #mess = m.__dict__['fields'][1]
     #mess = mess.strip()
     key = AI(mess)
+    if not key:
+        return
     if isinstance(topics[key], dict):
         send('There are multiple topics under ' + key + '.\nWhich of the following would you like to know about?\n\n' + str(topics[key].keys()))
         mess2 = receive_from_subs()
