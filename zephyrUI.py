@@ -9,9 +9,10 @@ def send(mess):
         print "There was an error sending the last message."
 
 #init
-zephyr.init()
-zephyr.Subscriptions().add(('dodona-test', '*', '*'))
-send(fill('Dodona is now running.  If you find that a topic you wish answered is not accounted for, please send mail to dodona AT mit DOT edu'))
+if __name__ != '__main__':
+    zephyr.init()
+    zephyr.Subscriptions().add(('dodona-test', '*', '*'))
+    send(fill('Dodona is now running.  If you find that a topic you wish answered is not accounted for, please send mail to dodona AT mit DOT edu'))
 
 #receive a zephyr not from yourself
 def receive_from_subs():
@@ -26,5 +27,7 @@ def receive_from_subs():
 #     print "Class: ", m.cls
 #     print "Instance: ", m.instance
 #     print "Message: ", m.__dict__['fields'][1]
+#     m = m.__dict__['fields'][1]
+#     m = m.strip()
 #     return m
     return raw_input("--> ")

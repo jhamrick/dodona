@@ -72,24 +72,42 @@ def message_to_list(mess):
             oldchars += char
     if oldchars != "":
 	words.append(oldchars)    
-    print words
-    return words            
+    #print words
+    return words
+
+def find_partial_key(word, list):
+    keys = []
+    for key in list.keys():
+        key2 = message_to_list(key)
+	for k in key2:
+            if k == word:
+                keys.append(key)
+		break
+    return keys
+
+def integrate_lists(list1, list2):
+    for item in list2:
+        if list1.count(item) == 0:
+            list1.append(item)
+    return list1
 
 def AI(mess, k=""):
     mess = message_to_list(mess)
     keys = []
     for key in mess:
         if k == "":
-            if topics.has_key(key):
-                keys.append(key)
+	    integrate_lists(keys, find_partial_key(key, topics))
         else:
-            if topics[k].has_key(key):
-                keys.append(key)
+	    integrate_lists(keys, find_partial_key(key, topics[k]))
     if len(keys) > 1:
         send("Multiple keywords match your query.  Which did you mean to ask about?\n\n" + str(keys))
-        question()
+        exit = question()
+	if exit:
+            send("Goodbye, then.")
+	    return True
+
     elif len(keys) == 0:
-        send("Sorry, I don\'t understand what you are asking me.")
+        #send("Sorry, I don\'t understand what you are asking me.")
 	return ""
     else:
         return keys[0]
@@ -100,21 +118,23 @@ def question():
     if mess.lower() == "exit":
         send("Goodbye, then.")
 	return True
-    #mess = m.__dict__['fields'][1]
-    #mess = mess.strip()
     key = AI(mess)
     if key == '':
-	question()    
+        exit = question()
+	if exit:
+            #send("Goodbye, then.")
+	    return True   
     elif isinstance(topics[key], dict):
         key2 = AI(mess, key)
 	if key2 == "":
             send('There are multiple topics under ' + key + '.\nWhich of the following would you like to know about?\n\n' + str(topics[key].keys()))
             mess2 = receive_from_subs()
-	    #mess2 = m2.__dict__['fields'][1]
- 	    #mess2 = mess2.strip()
             key2 = AI(mess2, key)
 	    if key2 == '':
-	        question()
+                exit = question()
+		if exit:
+                    #send("Goodbye, then.")
+		    return True   
 	    else:
                 send(custom_fill(topics[key][key2]))
 	else:
