@@ -1,5 +1,5 @@
 import site
-site.addsitedir('/mit/broder/lib/python2.4/site-packages')
+site.addsitedir('/mit/broder/lib/python2.5/site-packages')
 import zephyr
 from textwrap import fill
 from xml.dom import minidom  
@@ -129,27 +129,21 @@ def question():
     #mess = m.__dict__['fields'][1]
     #mess = mess.strip()
     key = AI(mess)
-    #print "key: ", repr(key)
     if key == '':
 	question()    
     elif isinstance(topics[key], dict):
         send('There are multiple topics under ' + key + '.\nWhich of the following would you like to know about?\n\n' + str(topics[key].keys()))
         mess2 = receive_from_subs()
+	#mess2 = m2.__dict__['fields'][1]
+	#mess2 = mess2.strip()
         key2 = AI(mess2, key)
-#             #mess2 = m2.__dict__['fields'][1]
-#             #mess2 = mess2.strip()
-#             if topics[mess].has_key(mess2):
 	if key2 == '':
 	    question()
 	else:
             send(custom_fill(topics[key][key2]))
-#             else:
-#                 send('Sorry, I don\'t understand what you are asking me.')
     else:
         send(custom_fill(topics[key]))
     return False
-#     else:
-#         send('Sorry, I don\'t understand what you are asking me.')
 
 #keep-alive loop
 send('Welcome, I am Dodona!  What would you like to ask me about?')
