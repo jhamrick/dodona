@@ -110,39 +110,45 @@ def AI(mess, k=""):
         question()
     elif len(keys) == 0:
         send("Sorry, I don\'t understand what you are asking me.")
+	return ""
     else:
         return keys[0]
 
 #get and answer a question
 def question():
     mess = receive_from_subs()
+    if mess.lower() == "exit":
+        send("Goodbye, then.")
+	return True
     #mess = m.__dict__['fields'][1]
     #mess = mess.strip()
     key = AI(mess)
-    if isinstance(topics[key], dict):
+    #print "key: ", repr(key)
+    if key == '':
+	question()    
+    elif isinstance(topics[key], dict):
         send('There are multiple topics under ' + key + '.\nWhich of the following would you like to know about?\n\n' + str(topics[key].keys()))
         mess2 = receive_from_subs()
-        key = AI(mess2, key)
+        key2 = AI(mess2, key)
 #             #mess2 = m2.__dict__['fields'][1]
 #             #mess2 = mess2.strip()
 #             if topics[mess].has_key(mess2):
-        send(custom_fill(topics[mess][mess2]))
+	if key2 == '':
+	    question()
+	else:
+            send(custom_fill(topics[key][key2]))
 #             else:
 #                 send('Sorry, I don\'t understand what you are asking me.')
     else:
         send(custom_fill(topics[key]))
+    return False
 #     else:
 #         send('Sorry, I don\'t understand what you are asking me.')
 
 #keep-alive loop
 send('Welcome, I am Dodona!  What would you like to ask me about?')
 while True:
-    question()
+    exit = question()
+    if exit == True:
+	break    
     send('Please ask me another question, or type \"exit\" to leave.')
-    m = receive_from_subs()#.__dict__['fields'][1].strip()
-    print m
-    if m.lower() == 'exit':
-        send('Goodbye, then.')
-        break
-    else:
-        continue
