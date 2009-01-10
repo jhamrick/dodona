@@ -1,5 +1,0 @@
-<?xml version="1.0" ?>
-<topics>
-	<topic name="emacs" file = "emacs.xml" />
-	<topic name="xemacs" file = "emacs.xml" />
-</topics>
