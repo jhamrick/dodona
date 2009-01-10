@@ -1,1 +1,2 @@
-import bot.py
+import bot
+from bot import *

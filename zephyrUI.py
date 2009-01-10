@@ -1,4 +1,5 @@
-import bot.py
+import bot
+from bot import *
 
 def send(mess):
     try:
