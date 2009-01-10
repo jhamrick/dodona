@@ -71,8 +71,10 @@ def custom_fill(s):
 
 def message_to_list(mess):
     words = []
+    #print mess
     oldchars = ""
     for char in mess:
+	#print char    
         if char == "," or \
            char == "." or \
            char == "?" or \
@@ -88,6 +90,8 @@ def message_to_list(mess):
             oldchars = ""
         else:
             oldchars += char
+    if oldchars != "":
+	words.append(oldchars)    
     print words
     return words            
 
