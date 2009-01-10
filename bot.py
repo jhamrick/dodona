@@ -43,7 +43,7 @@ def load_answers(file):
                     topics[answer] = line
                 else:
                     topics[answer] += "\n" + line
-    print topics
+    #print topics
     return topics
 
 topics = load_answers("topics")
@@ -85,28 +85,69 @@ def custom_fill(s):
     news += fill(s.partition("\n")[0])
     return news
 
+def message_to_list(mess):
+    words = []
+    oldchars = ""
+    for char in mess:
+        if char == "," or \
+           char == "." or \
+           char == "?" or \
+           char == "!" or \
+           char == "\'" or \
+           char == "\"":
+            if not oldchars == "":
+                words.append(oldchars)
+                oldchars = ""
+            words.append(char)
+        elif char == " " and not oldchars == "":
+            words.append(oldchars)
+            oldchars = ""
+        else:
+            oldchars += char
+    print words
+    return words            
+
+def AI(mess, k=""):
+    mess = message_to_list(mess)
+    keys = []
+    for key in mess:
+        if k == "":
+            if topics.has_key(key):
+                keys.append(key)
+        else:
+            if topics[k].has_key(key):
+                keys.append(key)
+    if len(keys) > 1:
+        send("Multiple keywords match your query.  Which did you mean to ask about?\n\n" + str(keys))
+        question()
+    elif len(keys) == 0:
+        send("Sorry, I don\'t understand what you are asking me.")
+    else:
+        return keys[0]
+
 #get and answer a question
 def question():
     mess = receive_from_subs()
     #mess = m.__dict__['fields'][1]
     #mess = mess.strip()
-    if topics.has_key(mess):
-        if isinstance(topics[mess], dict):
-            send('There are multiple topics under ' + mess + '.\nWhich of the following would you like to know about?\n\n' + str(topics[mess].keys()))
-            mess2 = receive_from_subs()
-            #mess2 = m2.__dict__['fields'][1]
-            #mess2 = mess2.strip()
-            if topics[mess].has_key(mess2):
-                send(custom_fill(topics[mess][mess2]))
-            else:
-                send('Sorry, I don\'t understand what you are asking me.')
-        else:
-            send(custom_fill(topics[mess]))
+    key = AI(mess)
+    if isinstance(topics[key], dict):
+        send('There are multiple topics under ' + key + '.\nWhich of the following would you like to know about?\n\n' + str(topics[key].keys()))
+        mess2 = receive_from_subs()
+        key = AI(mess2, key)
+#             #mess2 = m2.__dict__['fields'][1]
+#             #mess2 = mess2.strip()
+#             if topics[mess].has_key(mess2):
+        send(custom_fill(topics[mess][mess2]))
+#             else:
+#                 send('Sorry, I don\'t understand what you are asking me.')
     else:
-        send('Sorry, I don\'t understand what you are asking me.')
+        send(custom_fill(topics[key]))
+#     else:
+#         send('Sorry, I don\'t understand what you are asking me.')
 
 #keep-alive loop
-send('Welcome, I am dodona!  What would you like to ask me about?')
+send('Welcome, I am Dodona!  What would you like to ask me about?')
 while True:
     question()
     send('Please ask me another question, or type \"exit\" to leave.')
