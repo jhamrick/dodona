@@ -101,10 +101,8 @@ def AI(mess, k=""):
 	    integrate_lists(keys, find_partial_key(key, topics[k]))
     if len(keys) > 1:
         send("Multiple keywords match your query.  Which did you mean to ask about?\n\n" + str(keys))
-        exit = question()
-	if exit:
-            send("Goodbye, then.")
-	    return True
+	return ""
+	
 
     elif len(keys) == 0:
         #send("Sorry, I don\'t understand what you are asking me.")
@@ -119,6 +117,7 @@ def question():
         send("Goodbye, then.")
 	return True
     key = AI(mess)
+    #print key, mess
     if key == '':
         exit = question()
 	if exit:
@@ -144,9 +143,9 @@ def question():
     return False
 
 #keep-alive loop
-send('Welcome, I am Dodona!  What would you like to ask me about?')
+send('Welcome, I am Dodona!  What would you like to ask me about?\n\n' + str(topics.keys()))
 while True:
     exit = question()
     if exit == True:
 	break    
-    send('Please ask me another question, or type \"exit\" to leave.')
+    send('Please ask me another question, or type \"exit\" to leave.\n\n' + str(topics.keys()))
