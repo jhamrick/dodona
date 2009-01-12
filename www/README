@@ -1,0 +1,78 @@
+= Web Interface for Dodona=
+
+== Project subdirectories ==
+*console - an AJAX-enabled console application
+*gateway - a portal to the bot
+
+== Overview ==
+(not completely accurate, but close enough)
+
+ client________          __server__________________
+|              |        |                          |
+|            <---[HTTP]---> console.html           |
+|   browser    |        |                          |
+|            <---[AJAX]---> gateway.php <----|     |
+|______________|        |                 [socket] |
+                        |   daemon.py   <----|     |
+                        |__________________________|
+
+Here's how it works:
+
+1) client open consle web page
+2) client enters query and presses 'send'
+3) console app sends query gateway.php via AJAX
+4) gateway.php passes the query to the bot, which is
+   running on the server inside a daemon thread and
+   listening on (localhost,9999)
+5) bot returns response via socket
+6) gateway.php sends response to client
+7) console app display result
+
+== Design Decisions ==
+*Why a PHP gateway?*
+Python as a CGI script sucks. You have to write
+the headers yourself. (I may be doing this wrong,
+so please correct me if you know an easy way to
+use python to serve a page.)
+
+PHP is quick and it works. gateway.php is not a
+huge app. It's just a proxy for the bot that does
+some basic gatekeeping (rejecting invalid requests,
+etc...), so it doesn't need anything fancy.
+
+
+*Why have a gateway at all?*
+Dodona needs to sit inside a daemon thread so she
+doesn't have to reinitialize for each request. This
+is accomplished easily enough in python, but how
+she communicate with the outside world?
+
+Unfortunately, Python's socket handling sucks. You
+have to patch the libraries to get support for basic
+functionality like timeouts. This is fixed in 2.6 and
+3000, but we probably won't have the luxury of using
+these.
+
+Also, I'm pretty sure Apache is just Better than a
+Python server at handling the AJAX web requests. We'd
+have to set up mod_python or twisted or some other
+Python server in order to have the client app interface
+directly with Dodona over HTTP.
+(corrections to this are welcome...)
+
+This means we need a simple gateway that can communicate
+over HTTP with the client, and via a socket with Dodona.
+This also grants us the ability to validate input before
+passing it to Dodona, so we can reduce the load on the
+bot herself.
+
+== TODO ==
+- configuration
+-- daemon startup options (HOSTNAME,PORT)
+-- gateway config file    (HOSTNAME,PORT)
+- stop server by pressing <RETURN>
+- more features in for the console
+-- history?
+-- submit on '.'
+-- proper overflow handling (inner div with fixed width)
+- web docs / about page
