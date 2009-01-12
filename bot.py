@@ -102,8 +102,6 @@ def AI(mess, k=""):
     if len(keys) > 1:
         send("Multiple keywords match your query.  Which did you mean to ask about?\n\n" + str(keys))
 	return ""
-	
-
     elif len(keys) == 0:
         #send("Sorry, I don\'t understand what you are asking me.")
 	return ""
