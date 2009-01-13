@@ -34,4 +34,51 @@ To disable the menu bar, place the following line in your .emacs file:
 To disable the scrollbar, use the following line:
 (toggle-scroll-bar -1)
 	</answer>
+
+	<answer question="mouse buttons">
+You can use your workstation's mouse to perform some editing operations in Emacs.  The table below summarizes these operations.
+
+Button*:  Operation
+Left:  Move the cursor to the mouse's location.
+
+Middle:	Insert the text from the X cut buffer at the location of the Emacs cursor.
+
+Right:  Copy the text between the cursor and the mouse into the X cut buffer.  The text is not deleted from the buffer but is put into the Emacs kill ring.  The text may be recalled by using MIDDLE (above) or Ctrl-Y.
+
+Ctrl-Middle:  Cut the text between the cursor and the mouse into the X cut buffer.  The text is deleted from the buffer and is put into the Emacs kill ring.  The text may be recalled by using MIDDLE (above) or Ctrl-Y.
+
+Ctrl-Right:  Divide the current window into two windows.
+
+Ctrl-Shift-Right:  Return to single-window mode, keeping the window that contains the mouse.
+
+Ctrl-Shift-Middle:  Brings up a pop-up help window, from which various operations or buffers may be selected with the mouse.
+
+* Note: If your workstation's mouse only has two buttons, pressing both buttons simultaneously has the same effect as pressing the middle button.
+	</answer>
+
+	<answer question="moving the cursor">
+If you're logged into a workstation, you can use the arrow keys (though not the numeric keypad arrows) to move the cursor around your window.  Additionally, emacs has another set of control characters for movement: 
+
+To move forward one character, type:    CTRL-f
+To move backward one character, type:   CTRL-b
+
+To move to the next line, type:         CTRL-n
+To move to the previous line, type:     CTRL-p
+
+To move to the end of a line:           CTRL-e
+To move to the beginning of a line:     CTRL-a
+
+There are also some useful commands that use the Meta key.  On Suns, this is bound to both the Alt key and the diamond-symbol keys; on SGIs, it is bound to the Alt keys.   Additionally, the ESC key can be used in place of Alt/Meta.   
+
+(Note that you must hold down Alt and then press the next key; ESC can  be pressed and released before hitting the next key).
+
+To move forward one word:	                ESC f   or   M-f
+To move backwards one word:	                ESC b   or   M-b
+To move to the end of a sentence:	        ESC e   or   M-e
+To move to the beginning of a sentence:		ESC a   or   M-a
+To move to the end of the buffer:		ESC >	or   M->
+To move to the beginning of the buffer:		ESC <	or   M-<
+
+Notice how most of the commands are mnemonic.  
+	</answer>
 </topic>
