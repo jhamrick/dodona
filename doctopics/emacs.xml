@@ -76,9 +76,440 @@ To move forward one word:	                ESC f   or   M-f
 To move backwards one word:	                ESC b   or   M-b
 To move to the end of a sentence:	        ESC e   or   M-e
 To move to the beginning of a sentence:		ESC a   or   M-a
-To move to the end of the buffer:		ESC >	or   M->
-To move to the beginning of the buffer:		ESC <	or   M-<
+To move to the end of the buffer:		ESC &gt;	or   M-&gt;
+To move to the beginning of the buffer:		ESC &lt;	or   M-&lt;
 
 Notice how most of the commands are mnemonic.  
+	</answer>
+
+	<answer question="copy and paste : mouse">
+The cut and paste behavior of Emacs is similar to most other standard X applications.  
+
+  - Dragging with the LEFT mouse button now puts the selected region in the kill ring so you can paste it into other X applications. The old method of clicking at the beginning with the LEFT mouse button and at the end with the RIGHT mouse button still works, but the cursor will end up at the end of the region instead of at the beginning.
+
+  - Double and triple clicks with the LEFT mouse button now select the word or line surrounding where you click. If you drag after the last click, you can select a range of words or lines.
+
+  - Clicking and dragging the RIGHT mouse button now extends a previously mouse-selected region, from the end of the region that is closer to where you click.
+
+  - As before, clicking the RIGHT mouse button in the same place kills the region selected.
+	</answer>
+
+	<answer question="copy and past : keys">
+Ctrl-&lt;space&gt; or Ctrl-@:  Either of these commands will set a mark.  A mark is an or an invisible pointer which will be used to mark the starting character of the region you wish to delete or move.  If you place the mark in the wrong place, you can set it elsewhere with the same command.
+
+Ctrl-w: This command will kill all of the text between the mark location and the current emacs cursor position. This text can be retrieved with the following command unless you kill another block of text.
+
+Meta-w:  This command will "save" all of the text between the mark location and the current emacs cursor position; it can then be retrieved with the following command unless you kill/save another block of text.
+
+Ctrl-y:  This command will yank back the text which was deleted most recently with the above command. The text will be placed at the current emacs cursor location. You can yank back the text as many times as you wish.
+
+Meta-y:	 When you kill or copy a region of text, it doesn't forget about previous kills.  Instead, it keeps track of them in a "stack" fashion.  If you want to yank the region you killed before the last one, hit Ctrl-y to yank, and then Meta-y to yank the previous kill *instead* of the one you just retrieved.  You can keep hitting Meta-y as many times as you like, if you want to recover something killed a while back. The maximum number of kills remembered at any given time defaults to 30.
+
+Ctrl-x u:  This is the undo command. This is useful if you yank back text at the wrong location or sometimes if you delete something you didn't mean to. Each time you repeat this command, emacs will undo a previous change to your file.
+
+Please note that when you use Ctrl-w or Meta-w to put a region of text in the kill ring, it will become the current X selection. Likewise, when you use Ctrl-y to grab a region of text from the kill ring, it will use the current selection if you've selected text recently.
+
+To disable this behavior, place the following lines in your .emacs file:
+
+   (setq interprogram-cut-function nil)
+   (setq interprogram-paste-function nil)
+	</answer>
+
+	<answer question="query replace">
+To replace a character string everywhere that it occurs within the current buffer, there is two ways to do it
+
+        M-x replace-string
+
+will ask you for the string you want to replace and what you want to replace it with.  Once you provide these, it will make the change globally within the buffer.
+
+        M-%
+
+will also prompt you for the string to search for and the string to replace it.  It differs from m-x replace-string in that it asks for verification before making each change.
+
+In order to enter control characters in either of the above, they will have to be preceded by C-q. For example, ^J is typed as C-q C-j.
+	</answer>
+
+	<answer question="line number">
+The default version of Emacs on Athena has line numbering automatically.  If you are using an earlier version, you may have to turn it on.  
+
+The line number is displayed in the "mode line" at the bottom of the screen.  If you look down at the bottom of the screen, you should see a section that has "--L#--" where the "#" is the line number your text cursor is currently on.  If line numbering currently isn't on in your emacs window, just type:
+
+	Meta-x line-number-mode
+
+If you wish to turn on line numbering always, you can put the line:
+
+	(setq line-number-mode t)
+
+in your .emacs file.  If you wish to have it always be off, put in:
+
+	(setq line-number-mode nil)
+
+Similarly, there is a column-number-mode that works the same way.
+
+------------------------------------------------------------------
+
+There are several other related commands you can also use to determine the line number and perform line number functions.  If you want to find out the number of the line where the cursor is, type this:
+
+        M-x what-line
+
+If you want to move the cursor to a particular line, type this:
+
+        M-x goto-line
+
+followed by the line number.
+
+If you want to know how many lines are in a region of text, use:
+
+        M-x count-lines-region
+or
+        M-=
+	</answer>
+
+	<answer question="auto fill">
+If you want Emacs to be in Auto Fill mode every time you use it, then you need to put the following lines into a file named ~/.emacs:
+
+(setq default-major-mode 'text-mode)
+(setq text-mode-hook
+      '(lambda nil
+	 (setq fill-column 72)
+	 (auto-fill-mode 1)))
+
+The first line makes Text Mode the default for all files without another defined mode (such as C Mode).  (You can leave that line out if you wish.)  The other lines make Auto Fill mode the default for all Text Mode buffers, and make the lines break at the 72nd column.
+	</answer>
+
+	<answer question="autosave and recover">
+Unless you have specified otherwise in your '.emacs' file, Emacs will periodically save the file you are editing into the /var/tmp directory on your workstation.
+
+If:
+	1) You somehow delete your file.
+	2) Your workstation crashes.
+	3) You encounter filesystem errors because you are over quota, or because your fileserver has crashed.
+
+then the auto-save file could be of help.  These files are kept for three days before being deleted.
+
+To recover the file, start up emacs with the same filename as you did before, on the SAME WORKSTATION as before.  For example, suppose you were editing resume.tex when your workstation crashed.  When the workstation becomes usable again, login and do:
+
+	emacs resume.tex &amp;
+
+Note that when you start up Emacs, it will say:
+
+	Auto save file is newer; consider M-x recover-file
+
+This is a hint that the file needs to be recovered from the auto-save file. Look at the file you now have in Emacs; if it's blank or it's not the version you wanted, then you need to recover.  DO NOT just begin typing, or Emacs will soon make another auto-save file and clobber the old one.
+
+To recover the auto-save file, type:
+
+	M-x recover-file RETURN resume.tex RETURN
+
+Emacs will then show you the date of the auto-save file, just to be sure, and ask you whether you want to recover it.  Type 'yes' to recover, or 'no' if you don't want to.
+
+If Emacs says:
+	
+	Auto save file /var/tmp/#4863.@mit@jruser@resume.tex# not current
+
+then the file does not exist on your workstation (ie: you may have misspelled it).
+
+Now save this file under a different name:
+
+	C-x C-w resume.recover      
+
+Emacs will not auto-save this recovered file until you type:
+
+	M-x auto-save-mode
+
+This is so you can recover from the old auto-save file again, just in case you change your mind.
+
+Now look at the two files, resume.tex and resume.recover, and take the one you like, or parts of both.
+	</answer>
+
+	<answer question="customization : file">
+To customize Emacs, you need to write some Lisp code.  It's not really that difficult.  The code should be put in a file named '.emacs' in your home directory.  Every time Emacs starts up, it automatically reads any Lisp code you have put into your '.emacs' file.
+
+To define a key binding, use an expression of this form:
+
+	(define-key key-map keystrokes function)
+
+To set an Emacs variable, use an expression of this form:
+
+	(setq variable value)
+
+The section below gives some typical customizations you might perform in your '.emacs' file.  Note that comments in are preceded by semicolon ';' characters.
+
+
+(global-set-key "\M-g" 'goto-line) - Esc-G runs the goto-line function.
+
+(global-set-key "\C-xt" 'transpose-lines) - Ctrl-x t runs the transpose-lines function.
+
+(setq default-major-mode 'text-mode) - Default mode is text-mode.
+
+(setq text-mode-hook '(lambda () (auto-fill-mode 1))) - Enable auto-fill mode whenever using text-mode.
+
+(setq delete-auto-save-files t)	- Delete unnecessary auto-save files.
+
+(display-time) - Display current time and load average on mode line.
+	</answer>
+
+	<answer question="customization : X functions">
+Any X-related code that you want to put in your .emacs file should be enclosed in elisp which causes it to be called only if you're on an X workstation, and not if you're dialed in, like so: 
+
+        (if window-system-version
+            (progn
+                (require 'x-mouse)
+                 X-RELATED STUFF GOES HERE
+            ))
+
+For example:
+
+        (if window-system-version
+            (progn
+                (require 'x-mouse)
+                (setq x-paste-move-point t)))
+	</answer>
+
+	<answer question="function keys">
+The function keys (F1-F12) can be bound to functions in a similar fashion as any other key.  
+
+For example, you might set the following three function keys:
+
+   (global-set-key [f1] 'mail)
+   (global-set-key [f2] 'mh-rmail)
+   (global-set-key [f3] 'discuss)
+	</answer>
+
+	<answer question="check spelling">
+Several options are available for users who want emacs to check the spelling of their documents.    
+
+The first is:
+
+	M-x ispell
+
+(M-x is the ALT or Compose Character key and x key pressed at the same time.)
+
+Now the following commands are available for the duration of your emacs session:
+
+  M-x ispell-word         - Checks word
+  M-x ispell-buffer       - Checks buffer (current file)
+  M-x ispell-region       - Checks region
+
+When ispell finds a word that is not in its dictionary, it will outline the word in reverse video (from emacs it will respond with a message that says, "Enter letter to replace word; space to flush") If there are "near misses" in the dictionary, ispell will also display the incorrect word and a list of correct alternatives at the top if they exist.
+
+At this point, you can type one of the following characters:
+
+r - Replace Word:  Ispell asks you for a replacement word.  Ispell will NOT check this word.
+
+# - Replace Word with suggested word:  The words at the top of the screen are numbered.  If you type a word's number, ispell will use this word as a replacement.
+
+&lt;space&gt; - Skips Word:  Leave this word as is.  If this word is encountered again, ispell will stop and prompt you for an action.
+
+a - Accept Word:  Accept this word as correct for remainder of ispell session (or emacs if you are using ispell in emacs).
+
+i - Add Word:  Add this word to your personal dictionary. This is a file in your home directory called .ispell.words which tells ispell to accept the word as correct every time you use ispell (useful for things like your name).
+ 
+&lt;CTRL-G&gt; - Quit Ispell:  You can quit ispell at any time by pressing &lt;CTRL-G&gt;.  This is done by holding down the CTRL key and pressing "G".
+
+The man page on ispell lists more options and gives more detailed information on this program.
+
+-----------------------------------------------------------------
+
+	M-x spell-buffer
+
+is a similar program to M-x ispell, but runs off of the unix "spell" program instead of the "ispell" program.  The main differences are that spell has a larger vocabulary, but ispell offers suggestions for replacements and allows you to add words to your personal dictionary. 
+
+-----------------------------------------------------------------
+
+	M-x flyspell-mode
+
+is a command that is more useful to use when starting to write a document; words will be color-coded as you type them, using the ispell package.  The first time a word that it doesn't recognize is encountered, it's colored red, while further instances of the word are colored yellow.  
+
+Once a word is marked as misspelled, you can click on it with the middle mouse button to suggest replacements, or use M-TAB to automatically correct it to what ispell thinks it should be.
+	</answer>
+
+	<answer question="tags">
+An Emacs feature called "Tags" provides an indexing mechanism for Lisp, C, or Fortran source files.  Before using "Tags" in Emacs, you need to type this command at the system prompt:
+
+	etags filenames
+
+...where 'filenames' is a list of one or more names of the files you wish to index.  For example, if you are writing a C program that has two source files, named 'file1.c' and 'file2.c', you would type:
+
+	etags file1.c file2.c
+
+The 'etags' command creates a file named 'TAGS', which is used by the Emacs "Tags" functions.
+
+Now you can use the "Tags" functions to locate tags (function or routine names) in your source code.
+
+Some of the useful "Tags" functions are:
+
+M-. : Find first definition of a tag.
+
+M-x tags-search : Search for a specified regular expression through the files in the selected tag table.
+
+M-, : Find next definition of previous tag, next occurrence of specified regular expression.
+
+For more information about "Tags", read Section 21.10 of the "GNU Emacs Manual" which is in the documentation racks in all public Athena clusters, or on-line by using the Info Browser in Emacs.  (See the stock answer "Using the INFO Browser" for more information.)
+	</answer>
+
+	<answer question="rebound keys">
+On VT240 terminals, the keys Ctrl-s and Ctrl-q will not work properly in Emacs.  Instead, you should use Ctrl-~ (for Ctrl-s) and Ctrl-\ (for Ctrl-q).
+
+When you start Emacs on a VT240 terminal, you will see a warning message to remind you of these changes.
+
+If you accidentally type Ctrl-s on a VT240, your screen may appear to "freeze".  Typing Ctrl-q should get you out of this situation.
+	</answer>
+
+	<answer question="backspace">
+If your "delete" key on the terminal you're using isn't acting as you expect it to, it is likely that it is sending the "backspace" character instead of the "delete" character that is expected.  This is a common problem with PC's and Macs.  There are a few things you can do about this (in order of preference):
+
+- see if you can tell your terminal emulator (the communications program on your MAC or PC) to use "control-?" when you hit the "backspace" key.
+
+- you tell athena what to expect for the backspace key.  To do this, put the following line in your .startup.tty file:
+
+	stty erase "^H"
+    or  stty erase "^?"
+
+depending on which of these you normally see when you hit your backspace key.
+
+That will give you backspace capabilities in everything but emacs.  In emacs, add the following lines to your .emacs file (create one if you don't have one, as above):
+
+(setq term-setup-hook
+    '(lambda ()
+	(setq keyboard-translate-table "\C-@\C-a\C-b\C-c\C-d\C-e\C-f\C-g\C-?")
+	(global-set-key "\M-h" 'help-for-help)))
+
+That will fix the backspace key, and set "M-h" to give you help (regularly c-h does that).
+	</answer>
+
+	<answer question="^M : prevention">
+To prevent "^M" from appearing at the ends of lines in emacs shell mode, run these two commands:
+
+	unset lineedit edit
+	stty nl -echo
+
+You can also have this done automatically every time you start up a shell mode buffer by having a file called ~/.emacs_tcsh with this line in it:
+
+	unset lineedit edit; stty nl -echo
+	</answer>
+
+	<answer question="^M: remove">
+To remove '^M' (control-M) characters from the end of each line in a file, you can use a shell script called 'clean'.
+
+To use the shell script, you first need to attach the Consultants' Software Library to your workstation.  Use this command:
+
+	add consult
+
+Now you can type this command:
+
+	clean filename > newfilename
+
+...where 'filename' is the name of the file containing the '^M' characters, and 'newfilename' is the name of the file that you want the 'clean' script to create.
+
+The script takes 'filename' as input, changes each ^M to a newline character, and directs the output to the new file called 'newfilename'.  You can check that the new file contains no '^M' characters by viewing it with this command:
+
+	cat -v newfilename
+
+You can also remove all the control-M characters inside Emacs, though it's a little tricky because Emacs tries to be helpful and treat different OS-style line breaks transparently.  To use Emacs to make the replacement, follow these steps:
+
+1. type: 
+
+        C-x RET C undecided-unix RET C-x C-w RET y
+
+2. go to the beginning of the document
+
+3. type:
+
+	M-x replace-string RET C-q C-m RET RET
+
+where "RET" means &lt;press the RETURN key&gt; and things like C-q mean "hold control key and press the q" key.
+	</answer>
+
+	<answer question="source">
+Please see http://web.mit.edu/answers/emacs/emacs_gnu.html
+	</answer>
+
+	<answer question="language">
+Emacs can be used with a variety of languages other than English. Mule, or the Multilingual Environment, is packaged with emacs on Athena, and can be accessed under the "Options->Mule (Multilingual Environment)" submenu.
+
+To start inputting in a different language, you will first need to set the language environment in the Mule menu and then toggle to the desired input method.  Some useful key bindings that might help (these commands are also accessible through the Mule menu):
+
+C-\ : Toggle input method (usually between English and the foreign language you selected)
+
+C-h I : Describe input method (displays the keyboard layout for	an input method)
+	</answer>
+
+	<answer question="help">
+Emacs has an excellent internal help facility.  You can give it a keystroke, and it will tell you the name of the command it executes.  Or you can give it a word, and it will tell you the names of several commands that include that word.  Emacs' help facility has other features, as well.  Some of the most useful ones can be found at: http://web.mit.edu/answers/emacs/emacs_help.html
+
+To activate help, press C-h ? C-h
+	</answer>
+
+	<answer question="info browser">
+Emacs comes with a powerful built-in tool for reading manuals on-line, called the Info Browser.  These manuals, or Info files, are in a format called "TeXinfo", because they can be viewed in textual format, using the browser, or they can be converted to LaTeX format for printing.  Info files exist in numerous places, for nearly all of the programs in the gnu locker, and for many other utilities and packages as well.
+
+To get started using the Info Browser, type Control-h i in emacs.  This will load a menu of info files to choose from, including the Emacs editor and Info browsers themselves.  For a tutorial on how to use the info browser, press "h".
+
+Each Info file is set up like a tree, with each level consisting of several nodes, each of which contain sub-nodes.  Nodes are indicated by a star at the beginning of the line.  The basic commands for reading through these trees of nodes are:
+
+m	prompts for a menu item, or "node", and goes to it
+space   move forward a page (in current node)
+delete	move backward a page (in current node)
+n	go to next node
+p 	return to previous node
+u	go up one level above current node
+d	return to top level menu
+q	quits Info browser and returns to original buffer
+
+The Info browser, however, can be customized: you may extend or shrink menus, or enter bookmarks for commonly needed entries.  Information on all this is all included in the node entitled Info.
+
+Probably the most widely used is the Info file for Emacs.  You can examine the Emacs Info node by starting up the Info browser, and then typing mEmacs, followed by return, or by moving the cursor to the line that starts with "* Emacs", and hitting m and return.  Here, you can find the *entire* GNU Emacs Manual, and any questions you have about Emacs can almost certainly be found here.  If you are unsure of where to look, you can try one of the Indexes:
+
+Indexes, nodes containing large menus
+* Key Index::      An item for each standard Emacs key sequence.
+* Command Index::  An item for each command name.
+* Variable Index:: An item for each documented variable.
+* Concept Index::  An item for each concept.
+
+Simply move the cursor to the Index of your choice, hit m, and return.
+
+The default top-level node only contains of six entries, but there are, in fact, over 20 currently on Athena.  A list of these is kept in the consult locker.  To get a more expansive listing of useful manuals at Athena in the top-level node of your Info browser, add this line to your .emacs file:
+
+	(setq Info-directory "/afs/athena/contrib/consult/lib/info")
+
+Note that some of these nodes may require that you add the appropriate locker first.  Details on how to customize this file are in the Info node entitled "Info".
+
+Also, if you add a locker and it has an Info file, then that node will be automatically added when you start Info.  
+	</answer>
+
+	<answer question="non-english mail">
+Sending foreign-language email can be done using emacs-20.  It involves three setup steps.  (Additionally, it is easiest if you send mail entirely from within emacs, using  M-x mh-rmail to read mail, and M-x mh-smail to send mail.)
+
+1) Make sure emacs can display your language's fonts.
+  
+By default, emacs should be able to display the fonts.  (An easy test to see if emacs can display non-latin fonts is to type C-h h -- emacs will try to show you "hello" in many languages,using the fonts of those languages.)
+
+If you are unable to display the non-latin fonts, you may need to place a line in your ~/.Xresources file:
+
+	Emacs.Font: -misc-fixed-medium-r-normal-*-*-120-75-75-*-*-*-*
+
+2) Configure emacs to allow you to type text in your language.
+
+For languages whose characters are not found on English keyboards, it is often possible to type them by configuring emacs to use an alternate input method.  A properly configured emacs will allow semi-phonetic input of Chinese or Japanese, for example.
+
+The keyboard command  C-\  instructs emacs to switch to an alternate input method.  When emacs prompts you to enter what input method you want, you can type TAB to get it to give you a list of input methods which match what you've typed so far. Once you choose an alternate input method, you can switch between it and English whenever you want by typing  C-\
+
+IMPORTANT NOTE:  It's a good idea to switch back to English input before trying to save your file or to exit emacs, because emacs sometimes asks you questions which must be answered in English.
+
+Before using this "C-\", it may be useful to tell emacs which language you plan on using most often.  Typing  C-x C-m l  will prompt you to enter the language environment you want to use.  Again, you can type TAB to see a list of possible choices.  Choose what you want to use, and "C-\" will be automatically configured to be the customary input method for that language.
+
+
+3) Configure emacs to let you send Mime-encoded email.
+
+You need to make use of a package called "tm" to properly type and send non-ASCII email.  To load "tm", your ~/.emacs file should contain the line:
+
+(load "/afs/sipb/contrib/emacs/packages/tm-install-dir/share/emacs/site-lisp/mime-setup")
+    
+If this line is in your ~/.emacs file when you start emacs, emacs is configured to be able to send Mime-encoded email.
+	</answer>
+
+	<answer question="scheme">
+See http://web.mit.edu/answers/emacs/emacs_scheme.html
 	</answer>
 </topic>
