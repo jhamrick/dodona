@@ -7,6 +7,7 @@ import zephyrUI
 from zephyrUI import *
 import fuzzystack
 from fuzzystack import *
+import os.path
 
 def load_topics(file):
     topics = {}
@@ -107,9 +108,41 @@ def AI(mess, k=""):
     if len(keys) > 1:
 	return "d:more"
     elif len(keys) == 0:
-        return "d:fail"
+        return mess
     else:
         return keys[0]
+
+filter = ["dodona", "tell", "me", "about", ",", ".", "!", "?", "i", "would", "like", "to", "know", "what", "do", "you"]
+
+def pick_out_keyword(list, f = filter):
+    pruned_list = list[:]
+    for elem in list:
+        if elem.lower() in filter:
+            pruned_list.remove(elem)
+    #print pruned_list
+    
+    key = ""
+    for item in pruned_list:
+        key += item + " "
+    key = key.rstrip()
+
+    return key
+        
+
+def learn(topic, subtopic = None):
+    if subtopic == None:
+        topics[topic] = {}
+        send(custom_fill("What subtopic under " + topic + " would you like to tell me about?"))
+        mess = receive_from_subs()
+        mess = message_to_list(mess)
+        subtopic = pick_out_keyword(mess)
+    
+    send(custom_fill("Ok, we are talking about " + subtopic + " under " + topic + "!  Please tell me all you know about " + subtopic + " under " + topic + "."))
+    mess = receive_from_subs()
+    topics[topic][subtopic] =  mess
+
+    send(custom_fill("Thanks!"))
+    
 
 #get and answer a question
 def question(mess = None, k = None, d = topics):
@@ -120,21 +153,30 @@ def question(mess = None, k = None, d = topics):
     if k == None:  key = AI(mess)
     else:  key = AI(mess, k)
 
-    while key == "d:fail":
-        send(custom_fill("Sorry, I don't understand what you are asking me."))
+    while isinstance(key, list):
+        topic = pick_out_keyword(key)
+        send(custom_fill("Sorry, I don't know anything about " + topic + ".  Would you like to tell me about " + topic + "? (please answer \"yes\" or \"no\")"))
         mess = receive_from_subs()
         if mess.lower().find("exit") != -1:
             send("Glad to be of help.")
             return True
-        if k == None:  key = AI(mess)
-        else:  key = AI(mess, k)
+        elif mess.lower().find("yes") != -1:
+            if k == None:  learn(topic)
+            else:  learn(k, topic)
+            return False
+        elif mess.lower().find("no") != -1:
+            send("Ok.")
+            return False
+        else:
+            if k == None:  key = AI(mess)
+            else:  key = AI(mess, k)
 
     if key == "d:more":
         send(custom_fill("Multiple keywords match your query.  What did you mean to ask about?\n\n" + str(d.keys())))
     elif isinstance(d[key], dict):
         key2 = AI(mess, key)
         
-        if key2 == "d:more" or key2 == "d:fail":
+        if key2 == "d:more" or isinstance(key2, list):
             send(custom_fill('There are multiple topics under ' + key + '.\nWhich of the following would you like to know about?\n\n' + str(d[key].keys())))
             return question(k = key, d = d[key])
         else:
@@ -143,8 +185,8 @@ def question(mess = None, k = None, d = topics):
         send(custom_fill(d[key]))
     return False
 
-zephyr.init()
-zephyr.Subscriptions().add(('dodona', '*', '*'))
+#zephyr.init()
+#zephyr.Subscriptions().add(('dodona', '*', '*'))
 send(fill('Dodona is now running.  If you find that a topic you wish answered is not accounted for, please send mail to dodona AT mit DOT edu'))
 send(custom_fill(str(topics.keys())))
 
