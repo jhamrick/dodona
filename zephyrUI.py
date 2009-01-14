@@ -12,7 +12,6 @@ import time
 def send(mess):
     try:
         z = zephyr.ZNotice(cls='dodona-test', fields=["", mess], sender='dodona@ATHENA.MIT.EDU')
-        print z.__dict__
         foo = str(z.__dict__)
         time.sleep(1)
         z.send()
