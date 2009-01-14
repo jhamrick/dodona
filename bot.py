@@ -124,7 +124,7 @@ def question():
     elif isinstance(topics[key], dict):
         key2 = AI(mess, key)
         if key2 == "":
-            send('There are multiple topics under ' + key + '.\nWhich of the following would you like to know about?\n\n' + str(topics[key].keys()))
+            send(custom_fill('There are multiple topics under ' + key + '.\nWhich of the following would you like to know about?\n\n' + str(topics[key].keys())))
             mess2 = receive_from_subs()
             key2 = AI(mess2, key)
             if key2 == '':
@@ -141,12 +141,12 @@ def question():
     return False
 
 #keep-alive loop
-send('Welcome, I am Dodona!  What would you like to ask me about?\n\n' + str(topics.keys()))
+send(custom_fill('Welcome, I am Dodona!  What would you like to ask me about?\n\n' + str(topics.keys())))
 while True:
     exit = question()
     if exit == True:
         break
-    send('Please ask me another question, or type \"exit\" to leave.\n\n' + str(topics.keys()))
+    send(custom_fill('Please ask me another question, or type \"exit\" to leave.\n\n' + str(topics.keys())))
 
 # -*- indent-tabs-mode: nil; tab-width: 4; -*-
 # vi: set ts=4 sw=4 et:

@@ -4,7 +4,7 @@ from bot import *
 def send(mess):
     try:
         zephyr.ZNotice(cls='dodona-test', fields=["", mess], sender='dodona@ATHENA.MIT.EDU').send()
-        print "dodona: " + mess
+        #print "dodona: " + mess
     except:
         print "There was an error sending the last message."
 
