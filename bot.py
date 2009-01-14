@@ -143,8 +143,12 @@ def question(mess = None, k = None, d = topics):
         send(custom_fill(d[key]))
     return False
 
-#keep-alive loop
+zephyr.init()
+zephyr.Subscriptions().add(('dodona', '*', '*'))
+send(fill('Dodona is now running.  If you find that a topic you wish answered is not accounted for, please send mail to dodona AT mit DOT edu'))
 send(custom_fill(str(topics.keys())))
+
+#keep-alive loop
 while True:
     exit = question()
     if exit == False:

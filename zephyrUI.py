@@ -11,19 +11,13 @@ import time
 
 def send(mess):
     try:
-        z = zephyr.ZNotice(cls='dodona-test', fields=["", mess], sender='dodona@ATHENA.MIT.EDU')
+        z = zephyr.ZNotice(cls='dodona', fields=["", mess], sender='dodona@ATHENA.MIT.EDU')
         foo = str(z.__dict__)
         time.sleep(1)
         z.send()
         #print "dodona: " + mess
     except:
         print "There was an error sending the last message."
-
-#init
-if __name__ != '__main__':
-    zephyr.init()
-    zephyr.Subscriptions().add(('dodona-test', '*', '*'))
-    send(fill('Dodona is now running.  If you find that a topic you wish answered is not accounted for, please send mail to dodona AT mit DOT edu'))
 
 #receive a zephyr not from yourself
 def receive_from_subs():
