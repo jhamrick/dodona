@@ -3,7 +3,7 @@ from bot import *
 
 def send(mess):
     try:
-        #zephyr.ZNotice(cls='dodona-test', fields=["", mess], sender='dodona@ATHENA.MIT.EDU').send()
+        zephyr.ZNotice(cls='dodona-test', fields=["", mess], sender='dodona@ATHENA.MIT.EDU').send()
         print "dodona: " + mess
     except:
         print "There was an error sending the last message."
@@ -16,18 +16,18 @@ if __name__ != '__main__':
 
 #receive a zephyr not from yourself
 def receive_from_subs():
-    # try:
-#         m = zephyr.receive(True)
-#     except:
-#         return receive_from_subs()
+    try:
+        m = zephyr.receive(True)
+    except:
+        return receive_from_subs()
 
-#     while m.sender == 'dodona@ATHENA.MIT.EDU':
-#         m = zephyr.receive(True)
-#     print "From: ", m.sender
-#     print "Class: ", m.cls
-#     print "Instance: ", m.instance
-#     print "Message: ", m.__dict__['fields'][1]
-#     m = m.__dict__['fields'][1]
-#     m = m.strip()
-#     return m
-    return raw_input("--> ")
+    while m.sender == 'dodona@ATHENA.MIT.EDU':
+        m = zephyr.receive(True)
+    print "From: ", m.sender
+    print "Class: ", m.cls
+    print "Instance: ", m.instance
+    print "Message: ", m.__dict__['fields'][1]
+    m = m.__dict__['fields'][1]
+    m = m.strip()
+    return m
+    #return raw_input("--> ")
