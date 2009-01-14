@@ -140,12 +140,19 @@ def question():
         send(custom_fill(topics[key]))
     return False
 
-#keep-alive loop
-send(custom_fill('Welcome, I am Dodona!  What would you like to ask me about?\n\n' + str(topics.keys())))
+#keep-alive loops
+def wait():
+    while True:
+        mess = receive_from_subs()
+        if mess.lower().find("dodona") != -1:
+            send(custom_fill('What would you like to ask me about?\n\n' + str(topics.keys())))
+            return
+
+wait()
 while True:
     exit = question()
     if exit == True:
-        break
+        wait()
     send(custom_fill('Please ask me another question, or type \"exit\" to leave.\n\n' + str(topics.keys())))
 
 # -*- indent-tabs-mode: nil; tab-width: 4; -*-
