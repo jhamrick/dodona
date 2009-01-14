@@ -1,5 +1,5 @@
 import site
-site.addsitedir('/mit/broder/lib/python2.5/site-packages')
+site.addsitedir('/afs/athena.mit.edu/user/b/r/broder/lib/python2.5/site-packages')
 import zephyr
 from textwrap import fill
 from xml.dom import minidom
