@@ -1,10 +1,12 @@
 import site
-site.addsitedir('/mit/broder/lib/python2.5/site-packages')
+site.addsitedir('/afs/athena.mit.edu/user/b/r/broder/lib/python2.5/site-packages')
 import zephyr
 from textwrap import fill
 from xml.dom import minidom
 import zephyrUI
 from zephyrUI import *
+import fuzzystack
+from fuzzystack import *
 
 def load_topics(file):
     topics = {}
@@ -39,6 +41,7 @@ def load_topic(file):
     return answers
 
 topics = load_topics("doctopics/topics.xml")
+memory = FuzzyStack(5)
 
 #same as fill, except it preserves newlines
 def custom_fill(s):
@@ -68,6 +71,8 @@ def message_to_list(mess):
         elif char == " " and not oldchars == "":
             words.append(oldchars)
             oldchars = ""
+        elif char == " " and oldchars == "":
+            pass
         else:
             oldchars += char
     if oldchars != "":
@@ -100,53 +105,50 @@ def AI(mess, k=""):
         else:
             integrate_lists(keys, find_partial_key(key, topics[k]))
     if len(keys) > 1:
-        send("Multiple keywords match your query.  Which did you mean to ask about?\n\n" + str(keys))
-	return ""
+	return "d:more"
     elif len(keys) == 0:
-        #send("Sorry, I don\'t understand what you are asking me.")
-        return ""
+        return "d:fail"
     else:
         return keys[0]
 
 #get and answer a question
-def question():
-    mess = receive_from_subs()
-    if mess.lower() == "exit":
-        send("Goodbye, then.")
+def question(mess = None, k = None, d = topics):
+    if mess == None:  mess = receive_from_subs()
+    if mess.lower().find("exit") != -1:
+        send("Glad to be of help.")
         return True
-    key = AI(mess)
-    #print key, mess
-    if key == '':
-        exit = question()
-        if exit:
-            #send("Goodbye, then.")
+    if k == None:  key = AI(mess)
+    else:  key = AI(mess, k)
+
+    while key == "d:fail":
+        send(custom_fill("Sorry, I don't understand what you are asking me."))
+        mess = receive_from_subs()
+        if mess.lower().find("exit") != -1:
+            send("Glad to be of help.")
             return True
-    elif isinstance(topics[key], dict):
+        if k == None:  key = AI(mess)
+        else:  key = AI(mess, k)
+
+    if key == "d:more":
+        send(custom_fill("Multiple keywords match your query.  What did you mean to ask about?\n\n" + str(d.keys())))
+    elif isinstance(d[key], dict):
         key2 = AI(mess, key)
-        if key2 == "":
-            send('There are multiple topics under ' + key + '.\nWhich of the following would you like to know about?\n\n' + str(topics[key].keys()))
-            mess2 = receive_from_subs()
-            key2 = AI(mess2, key)
-            if key2 == '':
-                exit = question()
-                if exit:
-                    #send("Goodbye, then.")
-                    return True
-            else:
-                send(custom_fill(topics[key][key2]))
+        
+        if key2 == "d:more" or key2 == "d:fail":
+            send(custom_fill('There are multiple topics under ' + key + '.\nWhich of the following would you like to know about?\n\n' + str(d[key].keys())))
+            return question(k = key, d = d[key])
         else:
-            send(custom_fill(topics[key][key2]))
+            send(custom_fill(d[key][key2]))
     else:
-        send(custom_fill(topics[key]))
+        send(custom_fill(d[key]))
     return False
 
 #keep-alive loop
-send('Welcome, I am Dodona!  What would you like to ask me about?\n\n' + str(topics.keys()))
+send(custom_fill(str(topics.keys())))
 while True:
     exit = question()
-    if exit == True:
-        break
-    send('Please ask me another question, or type \"exit\" to leave.\n\n' + str(topics.keys()))
+    if exit == False:
+        send(custom_fill('Please ask me another question, or type \"exit\" to leave.\n\n' + str(topics.keys())))
 
 # -*- indent-tabs-mode: nil; tab-width: 4; -*-
 # vi: set ts=4 sw=4 et:
