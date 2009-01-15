@@ -8,6 +8,17 @@ class FuzzyStack :
         self.data = list()
         self.depth = depth
 
+    def __str__(self):
+        d = self.get()
+        p = ""
+        for key in d.keys():
+            p = p + str(key) + ": "
+            if isinstance(d[key], dict):
+                p = p + str(d[key].keys()) + "\n"
+            else:
+                p = p + str(d[key]) + "\n"
+        return p
+
     # Pushes a new key/value pair onto the dictionary
     def push(self, symbol, value) :
         # Truncate the stack to the desired length if necessary
@@ -16,6 +27,7 @@ class FuzzyStack :
         if len(self.data) == self.depth :
             self.popoldest()
         self.data.insert(0, (symbol, value));
+        print "Push: " + str(self)
 
     # Returns a dictionary of the most relevant keys
     def get(self) :
@@ -27,7 +39,8 @@ class FuzzyStack :
     # Retrieve a key
     def read(self, symbol) :
         d = self.get()
-        return d[symbol]
+        if d.has_key(symbol): return d[symbol]
+        return None
 
     # Count the number of records with the given key
     def countSymbols(self, symbol) :
@@ -51,6 +64,7 @@ class FuzzyStack :
             if(symbol == d[0]) :
                 self.data.remove(d)
                 return d
+        print "Pop: " + str(self)
         return False
 
     # Pop off the oldest occurrance of a key
