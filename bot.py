@@ -112,7 +112,7 @@ def AI(mess, k=""):
     else:
         return keys[0]
 
-filter = ["dodona", "tell", "me", "about", ",", ".", "!", "?", "i", "would", "like", "to", "know", "what", "do", "you"]
+filter = ["dodona", "tell", "me", "about", ",", ".", "!", "?", "i", "would", "like", "to", "know", "what", "do", "you", "is"]
 
 def pick_out_keyword(list, f = filter):
     pruned_list = list[:]
@@ -127,7 +127,38 @@ def pick_out_keyword(list, f = filter):
     key = key.rstrip()
 
     return key
-        
+
+def update_files(topic):
+    file = open("./doctopics/" + topic + ".xml", "w")
+    file.write("<?xml version=\"1.0\" ?>\n")
+    file.write("<topic>\n")
+    file.write("<default>Overview of " + topic + "</default>\n")
+    
+    for subtopic in topics[topic]:
+        file.write("<answer question=\"" + subtopic + "\">\n")
+        file.write(topics[topic][subtopic] + "\n")
+        file.write("</answer>\n")
+    
+    file.write("</topic>")
+    file.close()
+
+    file = open("./doctopics/topics.xml", "r")
+    f = []
+    line = None
+    while line != "":
+        line = file.readline()
+        if line.find("</topics>") == -1:
+            f.append(line)
+        else:
+            f.append("<topic name=\"" + topic + "\" file=\"doctopics/" + topic + ".xml\"/>\n")
+            f.append(line)
+
+    file.close()
+    file = open("./doctopics/topics.xml", "w")
+    for line in f:
+        file.write(line)
+
+    file.close()        
 
 def learn(topic, subtopic = None):
     if subtopic == None:
@@ -140,6 +171,7 @@ def learn(topic, subtopic = None):
     send(custom_fill("Ok, we are talking about " + subtopic + " under " + topic + "!  Please tell me all you know about " + subtopic + " under " + topic + "."))
     mess = receive_from_subs()
     topics[topic][subtopic] =  mess
+    update_files(topic)
 
     send(custom_fill("Thanks!"))
     
@@ -185,8 +217,8 @@ def question(mess = None, k = None, d = topics):
         send(custom_fill(d[key]))
     return False
 
-#zephyr.init()
-#zephyr.Subscriptions().add(('dodona', '*', '*'))
+zephyr.init()
+zephyr.Subscriptions().add(('dodona', '*', '*'))
 send(fill('Dodona is now running.  If you find that a topic you wish answered is not accounted for, please send mail to dodona AT mit DOT edu'))
 send(custom_fill(str(topics.keys())))
 
