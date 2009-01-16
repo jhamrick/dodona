@@ -8,10 +8,11 @@
 <topic name="php" file="doctopics/php.xml"/>
 <topic name="sipb" file="doctopics/SIPB.xml"/>
 <topic name="daleks" file="doctopics/Daleks.xml"/>
-<topic name="dodona" file="doctopics/A certain zephyrbot.xml"/>
+<topic name="dodona" file="doctopics/dodona.xml"/>
 <topic name="ponies" file="doctopics/ponies.xml"/>
 <topic name="yaks" file="doctopics/yaks.xml"/>
 <topic name="mitsfs" file="doctopics/mitsfs.xml"/>
 <topic name="dinosaurs" file="doctopics/dinosaurs.xml"/>
 <topic name="motorcycles" file="doctopics/motorcycles.xml"/>
+<topic name="words" file="doctopics/words.xml"/>
 </topics>

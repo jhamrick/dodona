@@ -19,10 +19,13 @@ def send(mess, name = None):
 
 #receive a zephyr not from yourself
 def receive_from_subs(return_sender=False):
-    try:
-        m = zephyr.receive(True)
-    except:
-        return receive_from_subs()
+    received = False
+    while not received:
+        try:
+            m = zephyr.receive(True)
+            received = True
+        except:
+            continue
 
     while m.sender == 'dodona@ATHENA.MIT.EDU':
         try:
@@ -51,5 +54,9 @@ def receive_from_subs(return_sender=False):
     m = str(m.strip().lower())
     if m.find("dodona, ") != -1:
         m = m.partition("dodona, ")[2]
+
+    if m == "":
+        return receive_from_subs()
+
     if return_sender:  return [m, sender]
     else:  return m

@@ -129,9 +129,12 @@ class Session:
     def question(self):
         name = self.name
         mess = self.memory.read("message")
+        m = tokenize(mess)
         if mess == None: return False
-        if mess == "exit":
-            send("Glad to be of help", name)
+        if mess == "exit" or \
+                "bye" in m or \
+                "goodbye" in m:
+            send("Glad to be of help :)", name)
             return True
 
         if mess.find("nevermind") != -1:
@@ -139,7 +142,6 @@ class Session:
             self.clear()
             return False
 
-        m = tokenize(mess)
         if "hi" in m or \
                 "hey" in m or \
                 "hello" in m != -1:
@@ -147,7 +149,6 @@ class Session:
             return None
         
         s = self.memory.read("status")
-        print "s: ", s
         if s == "unknown":  return self.unknown(mess)
         if s == "conv_topic":  return self.conv_topic(mess)
         if s == "subtopic":  return self.sub_topic(mess)
@@ -161,6 +162,7 @@ class Session:
 
         if key == "d:none":
             topic = self.pick_out_keyword(tokenize(mess))
+            if topic.strip() == "": return None
             self.memory.push("topic", topic)
             send("Sorry, I don't know anything about " + topic + ".  Would you like to tell me about " + topic + "?  (Please answer \"yes\" or \"no\")", name)
             self.memory.push("status", "unknown")
@@ -177,14 +179,10 @@ class Session:
             return None
 
         if isinstance(d[key], dict):
-            #if len(d[key]) == 1:
-            #    send(d[key].keys()[0] + "\n" + d[key][d[key].keys()[0]], name)
-            #    return False
-
             key2 = self.AI(mess, d[key])
 
             if key2 == "d:none" or isinstance(key2, list):
-                send("Please pick a topic below, or tell me a new one! (in relation to " + topic + ")\n\n" + print_list(d[key].keys()), name)
+                send("Please pick a topic below, or tell me a new one! (in relation to " + key + ")\n\n" + print_list(d[key].keys()), name)
                 self.memory.push("topic", key)
                 self.memory.push("data", d[key])
                 return None

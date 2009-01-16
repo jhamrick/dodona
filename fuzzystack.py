@@ -27,7 +27,6 @@ class FuzzyStack :
         if len(self.data) == self.depth :
             self.popoldest()
         self.data.insert(0, (symbol, value));
-        print "Push: " + str(self)
 
     # Returns a dictionary of the most relevant keys
     def get(self) :
@@ -64,7 +63,6 @@ class FuzzyStack :
             if(symbol == d[0]) :
                 self.data.remove(d)
                 return d
-        print "Pop: " + str(self)
         return False
 
     # Pop off the oldest occurrance of a key

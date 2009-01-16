@@ -1,0 +1,7 @@
+<?xml version="1.0" ?>
+<topic>
+<default>Overview of words</default>
+<answer question="foo">
+bar baz qux
+</answer>
+</topic>
