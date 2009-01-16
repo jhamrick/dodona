@@ -12,4 +12,6 @@
 <topic name="ponies" file="doctopics/ponies.xml"/>
 <topic name="yaks" file="doctopics/yaks.xml"/>
 <topic name="mitsfs" file="doctopics/mitsfs.xml"/>
+<topic name="dinosaurs" file="doctopics/dinosaurs.xml"/>
+<topic name="motorcycles" file="doctopics/motorcycles.xml"/>
 </topics>
