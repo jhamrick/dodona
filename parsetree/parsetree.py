@@ -5,6 +5,19 @@ from helper import *
 
 d = {"the": "D", "man": "N", "eats": "V", "[pres]": "I", "young": "Adj", "food": "N", "strong": "Adj", "quickly": "Adv", "barn": "N", "is": "V", "red": "Adj", "very": "Adv"}
 
+rules = {"XP": [["spec", "X'"], 
+                ["X'", "spec"],
+                ["X'"]],
+         "X'": [["adjunct", "X'"],
+                ["X'", "adjunct"],
+                ["X'"],
+                ["comp", "X"],
+                ["X", "comp"],
+                ["X"]],
+         "spec": [["DP"], ["NP"], ["AdjP"], ["adjunct"]],
+         "adjunct": [["AdvP"], ["AdjP"], ["PP"]],
+         "comp": [["CP"], ["VP"]]}
+
 class Node:        
     def __init__(self, list, type, level):
         self.children = list
@@ -26,6 +39,12 @@ class Node:
 
     def setType(self, type):
         self.type = type
+
+    def setLevel(self, level):
+        self.level = level
+    
+    def getLevel(self):
+        return self.level
 
     def getChildren(self):
         return self.children
@@ -54,56 +73,6 @@ class ParseTree:
 
     def __str__(self):
         return str(self.head)
-
-
-# def makeNodeTree(s, level=1):    
-#     if isinstance(s, str):
-#         return Leaf(s, d[s], level)
-
-#     children = []
-#     for child in s:
-#         children.append(makeNodeTree(child, level + 1))
-
-#     child = children[0]
-#     if not child.getType().endswith("\'") and not child.getType().endswith("P"):
-#         type = child.getType() + "\'"
-#     elif child.getType().endswith("\'"):
-#         if len(children) > 1:
-#             t = children[1].getType()
-#             if t == "AdvP" or t == "PP":
-#                 type = child.getType()
-#             else:
-#                 type = child.getType().partition("\'")[0] + "P"
-#         else:
-#             type = child.getType().partition("\'")[0] + "P"
-#     else:
-#         type = None
-
-#     if type == None and len(children) > 1:
-#         child = children[1]
-#         if not child.getType().endswith("\'") and not child.getType().endswith("P"):
-#             type = child.getType() + "\'"
-#         elif child.getType().endswith("\'"):
-#             t = children[0].getType()
-#             if t == "AdvP" or t == "PP":
-#                 type = child.getType()
-#             else:
-#                 type = child.getType().partition("\'")[0] + "P"
-
-#     return Node(children, type, level)
-
-rules = {"XP": [["spec", "X'"], 
-                ["X'", "spec"],
-                ["X'"]],
-         "X'": [["adjunct", "X'"],
-                ["X'", "adjunct"],
-                ["X'"],
-                ["comp", "X"],
-                ["X", "comp"],
-                ["X"]],
-         "spec": [["DP"], ["NP"], ["AdjP"]],
-         "adjunct": [["AdvP"], ["AdjP"], ["PP"]],
-         "comp": [["CP"], ["VP"]]}
 
 def matchRule(currNode, children):
     if currNode.getType() != "spec" and \
@@ -147,8 +116,26 @@ def makeNodeTree(s, currNode, level=1):
     rules = matchRule(currNode, s)
     if len(rules) == 1:
         rule = rules[0]
+        temp = Node(currNode.getChildren(), currNode.getType(), currNode.getLevel())
+        node = None
         for r, child in zip(rule, s):
-            currNode.addChild(makeNodeTree(child, Node([], r, level+1), level+1))
+            node = makeNodeTree(child, Node([], r, level+1), level+1)
+            if isinstance(node, list):
+                break
+            temp.addChild(node)
+
+        if isinstance(node, list):
+            adj = Node([], currNode.getType()[:len(currNode.getType())-1] + "'", level+1)
+            for r,  child in zip(rule, s):
+                n = makeNodeTree(child, Node([], r, level+2), level+2)
+                if isinstance(n, list):
+                    adj.addChild(n[0])
+                else:
+                    adj.addChild(n)
+            currNode.addChild(adj)
+        else:
+            currNode = temp
+            
 
     elif currNode.getType() == "spec" or\
             currNode.getType() == "adjunct" or\
@@ -171,7 +158,12 @@ def makeNodeTree(s, currNode, level=1):
         elif "D" in types and ["DP"] in rules:
             currNode.setType("DP")
         else:
-            return None
+            if ["adjunct"] in rules:
+                currNode.setType("adjunct")
+                return [makeNodeTree(s, currNode, level)]
+            else:
+                print rules, types
+                return None
 
         return makeNodeTree(s, currNode, level)
 
@@ -182,7 +174,7 @@ def makeNodeTree(s, currNode, level=1):
                 p = makeNodeTree(s[0], Node([], rule[0], level+1), level+1)
             else:
                 p = makeNodeTree(s[1], Node([], rule[1], level+1), level+1)
-
+ 
             if p != None:
                 poss.append(rule)
 
@@ -196,9 +188,5 @@ def makeTree(s):
     p = makeNodeTree(s, Node([], "IP", 1))
     return ParseTree(p)
 
-p = makeTree([[["the"], "barn"], ["[pres]", ["is", ["very", ["red"]]]]])
+p = makeTree([[["the"], [["red"], "barn"]], ["[pres]", ["is", ["red"]]]])
 print p
-#p = makeTree([[[["the"]], ["barn"]], ["[pres]", [["is"], [["red"]]]]])
-#print p
-#p = makeTree([[[["the"]], ["barn"]], ["[pres]", [[["is"], [["very"], [["red"]]]]]]])
-#print p
