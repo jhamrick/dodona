@@ -8,8 +8,9 @@ class FuzzyStack :
         self.data = list()
         self.depth = depth
 
+    #returns a string representing the data in dictionary form.
     def __str__(self):
-        d = self.get()
+        d = self.makeDict()
         p = ""
         for key in d.keys():
             p = p + str(key) + ": "
@@ -29,7 +30,7 @@ class FuzzyStack :
         self.data.insert(0, (symbol, value));
 
     # Returns a dictionary of the most relevant keys
-    def get(self) :
+    def makeDict(self) :
         output = dict()
         for d in reversed(self.data) :
             output[d[0]] = d[1]
@@ -37,7 +38,7 @@ class FuzzyStack :
 
     # Retrieve a key
     def read(self, symbol) :
-        d = self.get()
+        d = self.makeDict()
         if d.has_key(symbol): return d[symbol]
         return None
 

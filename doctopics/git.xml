@@ -1,0 +1,69 @@
+<?xml version="1.0" ?>
+<topic>
+<default>Overview of Git</default>
+<answer question="intro: version control concepts">
+    Version Control allows a team to collaborate on a file and keep track of old versions.
+    
+    The most basic way to do this with git:
+    1) Download the file (as about downloading something) : If do not have the file already, clone the file from a server where it is being hosted.
+    2) Make your changes the file. 
+    3) Commit your changes after you are sure enough that you want to consider them a separate version
+    4) 'push' your changes to that same server so that others can use your work. You might find that someone else has edited the file in the meantime and has already pushed thier changes. This means you might have edited the same text, leading to conflicts. In that case, you will need to decide which version to choose.
+<answer question="getting started">
+
+If this is an existing project by jflorey and you are just editing it:
+you first need to 
+    $ git clone git://github.com/jflorey/project.git
+    $ cd ./project
+    $ git pull
+It should reply "Already up-to-date". If it responds with an address error, replace git:// with http://
+  you are now ready to edit the file. ask dodona about "upload something" in order to push your changes after you are done. 
+
+    You first need to create a directory and initiate it as a git repository
+$ mkdir ./project
+$ cd ./project
+    afarrell@ender$ git init
+</answer>
+<answer question="github">
+In order to get working, you first have to 
+</answer>
+<answer question="create the first repository">
+In order to get working, you first have to 
+</answer>
+<answer question="upload something">
+    So now you have edited spam.py and created shrubbery.py in your project. How do you upload that back to jflorey's github repository?
+    You first need to tell git that you want this added to the "list of things I've changed"
+    afarrell@ender$ git add spam.py shrubbery.py
+    you can do this for each file after you are done editing it or in one fell swoop.
+    you can also remove files
+    afarrell@ender$ git rm foolish.py
+    Next, you need to commit to a certain set of changes that you want to make:
+    afarrell@ender$ git commit
+    this will give you a screen asking you write a commit message. you should write a short blurb explaining what changes you made
+    to which files. When you are done, hold down ctrl-shift and hit kx. To abort, hit ctrl-c.
+    you will then see a message like this:
+    Created commit 819ed4b: your comments here.
+ 2 files changed, 18 insertions(+), 0 deletions(-)
+ create mode 100755 shrubbery.py
+
+now, you can push that set of changes up to the repository.
+    afarrell@ender$ git push
+
+    If you want to undo a commit before pushing it, you can do 
+    afarrell@ender$ git reset
+    this will leave you where you were after you edited the files, but before you added them. It also displays
+    spam.py shrubbery.py needs update
+    meaning that, those are the files you had edited.
+    If you want to completely whipe out your changes you want 
+    afarrell@ender$ git reset --hard
+    if you want to be left where you were after adding the files, but before comitting them, you want:
+    afarrell@ender$ git reset --soft
+</answer>
+<answer question="merge conflicts">
+In order to get working, you first have to 
+</answer>
+
+<answer question="still being worked on by afarrell">
+In order to get working, you first have to 
+</answer>
+</topic>
