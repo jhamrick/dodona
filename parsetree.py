@@ -2,11 +2,11 @@ from pos import POSDict
 from grammar import Sentence, NounPhrase, VerbPhrase, AdjectivePhrase, PrepositionalPhrase, Nominal, Noun, Verb, Adjective, Adverb, Conjunction, Preposition, Pronoun, Determiner, Punctuation
 from copy import deepcopy
 import time
+from helper import tokenize
 
 #########################################
 # This file contains all the functions
 # needed to parse a sentence.  There is:
-#    tokenize(mess)
 #    word_to_type(word)
 #    check_rule(rule, sentence)
 #    build_tree(pos)
@@ -20,51 +20,6 @@ d = POSDict() # initialize the dictionary containing all the words and their
 
 # specify the phrases which will be used to build the tree
 phrases = [Nominal, NounPhrase, VerbPhrase, Sentence, AdjectivePhrase, PrepositionalPhrase]
-
-def tokenize(mess):
-    """
-    Split the sentence into a list, which contains words and some
-    punctuation, but no whitespace.
-    """
-    words = []
-    oldchars = ""
-    for char in mess:
-        if char == "," or \
-           char == "." or \
-           char == "?" or \
-           char == "!":
-            # if the previous characters are not whitespace,
-            # then make them a new entry in the list
-            if not oldchars == "":
-                words.append(oldchars)
-                oldchars = ""
-            # if the current character is punctuation,
-            # then make it a new entry in the list
-            words.append(char)
-        # if the current character is a space and the
-        # previous characters are not whitespace, then
-        # make the previous characters into an entry in
-        # the list
-        elif char == " " and not oldchars == "":
-            words.append(oldchars)
-            oldchars = ""
-        # if the current character is a space and the
-        # previous characters are whitespace, then do
-        # nothing.
-        elif char == " " and oldchars == "":
-            pass
-        # otherwise, add the current character to the string
-        # of previous characters
-        else:
-            oldchars += char
-    
-    # once you're at the end of the word, make any
-    # previous characters which are not whitespace
-    # to the list
-    if oldchars != "":
-        words.append(oldchars)
-
-    return words
 
 def word_to_type(word):
     """

@@ -78,7 +78,9 @@ class NounPhrase(Phrase):
         self.rules = [[AdjectivePhrase, Nominal],
                       [Nominal, PrepositionalPhrase],
                       [NounPhrase, Conjunction, NounPhrase],
-                      [Nominal]]
+                      [Nominal],
+                      [AdjectivePhrase, Conjunction, AdjectivePhrase, Nominal],
+                      [Determiner, AdjectivePhrase, Nominal]]
 
     def __str__(self):
         s = "[.NounPhrase "
@@ -96,7 +98,11 @@ class VerbPhrase(Phrase):
                       [Verb, PrepositionalPhrase],
                       [Verb, Sentence],
                       [VerbPhrase, PrepositionalPhrase],
-                      [Verb, AdjectivePhrase]]
+                      [Verb, AdjectivePhrase],
+                      [Adverb, Verb, NounPhrase],
+                      [Adverb, Verb],
+                      [Verb, NounPhrase, Adverb],
+                      [Verb, Adverb]]
 
     def __str__(self):
         s = "[.VerbPhrase "
