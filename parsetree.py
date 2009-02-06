@@ -212,20 +212,29 @@ def parse(sentence):
     # make a list of all possible sentences, given the type(s) of
     # speech for each word
     pos = [[]]
+#     for word in sentence:
+#         types = word_to_type(word)
+#         if len(types) == 1:
+#             for p in pos: p.append(types[0])
+#         else:
+#             temp = deepcopy(pos)
+#             for t in temp:
+#                 t.append(types[0])
+#             for type in types[1:]:
+#                 for p in pos:
+#                     t = p[:]
+#                     t.append(type)
+#                     temp.append(t)
+#             pos = deepcopy(temp)
     for word in sentence:
         types = word_to_type(word)
-        if len(types) == 1:
-            for p in pos: p.append(types[0])
-        else:
-            temp = deepcopy(pos)
-            for t in temp:
-                t.append(types[0])
-            for type in types[1:]:
-                for p in pos:
-                    t = p[:]
-                    t.append(type)
-                    temp.append(t)
-            pos = deepcopy(temp)          
+        oldpos = pos
+        pos = []
+        for p_s in oldpos:
+            pos += [p_s + [type_] for type_ in types]
+
+    print pos
+    print len(pos)
 
     # perform the search on the possible sentences
     pos = search(pos)
