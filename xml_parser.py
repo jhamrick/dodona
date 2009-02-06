@@ -3,6 +3,13 @@ site.addsitedir('/afs/athena.mit.edu/user/b/r/broder/lib/python2.5/site-packages
 from xml.dom import minidom
 
 def load_topics(file):
+    """
+    Loads the topics from the specified file,
+    and parse the XML to find the file which
+    each topic is associated with.  Returns a
+    dictionary of the topics and their associated
+    infomation.
+    """
     topics = {}
     xmldoc = minidom.parse(file)
     topicsNode = xmldoc.firstChild
@@ -21,6 +28,11 @@ def load_topics(file):
     return topics
 
 def load_topic(file):
+    """
+    Load the information about a topic from
+    the specified file, and return a dictionary
+    with said information.
+    """
     answers = {}
     xmldoc = minidom.parse(file)
     topicNode = xmldoc.firstChild
@@ -35,6 +47,10 @@ def load_topic(file):
     return answers
 
 def update_files(topic, topics, newtopic=True):
+    """
+    Updates the XML files with new information, which
+    is added by users.
+    """
     file = open("./doctopics/" + topic + ".xml", "w")
     file.write("<?xml version=\"1.0\" ?>\n")
     file.write("<topic>\n")
