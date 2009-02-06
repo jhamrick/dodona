@@ -2,26 +2,33 @@ import site
 site.addsitedir('/afs/athena.mit.edu/user/b/r/broder/lib/python2.5/site-packages')
 
 import zephyr
-import zephyrUI
-from zephyrUI import *
-import fuzzystack
-from fuzzystack import *
-import helper
-from helper import *
-import parser
-from parser import *
+from zephyrUI import send
+from fuzzystack import FuzzyStack
+from helper import print_list, custom_list, tokenize, integrate_lists, find_partial_key 
+from xml_parser import update_files
 
-topics = load_topics("doctopics/topics.xml")
+#######################################
+# The Session class stores a "session",
+# or conversation, between Dodona and
+# the user.
+#######################################
 
 class Session:
-    def __init__(self, name):
+    def __init__(self, name, topics):
         self.memory = FuzzyStack(20)
         self.memory.push("data", topics)
         self.memory.push("name", name)
-        self.filter = ["tell", "me", "about", ",", ".", "!", "?", "i", "would", "like", "to", "know", "what", "do", "you", "is"]
         self.name = name
+        self.topics = topics
 
-    def AI(self, mess, d = topics):
+    def AI(self, mess, d = self.topics):
+        """
+        Determines the keywords in the message,
+        and returns either:
+            - a list of keys, if there is more than one
+            - a single key
+            - the status "d:none", if there are none
+        """
         mess = tokenize(mess)
         keys = []
         for key in mess:
@@ -31,24 +38,18 @@ class Session:
         elif len(keys) == 0:
             return "d:none"
         else:
-            return keys[0]
-    
-    def pick_out_keyword(self, list, f = ""):
-        if f == "":  f = self.filter
-        pruned_list = list[:]
-        for elem in list:
-            if elem.lower() in f:
-                pruned_list.remove(elem)
-        #print pruned_list
-
-        key = ""
-        for item in pruned_list:
-            key += item + " "
-        key = key.rstrip()
-
-        return key     
+            return keys[0]    
 
     def add_data(self, mess, newtopic):
+        """
+        Adds a piece of new data to Dodona's 
+        knowledge, after having ascertained the 
+        subtopic and topic.
+
+        Corresponds to the status add_data_true or
+        add_data_false, depending on whether the
+        topic is brand new or not, respectively.
+        """
         subtopic = self.memory.pop("topic")[1]
         topic = self.memory.pop("topic")[1]
         print topics[topic]
@@ -59,23 +60,48 @@ class Session:
         return False
 
     def sub_topic(self, mess, subtopic = None):
+        """
+        Part of Dodona's learning algorithm.
+        Determines the subtopic, and waits for
+        the user to give it information about
+        that subtopic and topic.
+
+        Corresponds to the status subtopic.
+        """
         topic = self.memory.read("topic")
+        # if the subtopic is not already known, then
+        # read it from the current message.  This is
+        # an indicator that the topic is new or not.
         if subtopic == None:
             subtopic = mess
             newtopic = True
         else:
             newtopic = False
-        print topic, subtopic
+
         send("Ok, we are talking about " + subtopic + " under " + topic + "!  Please tell me all you know about " + subtopic + " under " + topic + ".", self.name)
         self.memory.push("topic", subtopic)
+
+        # if the topic is new, then set the status to add_data_true
         if newtopic:  self.memory.push("status", "add_data_true")
+        # if it's not, then set the status to add_data_false
         else:  self.memory.push("status", "add_data_false")
+
         return None
 
     def learn(self):
+        """
+        Begins the learning process.  Determines the topic
+        to which new information will be added.  If the user
+        is already talking about a topic, and tells Dodona
+        something she doesn't understand, then this will be
+        the subtopic.  If not, then she prompts the user to
+        enter a subtopic.
+        """
         name = self.name
         subtopic = self.memory.pop("topic")[1]
         topic = self.memory.pop("topic")
+        # if the topic is foreign, then prompt the user
+        # for a subtopic and set the status to subtopic
         if topic == False:
             topic = subtopic
             topics[subtopic] = {}
@@ -84,16 +110,30 @@ class Session:
             self.memory.pop("status")
             self.memory.push("status", "subtopic")
             return None
+        # if not, then go directly to sub_topic
         else:
             self.memory.push("topic", topic[1])
             return self.sub_topic("", subtopic)
 
     def unknown(self, mess):
+        """
+        Called when Dodona encounters something she does
+        not understand.  Asks the user if he/she would
+        like to tell Dodona about the subject.
+
+        Corresponds to the status unknown.
+        """
         name = self.name
+        # if the user says yes, then call learn
         if mess.find("yes") != -1:
             self.learn()
             return None
         
+        # if the user says no, and you're already
+        # talking about a specific topic, then ask if
+        # the user wants to continue talking about it,
+        # and sets the status to conv_topic
+        # if not, then return False (reset the session)
         if mess.find("no") != -1:
             send("Ok.", name)
             self.memory.pop("topic")
@@ -103,11 +143,18 @@ class Session:
 
             send("Are we still talking about " + t + "?  (Please answer \"yes\" or \"no\")")
             self.memory.push("status", "conv_topic")
-            return None
 
         return None
 
     def conv_topic(self, mess):
+        """
+        Called when the user responds to Dodona's
+        question of whether they are talking about
+        a certain topic, and processes the users's
+        answer.
+
+        Corresponds to the status conv_topic.
+        """
         name = self.name
         if mess.find("yes") != -1:
             send("Ok!", name)
@@ -122,32 +169,50 @@ class Session:
         return None
 
     def clear(self):
+        """
+        Clears (resets) the session and the
+        memory, but does not kill it.
+        """
         self.memory = FuzzyStack(20)
         self.memory.push("data", topics)        
 
-    #get and answer a question
     def question(self):
+        """
+        Parses the user's most recent message,
+        and decides what to do based on the
+        content and the current status.
+        """
         name = self.name
         mess = self.memory.read("message")
         m = tokenize(mess)
+
         if mess == None: return False
+
+        # if the user wants to exit, then
+        # return True (kill the session)
         if mess == "exit" or \
                 "bye" in m or \
                 "goodbye" in m:
             send("Glad to be of help :)", name)
             return True
 
+        # if the user says "nevermind", then
+        # clear the session
         if mess.find("nevermind") != -1:
             send("Ok.", name)
             self.clear()
             return False
 
+        # if the user greets Dodona, then respond
+        # in kind.
         if "hi" in m or \
                 "hey" in m or \
                 "hello" in m != -1:
             send("Hello, " + name + "!")
             return None
         
+        # check the status, and return the corresponding
+        # function if necessary
         s = self.memory.read("status")
         if s == "unknown":  return self.unknown(mess)
         if s == "conv_topic":  return self.conv_topic(mess)
@@ -157,17 +222,25 @@ class Session:
 
         d = self.memory.read("data")
         k = self.memory.read("topic")
+        # if there is no current topic, then decipher one
+        # from the most recent message.
         if k == None:  key = self.AI(mess)
+        # if there is a current topic, search for a subtopic
         else:  key = self.AI(mess, d)
 
+        # if there is no matching key, then ask the user to
+        # tell Dodona about the topic.
         if key == "d:none":
-            topic = self.pick_out_keyword(tokenize(mess))
+            topic = mess
             if topic.strip() == "": return None
             self.memory.push("topic", topic)
             send("Sorry, I don't know anything about " + topic + ".  Would you like to tell me about " + topic + "?  (Please answer \"yes\" or \"no\")", name)
             self.memory.push("status", "unknown")
             return None
-
+        
+        # if the key is a list, tihs means that there are
+        # multiple matching keywords.  Prompt the user as to
+        # which one they want.
         if isinstance(key, list):
             send("Multiple keywords match your query.  What did you mean to ask about?\n\n" + print_list(key), name)
             shortd = {}
@@ -178,6 +251,9 @@ class Session:
                 self.memory.pop("message")
             return None
 
+        # if the key is a dictionary, then you know it is a
+        # topic, and has subtopics.  Ask the user which subtopic
+        # they would like to know about.
         if isinstance(d[key], dict):
             key2 = self.AI(mess, d[key])
 
@@ -191,6 +267,8 @@ class Session:
                 send(d[key][key2], name)
                 return False
 
+        # if there is just a single key, then respond with
+        # the knowledge which Dodona has about the topic
         send(custom_fill(d[key]), name)
         return False
  
