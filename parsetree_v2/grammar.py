@@ -30,28 +30,27 @@ class Head:
 class NounPhrase(Phrase):
     def __init__(self, children):
         self.children = children
-        self.rules = [[DefArticle, Nominal],
-                      [IndefArticle, Nominal],
-                      [DefArticle, AdjectivePhrase, Nominal],
-                      [IndefArticle, AdjectivePhrase, Nominal],
-                      [NounPhrase, Conjunction, NounPhrase],
+        self.rules = [[AdjectivePhrase, Nominal],
                       [Nominal, PrepositionalPhrase],
+                      [NounPhrase, Conjunction, NounPhrase],
                       [Nominal]]
 
     def __str__(self):
-        s = "[NounPhrase: "
+        s = "[.NounPhrase "
         for child in self.children: s += str(child)
         s += "] "
         return s    
 
 class Noun(Head):
     def __str__(self):
-        return "Noun: " + self.word + " "
+        return "[.Noun " + self.word + " ] "
 
 class VerbPhrase(Phrase):
     def __init__(self, children):
         self.children = children
-        self.rules = [[Verb, NounPhrase],
+        self.rules = [[Verb, Verb],
+                      [Verb, Verb, Verb],
+                      [Verb, NounPhrase],
                       [Verb, NounPhrase, PrepositionalPhrase],
                       [Verb, PrepositionalPhrase],
                       [Verb, Sentence],
@@ -59,36 +58,14 @@ class VerbPhrase(Phrase):
                       [Verb, AdjectivePhrase]]
 
     def __str__(self):
-        s = "[VerbPhrase: "
+        s = "[.VerbPhrase "
         for child in self.children: s += str(child)
         s += "] "
         return s
 
 class Verb(Head):
     def __str__(self):
-        return "Verb: " + self.word + " "
-
-class TransVerbPhrase(VerbPhrase):
-    def __str__(self):
-        s = "[TransVerbPhrase"
-        for child in self.children: s += str(child)
-        s += "] "
-        return s
-
-class TransVerb(Head):
-    def __str__(self):
-        return "TransVerb: " + self.word + " "
-
-class IntransVerbPhrase(VerbPhrase):
-    def __str__(self):
-        s = "[IntransVerbPhrase"
-        for child in self.children: s += str(child)
-        s += "] "
-        return s
-
-class IntransVerb(Head):
-    def __str__(self):
-        return "IntransVerb: " + self.word + " "
+        return "[.Verb " + self.word + " ] "
 
 class Sentence(Phrase):
     def __init__(self, children):
@@ -98,7 +75,7 @@ class Sentence(Phrase):
                       [VerbPhrase]]
 
     def __str__(self):
-        s = "[Sentence: "
+        s = "[.Sentence "
         for child in self.children: s += str(child)
         s += "] "
         return s
@@ -110,22 +87,22 @@ class AdjectivePhrase(Phrase):
                       [Adverb, Adjective]]
 
     def __str__(self):
-        s = "[AdjectivePhrase: "
+        s = "[.AdjectivePhrase "
         for child in self.children: s += str(child)
         s += "] "
         return s
 
 class Adjective(Head):
     def __str__(self):
-        return "Adjective: " + self.word + " "
+        return "[.Adjective " + self.word + " ] "
 
 class Adverb(Head):
     def __str__(self):
-        return "Adverb: " + self.word + " "
+        return "[.Adverb " + self.word + " ] "
 
 class Conjunction(Head):
     def __str__(self):
-        return "Conjunction: " + self.word + " "
+        return "[.Conjunction " + self.word + " ] "
 
 class PrepositionalPhrase(Phrase):
     def __init__(self, children):
@@ -134,36 +111,33 @@ class PrepositionalPhrase(Phrase):
                       [Preposition]]
 
     def __str__(self):
-        s = "[PrepositionalPhrase: "
+        s = "[.PrepositionalPhrase "
         for child in self.children: s += str(child)
         s += "] "
         return s
 
 class Preposition(Head):
     def __str__(self):
-        return "Prepositional: " + self.word + " "
+        return "[.Preposition " + self.word + " ] "
 
 class Pronoun(Head):
     def __str__(self):
-        return "Pronoun: " + self.word + " "
+        return "[.Pronoun " + self.word + " ] "
 
-class DefArticle(Head):
+class Determiner(Head):
     def __str__(self):
-        return "DefArticle: " + self.word + " "
-
-class IndefArticle(Head):
-    def __str__(self):
-        return "IndefArticle: " + self.word + " "
+        return "[.Determiner " + self.word + " ] "
 
 class Nominal(Phrase):
     def __init__(self, children):
         self.children = children
         self.rules = [[Noun],
+                      [Determiner, Noun],
                       [Nominal, Noun],
                       [Nominal, PrepositionalPhrase]]
 
     def __str__(self):
-        s = "[Nominal: "
+        s = "[.Nominal "
         for child in self.children: s += str(child)
         s += "] "
         return s

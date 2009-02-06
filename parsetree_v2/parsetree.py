@@ -2,9 +2,11 @@ import pos
 from pos import *
 import grammar
 from grammar import *
+import copy
+from copy import *
+import time
 
-#d = POSDict()
-d = {"the": "D", "barn": "N", "is": "V", "red": "A", "very": "v"}
+d = POSDict()
 phrases = [Nominal, NounPhrase, VerbPhrase, Sentence, AdjectivePhrase, PrepositionalPhrase]
 
 def tokenize(mess):
@@ -35,16 +37,28 @@ def tokenize(mess):
     return words
 
 def word_to_type(word):
-    if d[word] == "N":
-        return Noun(word)
-    elif d[word] == "V":
-        return Verb(word)
-    elif d[word] == "A":
-        return Adjective(word)
-    elif d[word] == "D":
-        return DefArticle(word)
-    elif d[word] == "v":
-        return Adverb(word)
+    pos = d.read_all(word)
+    print word, ": ", pos
+    types = []
+    for p in pos:
+        if p == "N":
+            types.append(Noun(word))
+        elif p == "V":
+            types.append(Verb(word))
+        elif p == "A":
+            types.append(Adjective(word))
+        elif p == "D":
+            types.append(Determiner(word))
+        elif p == "v":
+            types.append(Adverb(word))
+        elif p == "P":
+            types.append(Preposition(word))
+        elif p == "C":
+            types.append(Conjunction(word))
+        elif p == "r":
+            types.append(Pronoun(word))
+
+    return types
 
 def check_rule(rule, sentence):
     if len(rule) > 1:
@@ -74,13 +88,14 @@ def build_tree(pos):
     matching_types = []
     matching_rules = []
     for type in phrases:
-        #print type
         for rule in type.getRules(type([])):
+            #print type, rule, pos
             r = check_rule(rule, pos)
             if r:
                 matching_rules.append(rule)
                 matching_types.append(type)
 
+    #print matching_rules, matching_types
     if len(matching_types) == 0 or len(matching_rules) == 0:
         #print "ERROR --> no matches"
         return []
@@ -107,11 +122,14 @@ def build_tree(pos):
                 else:
                     pos_new.append(pos[i])
         else:
-            for t in pos:
-                if isinstance(t, matching_rule[0]):
-                    pos_new.append(matching_type([t]))
+            for i in range(len(pos)):
+                if isinstance(pos[i], matching_rule[0]):
+                    pos_new.append(matching_type([pos[i]]))
+                    for j in range(i+1, len(pos)):
+                        pos_new.append(pos[j])
+                    break
                 else:
-                    pos_new.append(t)
+                    pos_new.append(pos[i])
 
         m.append(pos_new)
 
@@ -120,24 +138,60 @@ def build_tree(pos):
 
 def search(pos):
     for p in pos:
-        if isinstance(p[0], Sentence): return p
+        if isinstance(p[0], Sentence) and len(p) == 1: return p
         if p == []: return None
     
+    #print pos
+    temp = []
     for p in pos:
-        temp = search(build_tree(p))
-        if temp != None:
-            return temp
+        #print p
+        t = build_tree(p)
+        #print t
+        if t != []:
+            temp.extend(t)
+
+    if len(temp) == 0: 
+        print "NO PARSE FOUND"
+        #print pos
+        return []
+
+    #print temp
+    return search(temp)
 
 def parse(sentence):
+    t0 = time.clock()
     sentence = tokenize(sentence)
-    pos = []
+    pos = [[]]
     for word in sentence:
-        pos.append(word_to_type(word))
+        types = word_to_type(word)
+        if len(types) == 1:
+            for p in pos: p.append(types[0])
+        else:
+            temp = deepcopy(pos)
+            #print "temp: ", temp
+            for t in temp:
+                t.append(types[0])
+            #print "temp: ", temp
+            for type in types[1:]:
+                for p in pos:
+                    t = p[:]
+                    t.append(type)
+                    temp.append(t)
+                    #print "pos: ", pos
+                    #print "temp2: ", temp
+            pos = deepcopy(temp)          
 
-    pos = build_tree(pos)
-    #for p in pos: print p
+    #print pos
+    #print len(pos)
     pos = search(pos)
+    t1 = time.clock()
 
     for p in pos: print p
+    print "Parse took " + str(t1 - t0) + " seconds."
 
-parse("the barn is very red")
+parse("your pink hair is pretty")
+
+# for entry in d.d:
+#     if d.read(entry) == "r":
+#         d.replace(entry, "D")
+# d.save()
