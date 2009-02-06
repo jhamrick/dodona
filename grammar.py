@@ -47,6 +47,9 @@ class Head:
         """
         return self.word
 
+    def __repr__(self):
+        return self.__class__.__name__ + '(' + repr(self.word) + ')'
+
 ##############################
 # The following classes all
 # inherit from the Phrase
