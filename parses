@@ -1,0 +1,4 @@
+I am a girl and I like rainbows	[.Sentence [.Sentence [.NounPhrase [.Nominal [.Noun I ] ] ] [.VerbPhrase [.Verb am ] [.NounPhrase [.Nominal [.Determiner a ] [.Noun girl ] ] ] ] ] [.Conjunction and ] [.Sentence [.NounPhrase [.Nominal [.Noun I ] ] ] [.VerbPhrase [.Verb like ] [.NounPhrase [.Nominal [.Noun rainbows ] ] ] ] ] ] 
+I am a girl	[.Sentence [.NounPhrase [.Nominal [.Noun I ] ] ] [.VerbPhrase [.Verb am ] [.NounPhrase [.Nominal [.Determiner a ] [.Noun girl ] ] ] ] ] 
+buffalo buffalo	[.Sentence [.NounPhrase [.Nominal [.Noun buffalo ] ] ] [.VerbPhrase [.Verb buffalo ] ] ] 	[.NounPhrase [.AdjectivePhrase [.Adjective buffalo ] ] [.Nominal [.Noun buffalo ] ] ] 
+the possibilities suggest themselves to me	[.Sentence [.NounPhrase [.Nominal [.Determiner the ] [.Noun possibilities ] ] ] [.VerbPhrase [.Verb suggest ] [.NounPhrase [.Nominal [.Noun themselves ] ] ] [.PrepositionalPhrase [.Preposition to ] [.NounPhrase [.Nominal [.Noun me ] ] ] ] ] ] 

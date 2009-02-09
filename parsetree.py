@@ -1,5 +1,5 @@
 from pos import POSDict
-from grammar import Sentence, NounPhrase, VerbPhrase, AdjectivePhrase, PrepositionalPhrase, Nominal, Noun, Verb, Adjective, Adverb, Conjunction, Preposition, Pronoun, Determiner, Punctuation
+from grammar import Sentence, NounPhrase, VerbPhrase, AdjectivePhrase, PrepositionalPhrase, Nominal, Noun, Verb, Adjective, Adverb, Conjunction, Preposition, Pronoun, Determiner, Punctuation, string_to_type, Phrase, Head
 from copy import deepcopy
 import time
 from helper import tokenize
@@ -20,6 +20,7 @@ d = POSDict() # initialize the dictionary containing all the words and their
 
 # specify the phrases which will be used to build the tree
 phrases = [Nominal, NounPhrase, VerbPhrase, Sentence, AdjectivePhrase, PrepositionalPhrase]
+parses = {}
 
 def word_to_type(word):
     """
@@ -172,14 +173,14 @@ def search(pos):
     if it succeeds, or an empty list if it fails.
     """
     for p in pos:
-        # if the tree begins with a single node which is of type
-        # Sentence, then we've successfully parsed the sentence!
-        if isinstance(p[0], Sentence) and len(p) == 1: return p
+        # if the tree begins with a single node 
+        # then we've successfully parsed the sentence!
+        if len(p) == 1: return p
         # if the tree is empty, return an empty list
         if p == []: return p
     
     temp = []
-    # for each possible tree, find all possible chilren
+    # for each possible tree, find all possible children
     for p in pos:
         t = build_tree(p)
         # if there are possible children, add them to the temporary list
@@ -194,6 +195,71 @@ def search(pos):
 
     return search(temp)
 
+def save_parses():
+    """
+    Saves the known parses of various
+    sentences to file.
+    """
+    p = open("parses", "w")
+    for s in parses.keys():
+        temp = s
+        print temp
+        for parse in parses[s]:
+            temp = temp + "\t" + str(parse)
+        p.write(temp + "\n")
+
+    p.close()
+
+def make_tree_from_parse(p):
+    """
+    Makes a tree from a string of format:
+    [.Sentence [.NounPhrase [.Nominal [.Noun I ] ] ] [.VerbPhrase [.Verb am ] [.NounPhrase [.Nominal [.Determiner a ] [.Noun girl ] ] ] ] ] 
+    """
+    node = string_to_type(p[2:p.find(" ")])
+    p2 = p[p.find(" ")+1:]
+    left = 0
+    right = 0
+    chars = ""
+    for char in p2:
+        chars += char
+        if char == "]":
+            right += 1
+            if isinstance(node, Head):
+                node.setWord(chars.rstrip(" ]"))
+                return node
+
+        elif char == "[":
+            left += 1
+
+        if left == right and left > 0:
+            if chars.strip() == "":
+                chars = ""
+            elif isinstance(node, Phrase):
+                node.addChild(make_tree_from_parse(chars))
+                chars = ""
+
+    return node
+            
+
+def load_stored_parses():
+    """
+    Loads known parses into a dictionary.
+    """
+    p = open("parses", "r")
+    line = p.readline()
+    parse = {}
+    while line != "":
+        l = line.split("\t")
+        parse[l[0]] = []
+        for i in range(1, len(l)):
+            t = make_tree_from_parse(l[i])
+            print t
+            parse[l[0]].append(t)
+        line = p.readline()
+
+    p.close()
+    return parse
+
 def parse(sentence):
     """
     Splits the sentence up into a list, matches
@@ -206,41 +272,75 @@ def parse(sentence):
     Also prints out the amount of time the parse took to
     complete.
     """
+    if parses.has_key(sentence):
+        print("Parse already exists; no need to search.")
+        for p in parses[sentence]: print p
+        return parses[sentence]
+
     t0 = time.clock() # record the starting time
-    sentence = tokenize(sentence) # split the sentence into a list
+    sen = tokenize(sentence) # split the sentence into a list
+
+    for parse in parses.keys():
+        new_sen = []
+        p = parse.split()
+        i = 0
+        while i < (len(sen) - len(p) + 1):
+            curr = sen[i:i+len(p)]
+            if curr == p:
+                new_sen.append(parses[parse][0])
+                print parses[parse][0]
+                i += len(p)
+            else:
+                new_sen.append(sen[i])
+                i += 1
+        if i < len(sen):
+            for j in range(i, len(sen)):
+                new_sen.append(sen[j])
+
+        sen = new_sen
     
     # make a list of all possible sentences, given the type(s) of
     # speech for each word
     pos = [[]]
-#     for word in sentence:
-#         types = word_to_type(word)
-#         if len(types) == 1:
-#             for p in pos: p.append(types[0])
-#         else:
-#             temp = deepcopy(pos)
-#             for t in temp:
-#                 t.append(types[0])
-#             for type in types[1:]:
-#                 for p in pos:
-#                     t = p[:]
-#                     t.append(type)
-#                     temp.append(t)
-#             pos = deepcopy(temp)
-    for word in sentence:
-        types = word_to_type(word)
-        oldpos = pos
-        pos = []
-        for p_s in oldpos:
-            pos += [p_s + [type_] for type_ in types]
+    for word in sen:
+        if isinstance(word, str):
+            types = word_to_type(word)
+            oldpos = pos
+            pos = []
+            for p_s in oldpos:
+                pos += [p_s + [type_] for type_ in types]
+        else:
+            oldpos = []
+            for p in pos:
+                temp = p
+                temp.append(word)
+                oldpos.append(temp)
+            pos = oldpos
 
     print pos
-    print len(pos)
+
+    print "There are " + str(len(pos)) + " possible sentences."
 
     # perform the search on the possible sentences
-    pos = search(pos)
+    for p in pos:
+        print "Performing search on:"
+        print p
+        st0 = time.clock()
+        p_temp = search([p])
+        st1 = time.clock()
+        print "Subsearch took " + str(st1 - st0) + " seconds."
+        if p_temp != []:
+            pos = p_temp
+            if not parses.has_key(sentence): parses[sentence] = []
+            parses[sentence].append(pos[0])
+            save_parses()
+            break
+
     t1 = time.clock() # record the end time
 
     for p in pos: print p
     print "Parse took " + str(t1 - t0) + " seconds."
 
     return pos
+
+parses = load_stored_parses()
