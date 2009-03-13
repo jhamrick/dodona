@@ -1,0 +1,91 @@
+#!/usr/bin/env perl 
+
+# Usage: prettyprint [files]
+#
+# Quick and dirty prettyprinter for LISP-like expressions.
+# Prettyprints all the input.
+# No assumption about input whitespace except that it separates sister atoms.
+#
+# Author: Jason Eisner <jason@cs.jhu.edu>, 2001-09-08, for 600.465 HW1.
+#         Modified 2002-06-28 so it could be used as an interactive filter
+#           rather than reading a whole file before printing anything.
+
+# TO DO: Perhaps when the indent level is 0, we should preserve whitespace
+#        (or perhaps even all lines that don't start with \s\*\(, even if
+#        they contain parens).
+
+use IO::Handle
+STDOUT->autoflush();   # ensure that output reaches the user immediately
+
+sub pp;
+sub peektoken;
+sub gettoken;
+sub myeof;
+
+pp(0);         # prettyprint tokens at indent level 0
+die "$0: Unexpected right parenthesis; didn't finish printing\n" if defined peektoken;
+print "\n";
+
+######################################################################
+
+
+sub pp {    # prettyprints expressions from @tokens,
+            # at the indent level given by the argument,
+            # until it runs out of input or runs into an extra right paren.
+
+  my($indent) = @_;
+  my($i)=0;
+  while (defined peektoken && peektoken ne ")") {
+    print "\n", " " x $indent if $i++;           # newline before any expr but 1st
+    print my($token) = &gettoken;                # word or (
+    if ($token eq "(") {                         # if ( then
+      my($LHS) = &gettoken;
+      die "$0: Unexpected EOF\n" unless defined $LHS;
+      if ($LHS eq ")") {                         #    special-case ()
+	print $LHS;
+      } else {
+	print "$LHS ";                           #    LHS (+" " even if no RHS)
+	&pp($indent+length($LHS)+2);             #    RHS if any, indented
+	die "$0: Unexpected EOF\n" unless &peektoken;
+	print &gettoken;                         #    )
+      }
+    }
+  }
+}
+
+######################################################################
+# Manages the stream of tokens.
+######################################################################
+
+BEGIN {
+  my @tokens = ();
+  my $firsttime = 1;   # this is to fix the problem with Perl versions < 5.6,
+                       # where eof() returns 1 when called before <> has been read.
+
+  sub peektoken {   # undefined if no more tokens
+    while ($firsttime || @tokens==0 && !myeof) {
+      $_ = <>; $firsttime=0;
+      last if !defined $_;  # in case we tried to read because it was firsttime, but shouldn't have because input was empty
+      s/[()]/ $& /g;  # put space around parens so they get treated as tokens
+      @tokens=split;  # tokenize input by splitting at spaces
+      
+    }
+    $tokens[0];
+  }
+  
+  sub gettoken {
+    my $t = peektoken;
+    shift(@tokens) if defined $t;
+    $t;
+  }
+}
+
+# Version of eof() that is careful to keep returning 1 once it has reached eof.
+
+BEGIN {
+  my $myeof = 0;
+
+  sub myeof { 
+    $myeof || ($myeof = eof());
+  }
+}
