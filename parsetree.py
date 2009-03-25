@@ -1,6 +1,7 @@
 from nltk.parse.featurechart import EarleyChartParser 
 from nltk.grammar import ContextFreeGrammar, Production
 from nltk.grammar import Nonterminal as NT
+import random
 
 rules = []
 test_sentences = []
@@ -29,17 +30,55 @@ while line:
     line = vocab.readline()
 vocab.close()
 
-sens = open("examples.sen", "r")
-line = sens.readline()
-while line:
-    test_sentences.append(line.strip().split(" "))
-    line = sens.readline()
-sens.close()
-
 cfg = ContextFreeGrammar(NT("S"), rules)
-parser = EarleyChartParser(cfg, trace=3)
+parser = EarleyChartParser(cfg, trace=0)
 
-for sen in test_sentences:
-    parse = parser.nbest_parse(sen)
-    if parse: print parse
-    else: print "failure"
+def parse_file():
+    sens = open("parseable.sen", "r")
+    line = sens.readline()
+    while line:
+        test_sentences.append(line.strip().split(" "))
+        line = sens.readline()
+    sens.close()
+
+    for sen in test_sentences:
+        parse = parser.nbest_parse(sen)
+        if parse: print parse[0]
+        else: print "failure"
+
+def parse_sent(sen):
+    foreign = []
+    try:
+        parse = parser.nbest_parse(sen.strip().split(" "))
+    except:
+        sen = sen.strip().split(" ")
+        for word in sen:
+            if not cfg.covers([word]): foreign.append(word)
+        parse = None
+
+    if parse: 
+        print parse[0]
+        return parse[0]
+    else: 
+        print "failure"
+        return None, foreign
+
+def rand_sent(left=None):
+    if left == None: left = NT("S")
+    poss = cfg.productions(lhs=left)
+    if len(poss) > 1:
+        index = random.randint(0,len(poss)-1)
+    elif len(poss) == 1: index = 0
+    else: 
+        print left
+        return None
+    
+    sen = []
+    print poss[index]
+    for nt in poss[index].rhs():
+        if isinstance(nt, NT):
+            sen.append(rand_sent(nt))                
+        else: sen.append(nt)
+
+    return " ".join(sen)
+        

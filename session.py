@@ -4,8 +4,10 @@ site.addsitedir('/afs/athena.mit.edu/user/b/r/broder/lib/python2.5/site-packages
 import zephyr
 from zephyrUI import send
 from fuzzystack import FuzzyStack
-from helper import print_list, custom_list, tokenize, integrate_lists, find_partial_key 
+from helper import print_list, tokenize, integrate_lists, find_partial_key
+from nlp import find_subject, find_object, find_verb 
 from xml_parser import update_files
+import parsetree
 
 #######################################
 # The Session class stores a "session",
@@ -21,7 +23,7 @@ class Session:
         self.name = name
         self.topics = topics
 
-    def AI(self, mess, d = self.topics):
+    def AI(self, mess, d = None):
         """
         Determines the keywords in the message,
         and returns either:
@@ -29,16 +31,22 @@ class Session:
             - a single key
             - the status "d:none", if there are none
         """
-        mess = tokenize(mess)
-        keys = []
-        for key in mess:
-            integrate_lists(keys, find_partial_key(key, d))
-        if len(keys) > 1:
-            return keys
-        elif len(keys) == 0:
-            return "d:none"
+        parse = parsetree.parse_sent(mess)
+        if isinstance(parse, tuple):
+            return "d:none", parse[1]
+        
+        sub = find_subject(parse)
+        print sub
+        obj = find_object(parse, sub.leaves())
+        print obj
+        verb = find_verb(parse)
+        print verb
+
+        sub_prods = sub.productions()
+        if sub_prods[len(sub_prods)-1].lhs().symbol().startswith("Pers_Pro"):
+            return " ".join(obj.leaves())
         else:
-            return keys[0]    
+            return " ".join(sub.leaves())        
 
     def add_data(self, mess, newtopic):
         """
@@ -174,7 +182,7 @@ class Session:
         memory, but does not kill it.
         """
         self.memory = FuzzyStack(20)
-        self.memory.push("data", topics)        
+        self.memory.push("data", self.topics)        
 
     def question(self):
         """
@@ -227,16 +235,24 @@ class Session:
         if k == None:  key = self.AI(mess)
         # if there is a current topic, search for a subtopic
         else:  key = self.AI(mess, d)
+        
+        missing = None
+        if isinstance(key, tuple):
+            missing = key[1]
+            key = key[0]
 
         # if there is no matching key, then ask the user to
         # tell Dodona about the topic.
         if key == "d:none":
-            topic = mess
-            if topic.strip() == "": return None
-            self.memory.push("topic", topic)
-            send("Sorry, I don't know anything about " + topic + ".  Would you like to tell me about " + topic + "?  (Please answer \"yes\" or \"no\")", name)
-            self.memory.push("status", "unknown")
-            return None
+            if missing: 
+                topic = ", ".join(missing)
+                #self.memory.push("topic", topic)
+                send("Sorry, I don't know understand the following words: " + topic)
+                #self.memory.push("status", "unknown")
+                return False
+            else:
+                send("Sorry, I don't understand what you are asking me.")
+                return False
         
         # if the key is a list, tihs means that there are
         # multiple matching keywords.  Prompt the user as to
@@ -255,7 +271,8 @@ class Session:
         # topic, and has subtopics.  Ask the user which subtopic
         # they would like to know about.
         if isinstance(d[key], dict):
-            key2 = self.AI(mess, d[key])
+            #key2 = self.AI(mess, d[key])
+            key2 = "d:none"
 
             if key2 == "d:none" or isinstance(key2, list):
                 send("Please pick a topic below, or tell me a new one! (in relation to " + key + ")\n\n" + print_list(d[key].keys()), name)

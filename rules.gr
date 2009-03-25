@@ -14,7 +14,6 @@
 1 Ind_Clause		       NP_2nd VP_2nd
 1 Ind_Clause		       NP_3rd VP_3rd
 1 Ind_Clause_Pl		       NP_1st_Pl VP_1st_Pl
-1 Ind_Clause_Pl		       NP_2nd_Pl VP_2nd_Pl
 1 Ind_Clause_Pl		       NP_3rd_Pl VP_3rd_Pl
 
 1 Ind_Clause_Inf	       NP VP_Inf
@@ -29,26 +28,22 @@
 1 Passive_Interrog_In	       Be_2ndSing_Pres NP_2nd V_Pres_Part_In
 1 Passive_Interrog_In	       Be_3rdSing_Pres NP_3rd V_Pres_Part_In
 1 Passive_Interrog_In	       Be_1stPlur_Pres NP_1st_Pl V_Pres_Part_In
-1 Passive_Interrog_In	       Be_2ndPlur_Pres NP_2nd_Pl V_Pres_Part_In
 1 Passive_Interrog_In	       Be_3rdPlur_Pres NP_3rd_Pl V_Pres_Part_In
 1 Passive_Interrog_Tr	       Be_1stSing_Pres NP_1st V_Pres_Part_Tr
 1 Passive_Interrog_Tr	       Be_2ndSing_Pres NP_2nd V_Pres_Part_Tr
 1 Passive_Interrog_Tr	       Be_3rdSing_Pres NP_3rd V_Pres_Part_Tr
 1 Passive_Interrog_Tr	       Be_1stPlur_Pres NP_1st_Pl V_Pres_Part_Tr
-1 Passive_Interrog_Tr	       Be_2ndPlur_Pres NP_2nd_Pl V_Pres_Part_Tr
 1 Passive_Interrog_Tr	       Be_3rdPlur_Pres NP_3rd_Pl V_Pres_Part_Tr
 
 1 Passive_Interrog_In	       Be_1stSing_Past NP_1st V_Pres_Part_In
 1 Passive_Interrog_In	       Be_2ndSing_Past NP_2nd V_Pres_Part_In
 1 Passive_Interrog_In	       Be_3rdSing_Past NP_3rd V_Pres_Part_In
 1 Passive_Interrog_In	       Be_1stPlur_Past NP_1st_Pl V_Pres_Part_In
-1 Passive_Interrog_In	       Be_2ndPlur_Past NP_2nd_Pl V_Pres_Part_In
 1 Passive_Interrog_In	       Be_3rdPlur_Past NP_3rd_Pl V_Pres_Part_In
 1 Passive_Interrog_Tr	       Be_1stSing_Past NP_1st V_Pres_Part_Tr
 1 Passive_Interrog_Tr	       Be_2ndSing_Past NP_2nd V_Pres_Part_Tr
 1 Passive_Interrog_Tr	       Be_3rdSing_Past NP_3rd V_Pres_Part_Tr
 1 Passive_Interrog_Tr	       Be_1stPlur_Past NP_1st_Pl V_Pres_Part_Tr
-1 Passive_Interrog_Tr	       Be_2ndPlur_Past NP_2nd_Pl V_Pres_Part_Tr
 1 Passive_Interrog_Tr	       Be_3rdPlur_Past NP_3rd_Pl V_Pres_Part_Tr
 
 1 VP			       VP_1st
@@ -85,8 +80,8 @@
 1 VP_3rd_Pl		       Being_3rdPlur_Pres AdjP PP
 
 1 VP_1st		       Exp_1stSing_Pres Infl Ind_Clause
-1 VP_2nd		       Exp_2ndSing_Pres	Infl Ind_Clause
-1 VP_3rd		       Exp_3rdSing_Pres	Infl Ind_Clause
+1 VP_2nd		       Exp_2ndSing_Pres Infl Ind_Clause
+1 VP_3rd		       Exp_3rdSing_Pres Infl Ind_Clause
 1 VP_1st_Pl		       Exp_1stPlur_Pres Infl Ind_Clause
 1 VP_2nd_Pl		       Exp_2ndPlur_Pres Infl Ind_Clause
 1 VP_3rd_Pl		       Exp_3rdPlur_Pres Infl Ind_Clause
