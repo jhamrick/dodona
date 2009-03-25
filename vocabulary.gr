@@ -77,7 +77,7 @@
 1 Noun_Pl		lines
 1 Noun_Pl		things
 1 Noun_Pl		people
-1 Noun_Pl		text editors
+1 Noun_Pl		editors
 1 Noun_Pl		dinosaurs
 1 Noun_Pl		colors
 1 Noun_Pl		questions
@@ -299,9 +299,10 @@
  
 # Determiners
 1 Interrog_Det		which
-1 Interrog_Det		what
 1 Interrog_Det_Poss	whose
 1 Interrog_Det		who
+1 Interrog_Det		when
+1 Interrog_Det		what
  
 # Pronouns
 1 Interrog_Pronoun	who
@@ -314,7 +315,6 @@
 1 Interrog_Proadverb	when
 1 Interrog_Proadverb	how
 1 Interrog_Proadverb	why
-1 Interrog_Proadverb	what
 
 # Inflections
 1 Infl			that
@@ -481,18 +481,25 @@
 1 V_Base_Pres_Tr		know
 1 V_Base_Past_Tr		knew
 1 V_3rdSing_Pres_Tr		knows
+
+1 V_Inf_Tr			feel
+1 V_Pres_Part_Tr		feeling
+1 V_Past_Part_Tr		felt
+1 V_Base_Pres_Tr		feel
+1 V_Base_Past_Tr		felt
+1 V_3rdSing_Pres_Tr		feels
  
 #################### Modals ####################
  
 # present form
-1 Modal_Pres	shall
-1 Modal_Pres	will
-1 Modal_Pres	won't
-1 Modal_Pres	may
-1 Modal_Pres	can
-1 Modal_Pres	cannot
-1 Modal_Pres	can't
-1 Modal_Pres	must
+1 Modal_Pres		shall
+1 Modal_Pres		will
+1 Modal_Pres_Neg	won't
+1 Modal_Pres		may
+1 Modal_Pres		can
+1 Modal_Pres_Neg	cannot
+1 Modal_Pres_Neg	can't
+1 Modal_Pres		must
  
 # preterite form
 1 Modal_Past	should
@@ -527,12 +534,28 @@
 1 Be_2ndPlur_Past		were
 1 Be_3rdPlur_Past		were
 
-1 Be_Inf			feel
-1 Be_Pres_Part			feeling
-1 Be_Past_Part			felt
-1 Be_Base_Pres			feel
-1 Be_Base_Pastr			felt
-1 Be_3rdSing_Pres		feels
+1 Being_Inf	    	  	be
+1 Being_Pres_Part		being
+1 Being_Past_Part		been
+1 Being_1stSing_Pres		am
+1 Being_2ndSing_Pres		are
+1 Being_3rdSing_Pres		is
+1 Being_1stPlur_Pres		are
+1 Being_2ndPlur_Pres		are
+1 Being_3rdPlur_Pres		are
+1 Being_1stSing_Past		was
+1 Being_2ndSing_Past		were
+1 Being_3rdSing_Past		was
+1 Being_1stPlur_Past		were
+1 Being_2ndPlur_Past		were
+1 Being_3rdPlur_Past		were
+
+1 Being_Inf			feel
+1 Being_Pres_Part		feeling
+1 Being_Past_Part		felt
+1 Being_Base_Pres		feel
+1 Being_Base_Past		felt
+1 Being_3rdSing_Pres		feels
  
 # Verb exceptions - expressive verbs
  
