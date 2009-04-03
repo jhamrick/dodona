@@ -1,4 +1,4 @@
-1 START		       S
+1 START			       S
 
 1 S			       Name Comma Ind_Clause_Ques PuncQ
 1 S			       Name Comma Ind_Clause Punc
@@ -9,20 +9,24 @@
 1 Ind_Clause_Ques	       Interrog_Proadverb Aux Ind_Clause_Inf
 1 Ind_Clause_Ques	       Interrog_Proadverb Aux_3rd Ind_Clause_Inf_3rd
 1 Ind_Clause_Ques	       Interrog_Proadverb Interrog_Clause
+1 Ind_Clause_Ques	       Interrog_Proadverb AdjP Aux Ind_Clause_Inf
+1 Ind_Clause_Ques	       Interrog_Proadverb AdjP Aux_3rd Ind_Clause_Inf_3rd
+1 Ind_Clause_Ques	       Interrog_Proadverb AdjP Interrog_Clause
+1 Ind_Clause_Ques	       Interrog_Clause
 
 1 Ind_Clause		       NP_1st VP_1st
 1 Ind_Clause		       NP_2nd VP_2nd
 1 Ind_Clause		       NP_3rd VP_3rd
+1 Ind_Clause		       VP_Inf
 1 Ind_Clause_Pl		       NP_1st_Pl VP_1st_Pl
 1 Ind_Clause_Pl		       NP_3rd_Pl VP_3rd_Pl
 
 1 Ind_Clause_Inf	       NP VP_Inf
 1 Ind_Clause_Inf_3rd	       NP_3rd VP_Inf
 
-1 Interrog_Clause	       Passive_Interrog_In
-1 Interrog_Clause	       Passive_Interrog_In PP
-1 Interrog_Clause	       Passive_Interrog_Tr NP_Obj
-1 Interrog_Clause	       Passive_Interrog_Tr PP
+1 Interrog_Clause	       Passive_Interrog_In 
+1 Interrog_Clause	       Passive_Interrog_In After_Verb_In
+1 Interrog_Clause	       Passive_Interrog_Tr After_Verb_Tr
 
 1 Passive_Interrog_In	       Be_1stSing_Pres NP_1st V_Pres_Part_In
 1 Passive_Interrog_In	       Be_2ndSing_Pres NP_2nd V_Pres_Part_In
@@ -46,25 +50,78 @@
 1 Passive_Interrog_Tr	       Be_1stPlur_Past NP_1st_Pl V_Pres_Part_Tr
 1 Passive_Interrog_Tr	       Be_3rdPlur_Past NP_3rd_Pl V_Pres_Part_Tr
 
+1 Passive_Interrog_In	       Be_1stSing_Pres NP_1st AdjP
+1 Passive_Interrog_In	       Be_2ndSing_Pres NP_2nd AdjP
+1 Passive_Interrog_In	       Be_3rdSing_Pres NP_3rd AdjP
+1 Passive_Interrog_In	       Be_1stPlur_Pres NP_1st_Pl AdjP
+1 Passive_Interrog_In	       Be_3rdPlur_Pres NP_3rd_Pl AdjP
+1 Passive_Interrog_Tr	       Be_1stSing_Pres NP_1st AdjP
+1 Passive_Interrog_Tr	       Be_2ndSing_Pres NP_2nd AdjP
+1 Passive_Interrog_Tr	       Be_3rdSing_Pres NP_3rd AdjP
+1 Passive_Interrog_Tr	       Be_1stPlur_Pres NP_1st_Pl AdjP
+1 Passive_Interrog_Tr	       Be_3rdPlur_Pres NP_3rd_Pl AdjP
+
+1 Passive_Interrog_In	       Be_1stSing_Past NP_1st AdjP
+1 Passive_Interrog_In	       Be_2ndSing_Past NP_2nd AdjP
+1 Passive_Interrog_In	       Be_3rdSing_Past NP_3rd AdjP
+1 Passive_Interrog_In	       Be_1stPlur_Past NP_1st_Pl AdjP
+1 Passive_Interrog_In	       Be_3rdPlur_Past NP_3rd_Pl AdjP
+1 Passive_Interrog_Tr	       Be_1stSing_Past NP_1st AdjP
+1 Passive_Interrog_Tr	       Be_2ndSing_Past NP_2nd AdjP
+1 Passive_Interrog_Tr	       Be_3rdSing_Past NP_3rd AdjP
+1 Passive_Interrog_Tr	       Be_1stPlur_Past NP_1st_Pl AdjP
+1 Passive_Interrog_Tr	       Be_3rdPlur_Past NP_3rd_Pl AdjP
+
+1 Passive_Interrog_In	       Be_1stSing_Pres NP_1st AdjP After_Verb_In
+1 Passive_Interrog_In	       Be_2ndSing_Pres NP_2nd AdjP After_Verb_In
+1 Passive_Interrog_In	       Be_3rdSing_Pres NP_3rd AdjP After_Verb_In
+1 Passive_Interrog_In	       Be_1stPlur_Pres NP_1st_Pl AdjP After_Verb_In
+1 Passive_Interrog_In	       Be_3rdPlur_Pres NP_3rd_Pl AdjP After_Verb_In
+1 Passive_Interrog_Tr	       Be_1stSing_Pres NP_1st AdjP After_Verb_In
+1 Passive_Interrog_Tr	       Be_2ndSing_Pres NP_2nd AdjP After_Verb_In
+1 Passive_Interrog_Tr	       Be_3rdSing_Pres NP_3rd AdjP After_Verb_In
+1 Passive_Interrog_Tr	       Be_1stPlur_Pres NP_1st_Pl AdjP After_Verb_In
+1 Passive_Interrog_Tr	       Be_3rdPlur_Pres NP_3rd_Pl AdjP After_Verb_In
+
+1 Passive_Interrog_In	       Be_1stSing_Past NP_1st AdjP After_Verb_In
+1 Passive_Interrog_In	       Be_2ndSing_Past NP_2nd AdjP After_Verb_In
+1 Passive_Interrog_In	       Be_3rdSing_Past NP_3rd AdjP After_Verb_In
+1 Passive_Interrog_In	       Be_1stPlur_Past NP_1st_Pl AdjP After_Verb_In
+1 Passive_Interrog_In	       Be_3rdPlur_Past NP_3rd_Pl AdjP After_Verb_In
+1 Passive_Interrog_Tr	       Be_1stSing_Past NP_1st AdjP After_Verb_In
+1 Passive_Interrog_Tr	       Be_2ndSing_Past NP_2nd AdjP After_Verb_In
+1 Passive_Interrog_Tr	       Be_3rdSing_Past NP_3rd AdjP After_Verb_In
+1 Passive_Interrog_Tr	       Be_1stPlur_Past NP_1st_Pl AdjP After_Verb_In
+1 Passive_Interrog_Tr	       Be_3rdPlur_Past NP_3rd_Pl AdjP After_Verb_In
+
+1 Passive_Interrog_In	       Be_1stSing_Pres NP_1st After_Verb_In
+1 Passive_Interrog_In	       Be_2ndSing_Pres NP_2nd After_Verb_In
+1 Passive_Interrog_In	       Be_3rdSing_Pres NP_3rd After_Verb_In
+1 Passive_Interrog_In	       Be_1stPlur_Pres NP_1st_Pl After_Verb_In
+1 Passive_Interrog_In	       Be_3rdPlur_Pres NP_3rd_Pl After_Verb_In
+1 Passive_Interrog_Tr	       Be_1stSing_Pres NP_1st After_Verb_In
+1 Passive_Interrog_Tr	       Be_2ndSing_Pres NP_2nd After_Verb_In
+1 Passive_Interrog_Tr	       Be_3rdSing_Pres NP_3rd After_Verb_In
+1 Passive_Interrog_Tr	       Be_1stPlur_Pres NP_1st_Pl After_Verb_In
+1 Passive_Interrog_Tr	       Be_3rdPlur_Pres NP_3rd_Pl After_Verb_In
+
+1 Passive_Interrog_In	       Be_1stSing_Past NP_1st After_Verb_In
+1 Passive_Interrog_In	       Be_2ndSing_Past NP_2nd After_Verb_In
+1 Passive_Interrog_In	       Be_3rdSing_Past NP_3rd After_Verb_In
+1 Passive_Interrog_In	       Be_1stPlur_Past NP_1st_Pl After_Verb_In
+1 Passive_Interrog_In	       Be_3rdPlur_Past NP_3rd_Pl After_Verb_In
+1 Passive_Interrog_Tr	       Be_1stSing_Past NP_1st After_Verb_In
+1 Passive_Interrog_Tr	       Be_2ndSing_Past NP_2nd After_Verb_In
+1 Passive_Interrog_Tr	       Be_3rdSing_Past NP_3rd After_Verb_In
+1 Passive_Interrog_Tr	       Be_1stPlur_Past NP_1st_Pl After_Verb_In
+1 Passive_Interrog_Tr	       Be_3rdPlur_Past NP_3rd_Pl After_Verb_In
+
 1 VP			       VP_1st
 1 VP			       VP_2nd
 1 VP			       VP_3rd
 1 VP_Pl			       VP_1st_Pl
 1 VP_Pl			       VP_2nd_Pl
 1 VP_Pl			       VP_3rd_Pl
-
-1 VP_1st		       Be_1stSing_Pres NP_Obj
-1 VP_2nd		       Be_2ndSing_Pres NP_Obj
-1 VP_3rd		       Be_3rdSing_Pres NP_Obj
-1 VP_1st_Pl		       Be_1stPlur_Pres NP_Obj
-1 VP_2nd_Pl		       Be_2ndPlur_Pres NP_Obj
-1 VP_3rd_Pl		       Be_3rdPlur_Pres NP_Obj
-1 VP_1st		       Be_1stSing_Pres NP_Obj PP
-1 VP_2nd		       Be_2ndSing_Pres NP_Obj PP
-1 VP_3rd		       Be_3rdSing_Pres NP_Obj PP
-1 VP_1st_Pl		       Be_1stPlur_Pres NP_Obj PP
-1 VP_2nd_Pl		       Be_2ndPlur_Pres NP_Obj PP
-1 VP_3rd_Pl		       Be_3rdPlur_Pres NP_Obj PP
 
 1 VP_1st		       Being_1stSing_Pres AdjP
 1 VP_2nd		       Being_2ndSing_Pres AdjP
@@ -85,38 +142,50 @@
 1 VP_1st_Pl		       Exp_1stPlur_Pres Infl Ind_Clause
 1 VP_2nd_Pl		       Exp_2ndPlur_Pres Infl Ind_Clause
 1 VP_3rd_Pl		       Exp_3rdPlur_Pres Infl Ind_Clause
+1 V_Inf_Tr		       Exp_Inf Infl Ind_Clause
+1 V_Inf_In		       Exp_Inf Infl Ind_Clause
+1 V_Inf_Tr		       Exp_Pres_Part Infl Ind_Clause
+1 V_Inf_In		       Exp_Pres_Part Infl Ind_Clause
+1 V_Inf_Tr		       Exp_Past_Part Infl Ind_Clause
+1 V_Inf_In		       Exp_Past_Part Infl Ind_Clause
 
+1 VP_1st		       Verbal_1st_In After_Verb_In
+1 VP_1st		       Verbal_1st_Tr After_Verb_Tr
 1 VP_1st		       Verbal_1st_In
-1 VP_1st		       Verbal_1st_In PP
-1 VP_1st		       Verbal_1st_Tr NP_Obj
 
+1 VP_2nd		       Verbal_2nd_In After_Verb_In
+1 VP_2nd		       Verbal_2nd_Tr After_Verb_Tr
 1 VP_2nd		       Verbal_2nd_In
-1 VP_2nd		       Verbal_2nd_In PP
-1 VP_2nd		       Verbal_2nd_Tr NP_Obj
 
+1 VP_3rd		       Verbal_3rd_In After_Verb_In
+1 VP_3rd		       Verbal_3rd_Tr After_Verb_Tr
 1 VP_3rd		       Verbal_3rd_In
-1 VP_3rd		       Verbal_3rd_In PP
-1 VP_3rd		       Verbal_3rd_Tr NP_Obj
 
-1 VP_1st		       Verbal_1st_In
-1 VP_1st		       Verbal_1st_In PP
-1 VP_1st		       Verbal_1st_Tr NP_Obj
+1 VP_1st_Pl		       Verbal_1st_Pl_In After_Verb_In
+1 VP_1st_Pl		       Verbal_1st_Pl_Tr After_Verb_Tr
+1 VP_1st_Pl		       Verbal_1st_Pl_In
 
-1 VP_2nd		       Verbal_2nd_In
-1 VP_2nd		       Verbal_2nd_In PP
-1 VP_2nd		       Verbal_2nd_Tr NP_Obj
+1 VP_2nd_Pl		       Verbal_2nd_Pl_In After_Verb_In
+1 VP_2nd_Pl		       Verbal_2nd_Pl_Tr After_Verb_Tr
+1 VP_2nd_Pl		       Verbal_2nd_Pl_In
 
-1 VP_3rd		       Verbal_3rd_In 
-1 VP_3rd		       Verbal_3rd_In PP
-1 VP_3rd		       Verbal_3rd_Tr NP_Obj
+1 VP_3rd_Pl		       Verbal_3rd_Pl_In After_Verb_In
+1 VP_3rd_Pl		       Verbal_3rd_Pl_Tr After_Verb_Tr
+1 VP_3rd_Pl		       Verbal_3rd_Pl_In
 
-1 VP_Inf		       V_Inf_Tr NP_Obj
-1 VP_Inf		       V_Inf_Tr NP_Obj PP
-1 VP_Inf		       V_Inf_Tr
-1 VP_Inf		       V_Inf_Tr PP
-
+1 VP_Inf		       V_Inf_Tr After_Verb_Tr
+1 VP_Inf		       V_Inf_In After_Verb_In
 1 VP_Inf		       V_Inf_In
-1 VP_Inf		       V_Inf_In PP
+
+1 After_Verb_Tr		       NP_Obj
+1 After_Verb_Tr		       NP_Obj PP
+1 After_Verb_Tr		       PP
+1 After_Verb_Tr		       PP_No_Prep NP_Obj
+1 After_Verb_Tr		       PP_No_Prep NP_Obj PP
+
+1 After_Verb_In		       PP
+1 After_Verb_In		       PP_No_Prep
+1 After_Verb_In		       PP_No_Prep PP
 
 1 Verbal_1st_In		       V_1stSing_Pres_In
 1 Verbal_1st_In		       V_1stSing_Past_In
@@ -144,8 +213,94 @@
 1 Verbal_3rd_Pl_Tr	       V_3rdPlur_Pres_Tr
 1 Verbal_3rd_Tr		       V_3rdSing_Past_Tr
 
-1 PP			       Prep NP_Obj
+1 Verbal_1st_Tr		       Modal_Pres V_Inf_Tr
+1 Verbal_2nd_Tr		       Modal_Pres V_Inf_Tr
+1 Verbal_3rd_Tr		       Modal_Pres V_Inf_Tr
+1 Verbal_1st_Pl_Tr	       Modal_Pres V_Inf_Tr
+1 Verbal_2nd_Pl_Tr	       Modal_Pres V_Inf_Tr
+1 Verbal_3rd_Pl_Tr	       Modal_Pres V_Inf_Tr
 
+1 Verbal_1st_In		       Modal_Pres V_Inf_In
+1 Verbal_2nd_In		       Modal_Pres V_Inf_In
+1 Verbal_3rd_In		       Modal_Pres V_Inf_In
+1 Verbal_1st_Pl_In	       Modal_Pres V_Inf_In
+1 Verbal_2nd_Pl_In	       Modal_Pres V_Inf_In
+1 Verbal_3rd_Pl_In	       Modal_Pres V_Inf_In
+
+1 Verbal_1st_Tr		       Modal_Past Have V_Past_Part_Tr
+1 Verbal_2nd_Tr		       Modal_Past Have V_Past_Part_Tr
+1 Verbal_3rd_Tr		       Modal_Past Have V_Past_Part_Tr
+1 Verbal_1st_Pl_Tr	       Modal_Past Have V_Past_Part_Tr
+1 Verbal_2nd_Pl_Tr	       Modal_Past Have V_Past_Part_Tr
+1 Verbal_3rd_Pl_Tr	       Modal_Past Have V_Past_Part_Tr
+
+1 Verbal_1st_In		       Modal_Past Have V_Past_Part_In
+1 Verbal_2nd_In		       Modal_Past Have V_Past_Part_In
+1 Verbal_3rd_In		       Modal_Past Have V_Past_Part_In
+1 Verbal_1st_Pl_In	       Modal_Past Have V_Past_Part_In
+1 Verbal_2nd_Pl_In	       Modal_Past Have V_Past_Part_In
+1 Verbal_3rd_Pl_In	       Modal_Past Have V_Past_Part_In
+
+1 Verbal_1st_Tr		       Modal_Past Have Be_Past_Part V_Pres_Part_Tr
+1 Verbal_2nd_Tr		       Modal_Past Have Be_Past_Part V_Pres_Part_Tr
+1 Verbal_3rd_Tr		       Modal_Past Have Be_Past_Part V_Pres_Part_Tr
+1 Verbal_1st_Pl_Tr	       Modal_Past Have Be_Past_Part V_Pres_Part_Tr
+1 Verbal_2nd_Pl_Tr	       Modal_Past Have Be_Past_Part V_Pres_Part_Tr
+1 Verbal_3rd_Pl_Tr	       Modal_Past Have Be_Past_Part V_Pres_Part_Tr
+
+1 Verbal_1st_In		       Modal_Past Have Be_Past_Part V_Pres_Part_In
+1 Verbal_2nd_In		       Modal_Past Have Be_Past_Part V_Pres_Part_In
+1 Verbal_3rd_In		       Modal_Past Have Be_Past_Part V_Pres_Part_In
+1 Verbal_1st_Pl_In	       Modal_Past Have Be_Past_Part V_Pres_Part_In
+1 Verbal_2nd_Pl_In	       Modal_Past Have Be_Past_Part V_Pres_Part_In
+1 Verbal_3rd_Pl_In	       Modal_Past Have Be_Past_Part V_Pres_Part_In
+
+1 Verbal_1st_Tr		       Modal_Pres_Neg V_Inf_Tr
+1 Verbal_2nd_Tr		       Modal_Pres_Neg V_Inf_Tr
+1 Verbal_3rd_Tr		       Modal_Pres_Neg V_Inf_Tr
+1 Verbal_1st_Pl_Tr	       Modal_Pres_Neg V_Inf_Tr
+1 Verbal_2nd_Pl_Tr	       Modal_Pres_Neg V_Inf_Tr
+1 Verbal_3rd_Pl_Tr	       Modal_Pres_Neg V_Inf_Tr
+
+1 Verbal_1st_In		       Modal_Pres_Neg V_Inf_In
+1 Verbal_2nd_In		       Modal_Pres_Neg V_Inf_In
+1 Verbal_3rd_In		       Modal_Pres_Neg V_Inf_In
+1 Verbal_1st_Pl_In	       Modal_Pres_Neg V_Inf_In
+1 Verbal_2nd_Pl_In	       Modal_Pres_Neg V_Inf_In
+1 Verbal_3rd_Pl_In	       Modal_Pres_Neg V_Inf_In
+
+1 Verbal_1st_Tr		       Modal_Past_Neg Have V_Past_Part_Tr
+1 Verbal_2nd_Tr		       Modal_Past_Neg Have V_Past_Part_Tr
+1 Verbal_3rd_Tr		       Modal_Past_Neg Have V_Past_Part_Tr
+1 Verbal_1st_Pl_Tr	       Modal_Past_Neg Have V_Past_Part_Tr
+1 Verbal_2nd_Pl_Tr	       Modal_Past_Neg Have V_Past_Part_Tr
+1 Verbal_3rd_Pl_Tr	       Modal_Past_Neg Have V_Past_Part_Tr
+
+1 Verbal_1st_In		       Modal_Past_Neg Have V_Past_Part_In
+1 Verbal_2nd_In		       Modal_Past_Neg Have V_Past_Part_In
+1 Verbal_3rd_In		       Modal_Past_Neg Have V_Past_Part_In
+1 Verbal_1st_Pl_In	       Modal_Past_Neg Have V_Past_Part_In
+1 Verbal_2nd_Pl_In	       Modal_Past_Neg Have V_Past_Part_In
+1 Verbal_3rd_Pl_In	       Modal_Past_Neg Have V_Past_Part_In
+
+1 Verbal_1st_Tr		       Modal_Past_Neg Have Be_Past_Part V_Pres_Part_Tr
+1 Verbal_2nd_Tr		       Modal_Past_Neg Have Be_Past_Part V_Pres_Part_Tr
+1 Verbal_3rd_Tr		       Modal_Past_Neg Have Be_Past_Part V_Pres_Part_Tr
+1 Verbal_1st_Pl_Tr	       Modal_Past_Neg Have Be_Past_Part V_Pres_Part_Tr
+1 Verbal_2nd_Pl_Tr	       Modal_Past_Neg Have Be_Past_Part V_Pres_Part_Tr
+1 Verbal_3rd_Pl_Tr	       Modal_Past_Neg Have Be_Past_Part V_Pres_Part_Tr
+
+1 Verbal_1st_In		       Modal_Past_Neg Have Be_Past_Part V_Pres_Part_In
+1 Verbal_2nd_In		       Modal_Past_Neg Have Be_Past_Part V_Pres_Part_In
+1 Verbal_3rd_In		       Modal_Past_Neg Have Be_Past_Part V_Pres_Part_In
+1 Verbal_1st_Pl_In	       Modal_Past_Neg Have Be_Past_Part V_Pres_Part_In
+1 Verbal_2nd_Pl_In	       Modal_Past_Neg Have Be_Past_Part V_Pres_Part_In
+1 Verbal_3rd_Pl_In	       Modal_Past_Neg Have Be_Past_Part V_Pres_Part_In
+
+1 PP			       Prep NP_Obj
+1 PP_No_Prep		       NP_Obj
+
+1 NP			       NP PP
 1 NP			       NP_1st
 1 NP			       NP_2nd
 1 NP			       NP_1st_Pl
@@ -155,7 +310,7 @@
 1 NP_2nd		       Pers_Pro_2nd
 1 NP_3rd		       Pers_Pro_3rd
 1 NP_1st_Pl		       Pers_Pro_1st_Pl
-1 NP_3rd_Pl		       Pers_Pro_3nd_Pl
+1 NP_3rd_Pl		       Pers_Pro_3rd_Pl
 
 1 NP_3rd		       Name
 1 NP_3rd		       Place
@@ -171,6 +326,7 @@
 1 NP_3rd_Pl		       Def_Article_Pl Nominal_Pl
 1 NP_3rd_Pl		       Poss_Pers_Pro_Subj Nominal_Pl
 
+1 NP_Obj		       NP_Obj PP
 1 NP_Obj		       Obj_Pers_Pro
 1 NP_Obj		       Indef_Article Nominal
 1 NP_Obj		       Def_Article Nominal
@@ -201,6 +357,7 @@
 1 CompoundNoun		       Noun Noun Noun
 1 CompoundNoun		       Program Noun
 1 CompoundNoun		       Program Noun Noun
+1 CompoundNoun		       Program Program Noun
 1 CompoundNoun		       Place Noun
 1 CompoundNoun		       Place Noun Noun
 1 CompoundNoun		       Org Noun
@@ -209,6 +366,7 @@
 1 CompoundNoun_Pl	       Noun Noun Noun_Pl
 1 CompoundNoun_Pl	       Program Noun_Pl
 1 CompoundNoun_Pl	       Program Noun Noun_Pl
+1 CompoundNoun_Pl	       Program Program Noun_Pl
 1 CompoundNoun_Pl	       Place Noun_Pl
 1 CompoundNoun_Pl	       Place Noun Noun_Pl
 1 CompoundNoun_Pl	       Org Noun_Pl
@@ -221,6 +379,9 @@
 1 AdjP			       Adj_State
 1 AdjP			       Adj_Dir
 1 AdjP			       Noun PP
+
+1 Modal_Pres_Neg_Neg	       Modal_Pres_Neg Not
+1 Modal_Past_Neg	       Modal_Past Not
 
 ############## Verb Aliases ################
 
@@ -275,3 +436,29 @@
 1 Exp_1stPlur_Past	       Exp_Base_Past
 1 Exp_2ndPlur_Past	       Exp_Base_Past
 1 Exp_3rdPlur_Past	       Exp_Base_Past
+
+1 V_1stSing_Pres_In		       Be_1stSing_Pres
+1 V_2ndSing_Pres_In		       Be_2ndSing_Pres 
+1 V_3rdSing_Pres_In		       Be_3rdSing_Pres 
+1 V_1stPlur_Pres_In	      	       Be_1stPlur_Pres 
+1 V_2ndPlur_Pres_In	      	       Be_2ndPlur_Pres 
+1 V_3rdPlur_Pres_In		       Be_3rdPlur_Pres 
+1 V_1stSing_Pres_Tr		       Be_1stSing_Pres  
+1 V_2ndSing_Pres_Tr		       Be_2ndSing_Pres  
+1 V_3rdSing_Pres_Tr		       Be_3rdSing_Pres  
+1 V_1stPlur_Pres_Tr	       	       Be_1stPlur_Pres  
+1 V_2ndPlur_Pres_Tr	       	       Be_2ndPlur_Pres  
+1 V_3rdPlur_Pres_Tr	       	       Be_3rdPlur_Pres
+
+1 V_1stSing_Past_In		       Be_1stSing_Past
+1 V_2ndSing_Past_In		       Be_2ndSing_Past 
+1 V_3rdSing_Past_In		       Be_3rdSing_Past 
+1 V_1stPlur_Past_In	       	       Be_1stPlur_Past 
+1 V_2ndPlur_Past_In	       	       Be_2ndPlur_Past 
+1 V_3rdPlur_Past_In	       	       Be_3rdPlur_Past 
+1 V_1stSing_Past_Tr		       Be_1stSing_Past  
+1 V_2ndSing_Past_Tr		       Be_2ndSing_Past  
+1 V_3rdSing_Past_Tr		       Be_3rdSing_Past  
+1 V_1stPlur_Past_Tr	       	       Be_1stPlur_Past  
+1 V_2ndPlur_Past_Tr	       	       Be_2ndPlur_Past  
+1 V_3rdPlur_Past_Tr	       	       Be_3rdPlur_Past
