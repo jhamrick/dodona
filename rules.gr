@@ -15,6 +15,7 @@
 1 Ind_Clause_Ques	       Interrog_Proadverb AdjP Aux_3rd Ind_Clause_Inf_3rd
 1 Ind_Clause_Ques	       Interrog_Proadverb AdjP Interrog_Clause
 1 Ind_Clause_Ques	       Interrog_Clause
+1 Ind_Clause_Ques	       Interrog_Proadverb Aux 
 
 1 Ind_Clause		       NP_1st VP_1st
 1 Ind_Clause		       NP_2nd VP_2nd
@@ -151,6 +152,126 @@
 1 V_Inf_Tr		       Exp_Past_Part Infl Ind_Clause
 1 V_Inf_In		       Exp_Past_Part Infl Ind_Clause
 
+1 VP_1st		       Causal_1stSing_Pres NP_Obj V_Past_Part_Tr
+1 VP_1st		       Causal_1stSing_Pres NP_Obj V_Past_Part_Tr PP
+1 VP_1st		       Causal_1stSing_Pres NP_Obj V_Past_Part_In
+1 VP_1st		       Causal_1stSing_Pres NP_Obj V_Past_Part_In PP
+
+1 VP_2nd		       Causal_2ndSing_Pres NP_Obj V_Past_Part_Tr
+1 VP_2nd		       Causal_2ndSing_Pres NP_Obj V_Past_Part_Tr PP
+1 VP_2nd		       Causal_2ndSing_Pres NP_Obj V_Past_Part_In
+1 VP_2nd		       Causal_2ndSing_Pres NP_Obj V_Past_Part_In PP
+
+1 VP_3rd		       Causal_3rdSing_Pres NP_Obj V_Past_Part_Tr
+1 VP_3rd		       Causal_3rdSing_Pres NP_Obj V_Past_Part_Tr PP
+1 VP_3rd		       Causal_3rdSing_Pres NP_Obj V_Past_Part_In
+1 VP_3rd		       Causal_3rdSing_Pres NP_Obj V_Past_Part_In PP
+
+1 VP_1st_Pl		       Causal_1stPlur_Pres NP_Obj V_Past_Part_Tr
+1 VP_1st_Pl		       Causal_1stPlur_Pres NP_Obj V_Past_Part_Tr PP
+1 VP_1st_Pl		       Causal_1stPlur_Pres NP_Obj V_Past_Part_In
+1 VP_1st_Pl		       Causal_1stPlur_Pres NP_Obj V_Past_Part_In PP
+
+1 VP_2nd_Pl		       Causal_2ndPlur_Pres NP_Obj V_Past_Part_Tr
+1 VP_2nd_Pl		       Causal_2ndPlur_Pres NP_Obj V_Past_Part_Tr PP
+1 VP_2nd_Pl		       Causal_2ndPlur_Pres NP_Obj V_Past_Part_In
+1 VP_2nd_Pl		       Causal_2ndPlur_Pres NP_Obj V_Past_Part_In PP
+
+1 VP_3rd_Pl		       Causal_3rdPlur_Pres NP_Obj V_Past_Part_Tr
+1 VP_3rd_Pl		       Causal_3rdPlur_Pres NP_Obj V_Past_Part_Tr PP
+1 VP_3rd_Pl		       Causal_3rdPlur_Pres NP_Obj V_Past_Part_In
+1 VP_3rd_Pl		       Causal_3rdPlur_Pres NP_Obj V_Past_Part_In PP
+
+1 VP_1st		       Causal_1stSing_Pres V_Past_Part_Tr
+1 VP_1st		       Causal_1stSing_Pres V_Past_Part_Tr PP
+1 VP_1st		       Causal_1stSing_Pres V_Past_Part_In
+1 VP_1st		       Causal_1stSing_Pres V_Past_Part_In PP
+
+1 VP_2nd		       Causal_2ndSing_Pres V_Past_Part_Tr
+1 VP_2nd		       Causal_2ndSing_Pres V_Past_Part_Tr PP
+1 VP_2nd		       Causal_2ndSing_Pres V_Past_Part_In
+1 VP_2nd		       Causal_2ndSing_Pres V_Past_Part_In PP
+
+1 VP_3rd		       Causal_3rdSing_Pres V_Past_Part_Tr
+1 VP_3rd		       Causal_3rdSing_Pres V_Past_Part_Tr PP
+1 VP_3rd		       Causal_3rdSing_Pres V_Past_Part_In
+1 VP_3rd		       Causal_3rdSing_Pres V_Past_Part_In PP
+
+1 VP_1st_Pl		       Causal_1stPlur_Pres V_Past_Part_Tr
+1 VP_1st_Pl		       Causal_1stPlur_Pres V_Past_Part_Tr PP
+1 VP_1st_Pl		       Causal_1stPlur_Pres V_Past_Part_In
+1 VP_1st_Pl		       Causal_1stPlur_Pres V_Past_Part_In PP
+
+1 VP_2nd_Pl		       Causal_2ndPlur_Pres V_Past_Part_Tr
+1 VP_2nd_Pl		       Causal_2ndPlur_Pres V_Past_Part_Tr PP
+1 VP_2nd_Pl		       Causal_2ndPlur_Pres V_Past_Part_In
+1 VP_2nd_Pl		       Causal_2ndPlur_Pres V_Past_Part_In PP
+
+1 VP_3rd_Pl		       Causal_3rdPlur_Pres V_Past_Part_Tr
+1 VP_3rd_Pl		       Causal_3rdPlur_Pres V_Past_Part_Tr PP
+1 VP_3rd_Pl		       Causal_3rdPlur_Pres V_Past_Part_In
+1 VP_3rd_Pl		       Causal_3rdPlur_Pres V_Past_Part_In PP
+
+1 VP_1st		       Causal_1stSing_Past NP_Obj V_Past_Part_Tr
+1 VP_1st		       Causal_1stSing_Past NP_Obj V_Past_Part_Tr PP
+1 VP_1st		       Causal_1stSing_Past NP_Obj V_Past_Part_In
+1 VP_1st		       Causal_1stSing_Past NP_Obj V_Past_Part_In PP
+
+1 VP_2nd		       Causal_2ndSing_Past NP_Obj V_Past_Part_Tr
+1 VP_2nd		       Causal_2ndSing_Past NP_Obj V_Past_Part_Tr PP
+1 VP_2nd		       Causal_2ndSing_Past NP_Obj V_Past_Part_In
+1 VP_2nd		       Causal_2ndSing_Past NP_Obj V_Past_Part_In PP
+
+1 VP_3rd		       Causal_3rdSing_Past NP_Obj V_Past_Part_Tr
+1 VP_3rd		       Causal_3rdSing_Past NP_Obj V_Past_Part_Tr PP
+1 VP_3rd		       Causal_3rdSing_Past NP_Obj V_Past_Part_In
+1 VP_3rd		       Causal_3rdSing_Past NP_Obj V_Past_Part_In PP
+
+1 VP_1st_Pl		       Causal_1stPlur_Past NP_Obj V_Past_Part_Tr
+1 VP_1st_Pl		       Causal_1stPlur_Past NP_Obj V_Past_Part_Tr PP
+1 VP_1st_Pl		       Causal_1stPlur_Past NP_Obj V_Past_Part_In
+1 VP_1st_Pl		       Causal_1stPlur_Past NP_Obj V_Past_Part_In PP
+
+1 VP_2nd_Pl		       Causal_2ndPlur_Past NP_Obj V_Past_Part_Tr
+1 VP_2nd_Pl		       Causal_2ndPlur_Past NP_Obj V_Past_Part_Tr PP
+1 VP_2nd_Pl		       Causal_2ndPlur_Past NP_Obj V_Past_Part_In
+1 VP_2nd_Pl		       Causal_2ndPlur_Past NP_Obj V_Past_Part_In PP
+
+1 VP_3rd_Pl		       Causal_3rdPlur_Past NP_Obj V_Past_Part_Tr
+1 VP_3rd_Pl		       Causal_3rdPlur_Past NP_Obj V_Past_Part_Tr PP
+1 VP_3rd_Pl		       Causal_3rdPlur_Past NP_Obj V_Past_Part_In
+1 VP_3rd_Pl		       Causal_3rdPlur_Past NP_Obj V_Past_Part_In PP
+
+1 VP_1st		       Causal_1stSing_Past V_Past_Part_Tr
+1 VP_1st		       Causal_1stSing_Past V_Past_Part_Tr PP
+1 VP_1st		       Causal_1stSing_Past V_Past_Part_In
+1 VP_1st		       Causal_1stSing_Past V_Past_Part_In PP
+
+1 VP_2nd		       Causal_2ndSing_Past V_Past_Part_Tr
+1 VP_2nd		       Causal_2ndSing_Past V_Past_Part_Tr PP
+1 VP_2nd		       Causal_2ndSing_Past V_Past_Part_In
+1 VP_2nd		       Causal_2ndSing_Past V_Past_Part_In PP
+
+1 VP_3rd		       Causal_3rdSing_Past V_Past_Part_Tr
+1 VP_3rd		       Causal_3rdSing_Past V_Past_Part_Tr PP
+1 VP_3rd		       Causal_3rdSing_Past V_Past_Part_In
+1 VP_3rd		       Causal_3rdSing_Past V_Past_Part_In PP
+
+1 VP_1st_Pl		       Causal_1stPlur_Past V_Past_Part_Tr
+1 VP_1st_Pl		       Causal_1stPlur_Past V_Past_Part_Tr PP
+1 VP_1st_Pl		       Causal_1stPlur_Past V_Past_Part_In
+1 VP_1st_Pl		       Causal_1stPlur_Past V_Past_Part_In PP
+
+1 VP_2nd_Pl		       Causal_2ndPlur_Past V_Past_Part_Tr
+1 VP_2nd_Pl		       Causal_2ndPlur_Past V_Past_Part_Tr PP
+1 VP_2nd_Pl		       Causal_2ndPlur_Past V_Past_Part_In
+1 VP_2nd_Pl		       Causal_2ndPlur_Past V_Past_Part_In PP
+
+1 VP_3rd_Pl		       Causal_3rdPlur_Past V_Past_Part_Tr
+1 VP_3rd_Pl		       Causal_3rdPlur_Past V_Past_Part_Tr PP
+1 VP_3rd_Pl		       Causal_3rdPlur_Past V_Past_Part_In
+1 VP_3rd_Pl		       Causal_3rdPlur_Past V_Past_Part_In PP
+
 1 VP_1st		       Verbal_1st_In After_Verb_In
 1 VP_1st		       Verbal_1st_Tr After_Verb_Tr
 1 VP_1st		       Verbal_1st_In
@@ -178,6 +299,14 @@
 1 VP_Inf		       V_Inf_Tr After_Verb_Tr
 1 VP_Inf		       V_Inf_In After_Verb_In
 1 VP_Inf		       V_Inf_In
+1 VP_Inf		       Causal_Inf NP_Obj V_Past_Part_Tr
+1 VP_Inf		       Causal_Inf NP_Obj V_Past_Part_In
+1 VP_Inf		       Causal_Inf NP_Obj V_Past_Part_Tr PP
+1 VP_Inf		       Causal_Inf NP_Obj V_Past_Part_In PP
+1 VP_Inf		       Causal_Inf V_Past_Part_Tr
+1 VP_Inf		       Causal_Inf V_Past_Part_In
+1 VP_Inf		       Causal_Inf V_Past_Part_Tr PP
+1 VP_Inf		       Causal_Inf V_Past_Part_In PP
 
 1 After_Verb_Tr		       NP_Obj
 1 After_Verb_Tr		       NP_Obj PP
@@ -299,13 +428,18 @@
 1 Verbal_2nd_Pl_In	       Modal_Past_Neg Have Be_Past_Part V_Pres_Part_In
 1 Verbal_3rd_Pl_In	       Modal_Past_Neg Have Be_Past_Part V_Pres_Part_In
 
+1 Verb_As_Noun_Obj	       V_Pres_Part_Tr NP_Obj
+1 Verb_As_Noun_Obj	       V_Pres_Part_In
+1 Verb_As_Noun		       V_Pres_Part_Tr NP
+1 Verb_As_Noun		       V_Pres_Part_In
+
 1 PP			       Prep NP_Obj
 1 PP_No_Prep		       NP_Obj
-	
 
 1 NP			       NP PP
 1 NP			       NP_1st
 1 NP			       NP_2nd
+1 NP			       NP_3rd
 1 NP			       NP_1st_Pl
 1 NP			       NP_3rd_Pl
 
@@ -324,10 +458,20 @@
 1 NP_3rd		       Indef_Article Nominal
 1 NP_3rd		       Def_Article Nominal
 1 NP_3rd		       Poss_Pers_Pro_Subj Nominal
+1 NP_3rd		       Quant_Part Nominal
+1 NP_3rd		       Quant_Part Def_Article Nominal
+1 NP_3rd		       Quant_Sing Nominal
+1 NP_3rd		       Quant_Part Of Def_Article Nominal
+1 NP_3rd		       Verb_As_Noun
+1 NP_3rd		       NP_3rd Adj_Infl VP_3rd
 
 1 NP_3rd_Pl		       Nominal_Pl
 1 NP_3rd_Pl		       Def_Article_Pl Nominal_Pl
 1 NP_3rd_Pl		       Poss_Pers_Pro_Subj Nominal_Pl
+1 NP_3rd_Pl		       Quant_Plur Nominal
+1 NP_3rd_Pl		       Quant_Plur Def_Article_Pl Nominal
+1 NP_3rd_Pl		       Quant_Plur Of Def_Article_Pl Nominal_Pl
+1 NP_3rd_Pl		       NP_3rd_Pl Adj_Infl VP_3rd_Pl
 
 1 NP_Obj		       NP_Obj PP
 1 NP_Obj		       Obj_Pers_Pro
@@ -343,6 +487,16 @@
 1 NP_Obj		       Program
 1 NP_Obj		       Org
 1 NP_Obj		       Field
+1 NP_Obj		       Verb_As_Noun_Obj
+1 NP_Obj		       Quant_Part Nominal
+1 NP_Obj		       Quant_Part Def_Article Nominal
+1 NP_Obj		       Quant_Part Of Def_Article Nominal
+1 NP_Obj		       Quant_Sing Nominal
+1 NP_Obj		       Quant_Plur Nominal_Pl
+1 NP_Obj		       Quant_Plur Def_Article_Pl Nominal_Pl
+1 NP_Obj		       Quant_Plur Of Def_Article_Pl Nominal_Pl
+1 NP_Obj		       NP_Obj Adj_Infl VP
+1 NP_Obj		       NP_Obj Adj_Infl VP_Pl
 
 1 Nominal		       Noun
 1 Nominal		       CompoundNoun
@@ -465,3 +619,16 @@
 1 V_1stPlur_Past_Tr	       	       Be_1stPlur_Past  
 1 V_2ndPlur_Past_Tr	       	       Be_2ndPlur_Past  
 1 V_3rdPlur_Past_Tr	       	       Be_3rdPlur_Past
+
+1 Causal_1stSing_Pres		       Causal_Base_Pres
+1 Causal_2ndSing_Pres		       Causal_Base_Pres
+1 Causal_1stPlur_Pres		       Causal_Base_Pres
+1 Causal_2ndPlur_Pres		       Causal_Base_Pres
+1 Causal_3rdPlur_Pres		       Causal_Base_Pres
+
+1 Causal_1stSing_Past		       Causal_Base_Past
+1 Causal_2ndSing_Past		       Causal_Base_Past
+1 Causal_3rdSing_Past		       Causal_Base_Past
+1 Causal_1stPlur_Past		       Causal_Base_Past
+1 Causal_2ndPlur_Past		       Causal_Base_Past
+1 Causal_3rdPlur_Past		       Causal_Base_Past

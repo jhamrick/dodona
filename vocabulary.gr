@@ -106,6 +106,7 @@
 1 Noun		car
 1 Noun		suggestion
 1 Noun		snark
+1 Noun		file
  
 # Plural nouns
 1 Noun_Pl		command
@@ -165,6 +166,7 @@
 1 Noun_Pl		cars
 1 Noun_Pl		suggestions
 1 Noun_Pl		snark
+1 Noun_Pl		files
  
 #################### Pronouns ####################
  
@@ -341,7 +343,7 @@
 1 Subord_Conj		so that
 1 Subord_Conj		therefore
 1 Subord_Conj		because
-1 Subord_Conj		than
+Q1 Subord_Conj		than
  
 # Correlative conjunctions
 1 Corr_Conj_First		both
@@ -383,7 +385,7 @@
  
 # Indefinite articles
 1 Indef_Article		a
-1 Indef_Artlcle		an
+1 Indef_Article		an
  
 #################### Interrogatives ####################
  
@@ -408,6 +410,9 @@
 
 # Inflections
 1 Infl			that
+1 Adj_Infl		that
+1 Adj_Infl		which
+1 Adj_Infl		who
  
 #################### Verbs ####################
 
@@ -744,6 +749,13 @@
 1 Being_Base_Pres		feel
 1 Being_Base_Past		felt
 1 Being_3rdSing_Pres		feels
+
+1 Causal_Inf			get
+1 Causal_Pres_Part		getting
+1 Causal_Past_Part		gotten
+1 Causal_Base_Pres		get
+1 Causal_Base_Past		got
+1 Causal_3rdSing_Pres		gets
  
 # Verb exceptions - expressive verbs
  
@@ -836,3 +848,5 @@
 1 Misc		     fs/binfmt_efl.c
 1 Misc		     web.mit.edu/geofft/www
 1 Misc		     '
+
+1 Of		     of

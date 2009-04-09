@@ -46,11 +46,10 @@ def parse_file():
         if parse: print parse[0]
         else: print "failure"
 
-def parse_sent():
-    sen = "what do you not know ?"
+def parse_sent(sen):
     foreign = []
     try:
-        parse = parser.nbest_parse(sen.strip().split(" "), trace=2)
+        parse = parser.nbest_parse(sen.strip().split(" "), trace=3)
     except:
         sen = sen.strip().split(" ")
         for word in sen:
