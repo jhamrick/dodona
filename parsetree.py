@@ -84,4 +84,4 @@ def rand_sent(left=None):
     return " ".join(sen)
         
 if __name__ == "__main__":
-    parse_file()
+    parse_sent()

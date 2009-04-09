@@ -106,6 +106,7 @@
 1 Noun		car
 1 Noun		suggestion
 1 Noun		snark
+1 Noun		file
  
 # Plural nouns
 1 Noun_Pl		command
@@ -165,6 +166,7 @@
 1 Noun_Pl		cars
 1 Noun_Pl		suggestions
 1 Noun_Pl		snark
+1 Noun_Pl		files
  
 #################### Pronouns ####################
  
@@ -747,26 +749,26 @@
  
 # Verb exceptions - expressive verbs
  
-1 Exp_Inf		know
+1 Exp_Inf			know
 1 Exp_Pres_Part		knowing
 1 Exp_Past_Part		known
 1 Exp_Base_Pres		know
 1 Exp_Base_Past		knew
-1 Exp_3rdSing_Pres	knows
+1 Exp_3rdSing_Pres		knows
  
-1 Exp_Inf		think
+1 Exp_Inf			think
 1 Exp_Pres_Part		thinking
 1 Exp_Past_Part		thought
 1 Exp_Base_Pres		think
 1 Exp_Base_Past		thought
-1 Exp_3rdSing_Pres	thinks
+1 Exp_3rdSing_Pres		thinks
 
-1 Do_Inf			do
+1 Do_Inf				do
 1 Do_Pres_Part			doing
 1 Do_Past_Part			done
 1 Do_Base_Pres			do
 1 Do_Base_Past			did
-1 Do_3rdSing_Pres		does
+1 Do_3rdSing_Pres			does
  
 #################### Punctuation ####################
  
