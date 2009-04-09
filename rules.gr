@@ -1,13 +1,14 @@
-1 START			       S
+1 START			S
 
 1 S			       Name Comma Ind_Clause_Ques PuncQ
 1 S			       Name Comma Ind_Clause Punc
 1 S			       Ind_Clause Punc
 1 S			       Ind_Clause_Ques PuncQ
-1 S			       Ind_Clause_Ques
+
 
 1 Ind_Clause_Ques	       Interrog_Det VP_3rd
 1 Ind_Clause_Ques	       Interrog_Det VP_3rd Prep
+1 Ind_Clause_Ques		Interrog_Det Aux Ind_Clause_Inf_2nd 		
 1 Ind_Clause_Ques	       Interrog_Proadverb Aux Ind_Clause_Inf
 1 Ind_Clause_Ques	       Interrog_Proadverb Aux_3rd Ind_Clause_Inf_3rd
 1 Ind_Clause_Ques	       Interrog_Proadverb Interrog_Clause
@@ -21,10 +22,11 @@
 1 Ind_Clause		       NP_2nd VP_2nd
 1 Ind_Clause		       NP_3rd VP_3rd
 1 Ind_Clause		       VP_Inf
-1 Ind_Clause_Pl		       NP_1st_Pl VP_1st_Pl
-1 Ind_Clause_Pl		       NP_3rd_Pl VP_3rd_Pl
+1 Ind_Clause_Pl	       NP_1st_Pl VP_1st_Pl
+1 Ind_Clause_Pl	       NP_3rd_Pl VP_3rd_Pl
 
 1 Ind_Clause_Inf	       NP VP_Inf
+1 Ind_Clause_Inf_2nd		NP_2nd VP_Inf
 1 Ind_Clause_Inf_3rd	       NP_3rd VP_Inf
 
 1 Interrog_Clause	       Passive_Interrog_In 
@@ -272,6 +274,9 @@
 1 VP_3rd_Pl		       Causal_3rdPlur_Past V_Past_Part_In
 1 VP_3rd_Pl		       Causal_3rdPlur_Past V_Past_Part_In PP
 
+1 V_Inf_In_Neg		Not Exp_Inf Infl Ind_Clause
+1 V_Inf_In_Neg		Not Exp_Inf
+
 1 VP_1st		       Verbal_1st_In After_Verb_In
 1 VP_1st		       Verbal_1st_Tr After_Verb_Tr
 1 VP_1st		       Verbal_1st_In
@@ -307,6 +312,7 @@
 1 VP_Inf		       Causal_Inf V_Past_Part_In
 1 VP_Inf		       Causal_Inf V_Past_Part_Tr PP
 1 VP_Inf		       Causal_Inf V_Past_Part_In PP
+1 VP_Inf		       V_Inf_In_Neg
 
 1 After_Verb_Tr		       NP_Obj
 1 After_Verb_Tr		       NP_Obj PP
@@ -384,7 +390,7 @@
 1 Verbal_3rd_In		       Modal_Past Have Be_Past_Part V_Pres_Part_In
 1 Verbal_1st_Pl_In	       Modal_Past Have Be_Past_Part V_Pres_Part_In
 1 Verbal_2nd_Pl_In	       Modal_Past Have Be_Past_Part V_Pres_Part_In
-1 Verbal_3rd_Pl_In	       Modal_Past Have Be_Past_Part V_Pres_Part_In
+1 Verbal_3rd_Pl_In	       Modal_Past Have Bedo_Past_Part V_Pres_Part_In
 
 1 Verbal_1st_Tr		       Modal_Pres_Neg V_Inf_Tr
 1 Verbal_2nd_Tr		       Modal_Pres_Neg V_Inf_Tr
