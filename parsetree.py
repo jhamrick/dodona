@@ -42,7 +42,7 @@ def parse_file():
     sens.close()
 
     for sen in test_sentences:
-        parse = parser.nbest_parse(sen)
+        parse = parser.nbest_parse(sen, trace=0)
         if parse: print parse[0]
         else: print "failure"
 
