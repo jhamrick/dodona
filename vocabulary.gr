@@ -358,16 +358,20 @@
 #################### Determiners ####################
  
 # Quantifiers
-1 Quant			all
-1 Quant			some
-1 Quant			every
-1 Quant			most
-1 Quant			much
-1 Quant			more
-1 Quant			a lot
-1 Quant			lots
-1 Quant			somebody
-1 Quant			nobody
+1 Quant_Plur		all
+1 Quant_Part		all
+1 Quant_Plur		some
+1 Quant_Part		some
+1 Quant_Sing		every
+1 Quant_Plur		most
+1 Quant_Part		most
+1 Quant_Plur		much
+1 Quant_Part		much
+1 Quant_Plur		more
+1 Quant_Part		more
+1 Quant_Part		no
+1 Quant_Plur		no
+1 Quant_Sing		no
  
 # Definite articles
 1 Def_Article		the
