@@ -34,7 +34,7 @@ cfg = ContextFreeGrammar(NT("S"), rules)
 parser = EarleyChartParser(cfg, trace=0)
 
 def parse_file():
-    sens = open("parseable.sen", "r")
+    sens = open("examples.sen", "r")
     line = sens.readline()
     while line:
         test_sentences.append(line.strip().split(" "))
@@ -49,7 +49,7 @@ def parse_file():
 def parse_sent(sen):
     foreign = []
     try:
-        parse = parser.nbest_parse(sen.strip().split(" "))
+        parse = parser.nbest_parse(sen.strip().split(" "), trace=3)
     except:
         sen = sen.strip().split(" ")
         for word in sen:
@@ -82,3 +82,5 @@ def rand_sent(left=None):
 
     return " ".join(sen)
         
+if __name__ == "__main__":
+    parse_file()

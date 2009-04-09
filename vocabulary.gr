@@ -6,10 +6,15 @@
 1 Name		Jessica
 1 Name		Socrates
 1 Name		geofft
+1 Name		God
  
 # Places (do not require "the")
 1 Place		Cambridge
 1 Place		Somerville
+1 Place		MIT
+
+# Events
+1 Event		DEFCON
  
 # Programs
 1 Program		emacs
@@ -20,6 +25,13 @@
 1 Program		Ubuntu
 1 Program		Athena
 1 Program		Zephyr
+1 Program		SkyNet
+1 Program		UNIX
+1 Program		Itanium
+1 Program		Intrepid
+
+1 Command		\def
+1 Command		\newcommand
  
 # Organizations
 1 Org		SIPB
@@ -71,6 +83,29 @@
 1 Noun		extension
 1 Noun		page
 1 Noun		airspeed
+1 Noun		advantage
+1 Noun		language
+1 Noun		PEG
+1 Noun		CFG
+1 Noun		directory
+1 Noun		inode
+1 Noun		reference
+1 Noun		size
+1 Noun		router
+1 Noun		housing
+1 Noun		lottery
+1 Noun		difference
+1 Noun		hair
+1 Noun		LiveCD
+1 Noun		laptop
+1 Noun		harddrive
+1 Noun		drive
+1 Noun		path
+1 Noun		communication
+1 Noun		road
+1 Noun		car
+1 Noun		suggestion
+1 Noun		snark
  
 # Plural nouns
 1 Noun_Pl		command
@@ -106,6 +141,30 @@
 1 Noun_Pl		extensions
 1 Noun_Pl		pages
 1 Noun_Pl		airspeeds
+1 Noun_Pl		advantages
+1 Noun_Pl		languages
+1 Noun_Pl		PEGs
+1 Noun_Pl		CFGs
+1 Noun_Pl		directories
+1 Noun_Pl		inodes
+1 Noun_Pl		references
+1 Noun_Pl		sizes
+1 Noun_Pl		routers
+1 Noun_Pl		housing
+1 Noun_Pl		lotteries
+1 Noun_Pl		differences
+1 Noun_Pl		hair
+1 Noun_Pl		hairs
+1 Noun_Pl		LiveCDs
+1 Noun_Pl		laptops
+1 Noun_Pl		harddrives
+1 Noun_Pl		drives
+1 Noun_Pl		paths
+1 Noun_Pl		communications
+1 Noun_Pl		roads
+1 Noun_Pl		cars
+1 Noun_Pl		suggestions
+1 Noun_Pl		snark
  
 #################### Pronouns ####################
  
@@ -154,6 +213,10 @@
 1 Reflex_Pers_Pro		ourselves
 1 Reflex_Pers_Pro		yourselves
 1 Reflex_Pers_Pro		themselves
+
+1 's		 	's
+
+1 Pronoun		many
  
 #################### Adjectives ####################
  
@@ -223,8 +286,8 @@
 1 Adj_Pos			first
 1 Adj_Pos			near
 1 Adj_Pos			far
-1 Adj_Dir			left
-1 Adj_Dir			right
+1 Adj_Pos			here
+1 Adj_Pos			there
  
 # State
 1 Adj_State		bad
@@ -232,11 +295,32 @@
 1 Adj_State		mortal
 1 Adj_State		true
 1 Adj_State		unladen
-1 Adj_State		best
+1 Adj_State		trapped
+1 Adj_State		only
+1 Adj_State		hard
+1 Adj_State		secure
+1 Adj_State		helpful
+1 Adj_State		open
  
 # Directions
 1 Adj_Dir			up
 1 Adj_Dir			down
+1 Adj_Dir			left
+1 Adj_Dir			right
+
+# Superlatives
+1 Super			greater
+1 Super			best
+
+# Possesion
+1 Poss_Adj		own
+
+#################### Adverbs ####################
+
+1 Adv		     instead
+1 Adv		     ever
+1 Adv		     back
+1 Adv		     just
  
 #################### Conjunctions ####################
  
@@ -257,6 +341,7 @@
 1 Subord_Conj		so that
 1 Subord_Conj		therefore
 1 Subord_Conj		because
+1 Subord_Conj		than
  
 # Correlative conjunctions
 1 Corr_Conj_First		both
@@ -278,6 +363,7 @@
 1 Quant			every
 1 Quant			most
 1 Quant			much
+1 Quant			more
 1 Quant			a lot
 1 Quant			lots
 1 Quant			somebody
@@ -488,6 +574,98 @@
 1 V_Base_Pres_Tr		feel
 1 V_Base_Past_Tr		felt
 1 V_3rdSing_Pres_Tr		feels
+
+1 V_Inf_Tr			take
+1 V_Pres_Part_Tr		taking
+1 V_Past_Part_Tr		taken
+1 V_Base_Pres_Tr		take
+1 V_Base_Past_Tr		took
+1 V_3rdSing_Pres_Tr		takes
+
+1 V_Inf_Tr			specify
+1 V_Pres_Part_Tr		specifying
+1 V_Past_Part_Tr		specified
+1 V_Base_Pres_Tr		specify
+1 V_Base_Past_Tr		specified
+1 V_3rdSing_Pres_Tr		specifies
+
+1 V_Inf_In			count
+1 V_Pres_Part_In		counting
+1 V_Past_Part_In		counted
+1 V_Base_Pres_In		count
+1 V_Base_Past_In		counted
+1 V_3rdSing_Pres_In		counts
+
+1 V_Inf_Tr			count
+1 V_Pres_Part_Tr		counting
+1 V_Past_Part_Tr		counted
+1 V_Base_Pres_Tr		count
+1 V_Base_Past_Tr		counted
+1 V_3rdSing_Pres_Tr		counts
+
+1 V_Inf_Tr			bring
+1 V_Pres_Part_Tr		bringing
+1 V_Past_Part_Tr		brought
+1 V_Base_Pres_Tr		bring
+1 V_Base_Past_Tr		brought
+1 V_3rdSing_Pres_Tr		brings
+
+1 V_Inf_Tr			dye
+1 V_Pres_Part_Tr		dying
+1 V_Past_Part_Tr		dyed
+1 V_Base_Pres_Tr		dye
+1 V_Base_Past_Tr		dyed
+1 V_3rdSing_Pres_Tr		dyes
+
+1 V_Inf_Tr			trap
+1 V_Pres_Part_Tr		trapping
+1 V_Past_Part_Tr		trapped
+1 V_Base_Pres_Tr		trap
+1 V_Base_Past_Tr		trapped
+1 V_3rdSing_Pres_Tr		traps
+
+1 V_Inf_In			miss
+1 V_Pres_Part_In		missing
+1 V_Past_Part_In		missed
+1 V_Base_Pres_In		miss
+1 V_Base_Past_In		missed
+1 V_3rdSing_Pres_In		misses
+
+1 V_Inf_Tr			bootstrap
+1 V_Pres_Part_Tr		bootstrapping
+1 V_Past_Part_Tr		bootstrapped
+1 V_Base_Pres_Tr		bootstrap
+1 V_Base_Past_Tr		bootstrapped
+1 V_3rdSing_Pres_Tr		bootstraps
+
+1 V_Inf_In			walk
+1 V_Pres_Part_In		walking
+1 V_Past_Part_In		walked
+1 V_Base_Pres_In		walk
+1 V_Base_Past_In		walked
+1 V_3rdSing_Pres_In		walks
+
+1 V_Inf_Tr			walk
+1 V_Pres_Part_Tr		walking
+1 V_Past_Part_Tr		walked
+1 V_Base_Pres_Tr		walk
+1 V_Base_Past_Tr		walked
+1 V_3rdSing_Pres_Tr		walks
+
+1 V_Inf_In			try
+1 V_Pres_Part_In		trying
+1 V_Past_Part_In		tried
+1 V_Base_Pres_In		try
+1 V_Base_Past_In		tried
+1 V_3rdSing_Pres_In		tries
+
+1 V_Inf_Tr			try
+1 V_Pres_Part_Tr		trying
+1 V_Past_Part_Tr		tried
+1 V_Base_Pres_Tr		try
+1 V_Base_Past_Tr		tried
+1 V_3rdSing_Pres_Tr		tries
+
  
 #################### Modals ####################
  
@@ -500,13 +678,19 @@
 1 Modal_Pres_Neg	cannot
 1 Modal_Pres_Neg	can't
 1 Modal_Pres		must
+
+1 Not			not
+1 Have			have
  
 # preterite form
-1 Modal_Past	should
-1 Modal_Past	would
-1 Modal_Past	might
-1 Modal_Past	could
-1 Modal_Past	must
+1 Modal_Past		should
+1 Modal_Past_Neg	shouldn't
+1 Modal_Past		would
+1 Modal_Past_Neg	wouldn't
+1 Modal_Past		might
+1 Modal_Past		could
+1 Modal_Past_Neg 	couldn't
+1 Modal_Past		must
 
 #################### Auxiliaries ####################
 
@@ -641,6 +825,7 @@
 1 Prep		     with
 1 Prep		     within
 1 Prep		     without
+1 Prep		     like
  
 #################### Misc ####################
  
