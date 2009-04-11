@@ -27,7 +27,6 @@
 1 Program		Zephyr
 1 Program		SkyNet
 1 Program		UNIX
-1 Program		Itanium
 1 Program		Intrepid
 
 1 Command		\def
@@ -107,6 +106,7 @@
 1 Noun		suggestion
 1 Noun		snark
 1 Noun		file
+1 Noun		Itanium
  
 # Plural nouns
 1 Noun_Pl		command
@@ -167,11 +167,13 @@
 1 Noun_Pl		suggestions
 1 Noun_Pl		snark
 1 Noun_Pl		files
+1 Noun_Pl		Itaniums
  
 #################### Pronouns ####################
  
 # Personal pronouns
 1 Pers_Pro_1st		I
+1 Pers_Pro_1st		one
 1 Pers_Pro_2nd		you
 1 Pers_Pro_3rd		she
 1 Pers_Pro_3rd		he
@@ -303,6 +305,7 @@
 1 Adj_State		secure
 1 Adj_State		helpful
 1 Adj_State		open
+1 Adj_State		other
  
 # Directions
 1 Adj_Dir			up
@@ -323,6 +326,7 @@
 1 Adv		     ever
 1 Adv		     back
 1 Adv		     just
+1 Adv		     best
  
 #################### Conjunctions ####################
  
@@ -340,10 +344,8 @@
 1 Subord_Conj		although
 1 Subord_Conj		if
 1 Subord_Conj		unless
-1 Subord_Conj		so that
 1 Subord_Conj		therefore
 1 Subord_Conj		because
-1 Subord_Conj		than
  
 # Correlative conjunctions
 1 Corr_Conj_First		both
@@ -356,6 +358,11 @@
 1 Corr_Conj_Last		or
 1 Corr_Conj_Last		but
 1 Corr_Conj_Last		but also
+1 Corr_Conj_First		if
+1 Corr_Conj_Last		then
+
+1 Noun_Conj			and
+1 Noun_Conj			or
  
 #################### Determiners ####################
  
@@ -388,7 +395,12 @@
 1 Indef_Article		an
  
 #################### Interrogatives ####################
- 
+
+# Determiners which can work as an object
+1 Interrog_Obj	    	which
+1 Interrog_Obj		whose
+1 Interrog_Obj		whatu
+
 # Determiners
 1 Interrog_Det		which
 1 Interrog_Det_Poss	whose
@@ -675,6 +687,33 @@
 1 V_Base_Past_Tr		tried
 1 V_3rdSing_Pres_Tr		tries
 
+1 V_Inf_Tr			do
+1 V_Pres_Part_Tr		doing
+1 V_Past_Part_Tr		done
+1 V_Base_Pres_Tr		do
+1 V_Base_Past_Tr		did
+1 V_3rdSing_Pres_Tr		does
+
+1 V_Inf_Tr			call
+1 V_Pres_Part_Tr		calling
+1 V_Past_Part_Tr		called
+1 V_Base_Pres_Tr		call
+1 V_Base_Past_Tr		called
+1 V_3rdSing_Pres_Tr		calls
+
+1 V_Inf_In			call
+1 V_Pres_Part_In		calling
+1 V_Past_Part_In		called
+1 V_Base_Pres_In		call
+1 V_Base_Past_In		called
+1 V_3rdSing_Pres_In		calls
+ 
+1 V_Inf_In			think
+1 V_Pres_Part_In		thinking
+1 V_Past_Part_In		thought
+1 V_Base_Pres_In		think
+1 V_Base_Past_In		thought
+1 V_3rdSing_Pres_In		thinks
  
 #################### Modals ####################
  
@@ -717,6 +756,7 @@
 1 Be_1stSing_Pres		am
 1 Be_2ndSing_Pres		are
 1 Be_3rdSing_Pres		is
+1 Be_3rdSing_Pres		's
 1 Be_1stPlur_Pres		are
 1 Be_2ndPlur_Pres		are
 1 Be_3rdPlur_Pres		are
@@ -760,25 +800,32 @@
 # Verb exceptions - expressive verbs
  
 1 Exp_Inf			know
-1 Exp_Pres_Part		knowing
-1 Exp_Past_Part		known
-1 Exp_Base_Pres		know
-1 Exp_Base_Past		knew
+1 Exp_Pres_Part			knowing
+1 Exp_Past_Part			known
+1 Exp_Base_Pres			know
+1 Exp_Base_Past			knew
 1 Exp_3rdSing_Pres		knows
  
 1 Exp_Inf			think
-1 Exp_Pres_Part		thinking
-1 Exp_Past_Part		thought
-1 Exp_Base_Pres		think
-1 Exp_Base_Past		thought
+1 Exp_Pres_Part			thinking
+1 Exp_Past_Part			thought
+1 Exp_Base_Pres			think
+1 Exp_Base_Past			thought
 1 Exp_3rdSing_Pres		thinks
 
-1 Do_Inf				do
+1 Do_Inf			do
 1 Do_Pres_Part			doing
 1 Do_Past_Part			done
 1 Do_Base_Pres			do
 1 Do_Base_Past			did
-1 Do_3rdSing_Pres			does
+1 Do_3rdSing_Pres		does
+
+1 Go_Inf			go
+1 Go_Pres_Part			going
+1 Go_Past_Part			gone
+1 Go_Base_Pres			go
+1 Go_Base_Past			went
+1 Go_3rdSing_Pres		goes
  
 #################### Punctuation ####################
  
@@ -829,6 +876,7 @@
 1 Prep		     over
 1 Prep		     past
 1 Prep		     round
+1 Prep		     than
 1 Prep		     through
 1 Prep		     throughout
 1 Prep		     to
@@ -847,7 +895,8 @@
  
 1 File_Addr		     fs/binfmt_efl.c
 1 Web_Addr		     web.mit.edu/geofft/www
-1 Quote			     '
-1 Quote			     "
+1 Quote_Single		     '
+1 Quote_Double		     "
 
 1 Of		     of
+1 To		     to
