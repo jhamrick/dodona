@@ -173,6 +173,7 @@
  
 # Personal pronouns
 1 Pers_Pro_1st		I
+1 Pers_Pro_1st		one
 1 Pers_Pro_2nd		you
 1 Pers_Pro_3rd		she
 1 Pers_Pro_3rd		he
@@ -325,6 +326,7 @@
 1 Adv		     ever
 1 Adv		     back
 1 Adv		     just
+1 Adv		     best
  
 #################### Conjunctions ####################
  

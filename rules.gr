@@ -208,6 +208,10 @@
 1 VP_Pl			       VP_1st_Pl
 1 VP_Pl			       VP_2nd_Pl
 1 VP_Pl			       VP_3rd_Pl
+1 VP			       Adv VP
+1 VP			       VP Adv
+1 VP_Pl			       Adv VP_Pl
+1 VP_Pl			       VP_Pl Adv
 
 1 VP_1st		       Being_1stSing_Pres AdjP
 1 VP_2nd		       Being_2ndSing_Pres AdjP
@@ -397,6 +401,23 @@
 1 VP_Inf		       Causal_Inf V_Past_Part_In
 1 VP_Inf		       Causal_Inf V_Past_Part_Tr PP
 1 VP_Inf		       Causal_Inf V_Past_Part_In PP
+1 VP_Inf		       V_Inf_In_Neg
+1 VP_Inf		       Adv VP_Inf
+1 VP_Inf		       V_Inf_Tr Adv After_Verb_Tr
+1 VP_Inf		       V_Inf_In Adv After_Verb_In
+1 VP_Inf		       V_Inf_In Adv
+1 VP_Inf		       V_Inf_Tr Adv
+1 VP_Inf		       V_Inf_In Adv PP
+1 VP_Inf		       V_Inf_Tr Adv NP_Obj
+1 VP_Inf		       V_Inf_Tr Adv NP_Obj PP
+1 VP_Inf		       Causal_Inf Adv NP_Obj V_Past_Part_Tr
+1 VP_Inf		       Causal_Inf Adv NP_Obj V_Past_Part_In
+1 VP_Inf		       Causal_Inf Adv NP_Obj V_Past_Part_Tr PP
+1 VP_Inf		       Causal_Inf Adv NP_Obj V_Past_Part_In PP
+1 VP_Inf		       Causal_Inf Adv V_Past_Part_Tr
+1 VP_Inf		       Causal_Inf Adv V_Past_Part_In
+1 VP_Inf		       Causal_Inf Adv V_Past_Part_Tr PP
+1 VP_Inf		       Causal_Inf Adv V_Past_Part_In PP
 1 VP_Inf		       V_Inf_In_Neg
 
 1 After_Verb_Tr		       NP_Obj
@@ -739,6 +760,11 @@
 
 1 V_Pres_Part_In		       Go_Pres_Part To V_Inf_In
 1 V_Pres_Part_Tr		       Go_Pres_Part To V_Inf_Tr
+
+1 V_Pres_Part_In		       Adv V_Pres_Part_In
+1 V_Pres_Part_In		       V_Pres_Part_In Adv
+1 V_Pres_Part_Tr		       Adv V_Pres_Part_Tr
+1 V_Pres_Part_Tr		       V_Pres_Part_Tr Adv
 
 1 Word				       Name
 1 Word				       Place
