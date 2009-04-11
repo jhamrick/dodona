@@ -303,6 +303,7 @@
 1 Adj_State		secure
 1 Adj_State		helpful
 1 Adj_State		open
+1 Adj_State		other
  
 # Directions
 1 Adj_Dir			up
@@ -356,6 +357,9 @@
 1 Corr_Conj_Last		or
 1 Corr_Conj_Last		but
 1 Corr_Conj_Last		but also
+
+1 Noun_Conj			and
+1 Noun_Conj			or
  
 #################### Determiners ####################
  
@@ -388,7 +392,12 @@
 1 Indef_Article		an
  
 #################### Interrogatives ####################
- 
+
+# Determiners which can work as an object
+1 Interrog_Obj	    	which
+1 Interrog_Obj		whose
+1 Interrog_Obj		whatu
+
 # Determiners
 1 Interrog_Det		which
 1 Interrog_Det_Poss	whose
@@ -675,6 +684,26 @@
 1 V_Base_Past_Tr		tried
 1 V_3rdSing_Pres_Tr		tries
 
+1 V_Inf_Tr			do
+1 V_Pres_Part_Tr		doing
+1 V_Past_Part_Tr		done
+1 V_Base_Pres_Tr		do
+1 V_Base_Past_Tr		did
+1 V_3rdSing_Pres_Tr		does
+
+1 V_Inf_Tr			call
+1 V_Pres_Part_Tr		calling
+1 V_Past_Part_Tr		called
+1 V_Base_Pres_Tr		call
+1 V_Base_Past_Tr		called
+1 V_3rdSing_Pres_Tr		calls
+
+1 V_Inf_In			call
+1 V_Pres_Part_In		calling
+1 V_Past_Part_In		called
+1 V_Base_Pres_In		call
+1 V_Base_Past_In		called
+1 V_3rdSing_Pres_In		calls
  
 #################### Modals ####################
  
@@ -717,6 +746,7 @@
 1 Be_1stSing_Pres		am
 1 Be_2ndSing_Pres		are
 1 Be_3rdSing_Pres		is
+1 Be_3rdSing_Pres		's
 1 Be_1stPlur_Pres		are
 1 Be_2ndPlur_Pres		are
 1 Be_3rdPlur_Pres		are
@@ -760,25 +790,25 @@
 # Verb exceptions - expressive verbs
  
 1 Exp_Inf			know
-1 Exp_Pres_Part		knowing
-1 Exp_Past_Part		known
-1 Exp_Base_Pres		know
-1 Exp_Base_Past		knew
+1 Exp_Pres_Part			knowing
+1 Exp_Past_Part			known
+1 Exp_Base_Pres			know
+1 Exp_Base_Past			knew
 1 Exp_3rdSing_Pres		knows
  
 1 Exp_Inf			think
-1 Exp_Pres_Part		thinking
-1 Exp_Past_Part		thought
-1 Exp_Base_Pres		think
-1 Exp_Base_Past		thought
+1 Exp_Pres_Part			thinking
+1 Exp_Past_Part			thought
+1 Exp_Base_Pres			think
+1 Exp_Base_Past			thought
 1 Exp_3rdSing_Pres		thinks
 
-1 Do_Inf				do
+1 Do_Inf			do
 1 Do_Pres_Part			doing
 1 Do_Past_Part			done
 1 Do_Base_Pres			do
 1 Do_Base_Past			did
-1 Do_3rdSing_Pres			does
+1 Do_3rdSing_Pres		does
  
 #################### Punctuation ####################
  
@@ -847,7 +877,7 @@
  
 1 File_Addr		     fs/binfmt_efl.c
 1 Web_Addr		     web.mit.edu/geofft/www
-1 Quote			     '
-1 Quote			     "
+1 Quote_Single		     '
+1 Quote_Double		     "
 
 1 Of		     of
