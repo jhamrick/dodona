@@ -1,0 +1,59 @@
+---
+ parsetree.py |   33 +++++++++++++++++++--------------
+ 1 files changed, 19 insertions(+), 14 deletions(-)
+
+diff --git a/parsetree.py b/parsetree.py
+index 4b931d7..f5d37b8 100644
+--- a/parsetree.py
++++ b/parsetree.py
+@@ -1,6 +1,5 @@
+ from pos import POSDict
+ from grammar import Sentence, NounPhrase, VerbPhrase, AdjectivePhrase, PrepositionalPhrase, Nominal, Noun, Verb, Adjective, Adverb, Conjunction, Preposition, Pronoun, Determiner, Punctuation
+-from copy import deepcopy
+ import time
+ 
+ #########################################
+@@ -257,21 +256,27 @@ def parse(sentence):
+     # make a list of all possible sentences, given the type(s) of
+     # speech for each word
+     pos = [[]]
++##     for word in sentence:
++##         types = word_to_type(word)
++##         if len(types) == 1:
++##             for p in pos: p.append(types[0])
++##         else:
++##             temp = deepcopy(pos)
++##             for t in temp:
++##                 t.append(types[0])
++##             for type in types[1:]:
++##                 for p in pos:
++##                     t = p[:]
++##                     t.append(type)
++##                     temp.append(t)
++##             pos = deepcopy(temp)
+     for word in sentence:
+         types = word_to_type(word)
+-        if len(types) == 1:
+-            for p in pos: p.append(types[0])
+-        else:
+-            temp = deepcopy(pos)
+-            for t in temp:
+-                t.append(types[0])
+-            for type in types[1:]:
+-                for p in pos:
+-                    t = p[:]
+-                    t.append(type)
+-                    temp.append(t)
+-            pos = deepcopy(temp)          
+-
++        oldpos = pos
++        pos = []
++        for p_s in oldpos:
++            pos += [p_s + [type_] for type_ in types]
++        
+     # perform the search on the possible sentences
+     pos = search(pos)
+     t1 = time.clock() # record the end time
+-- 
+1.5.6.5
+

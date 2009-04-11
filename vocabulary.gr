@@ -1,0 +1,853 @@
+#################### Nouns ######################
+ 
+# Names
+1 Name		Dodona
+1 Name		jhamrick
+1 Name		Jessica
+1 Name		Socrates
+1 Name		geofft
+1 Name		God
+ 
+# Places (do not require "the")
+1 Place		Cambridge
+1 Place		Somerville
+1 Place		MIT
+
+# Events
+1 Event		DEFCON
+ 
+# Programs
+1 Program		emacs
+1 Program		BarnOwl
+1 Program		Google
+1 Program		Linux
+1 Program		git
+1 Program		Ubuntu
+1 Program		Athena
+1 Program		Zephyr
+1 Program		SkyNet
+1 Program		UNIX
+1 Program		Itanium
+1 Program		Intrepid
+
+1 Command		\def
+1 Command		\newcommand
+ 
+# Organizations
+1 Org		SIPB
+ 
+# Field of study
+1 Field		NLP
+1 Field		CS
+1 Field		EE
+ 
+# Singular nouns
+1 Noun		green
+1 Noun		line
+1 Noun		office
+1 Noun		student
+1 Noun		center
+1 Noun		command
+1 Noun		line
+1 Noun		thing
+1 Noun		person
+1 Noun		text
+1 Noun		editor
+1 Noun		dinosaur
+1 Noun		color
+1 Noun		question
+1 Noun		room
+1 Noun		man
+1 Noun		sentence
+1 Noun		wood
+1 Noun		woodchuck
+1 Noun		revision
+1 Noun		result
+1 Noun		website
+1 Noun		sun
+1 Noun		earth
+1 Noun		phase
+1 Noun		moon
+1 Noun		name
+1 Noun		quest
+1 Noun		velocity
+1 Noun		swallow
+1 Noun		tree
+1 Noun		day
+1 Noun		registration
+1 Noun		state
+1 Noun		art
+1 Noun		mortal
+1 Noun		sandwich
+1 Noun		status
+1 Noun		extension
+1 Noun		page
+1 Noun		airspeed
+1 Noun		advantage
+1 Noun		language
+1 Noun		PEG
+1 Noun		CFG
+1 Noun		directory
+1 Noun		inode
+1 Noun		reference
+1 Noun		size
+1 Noun		router
+1 Noun		housing
+1 Noun		lottery
+1 Noun		difference
+1 Noun		hair
+1 Noun		LiveCD
+1 Noun		laptop
+1 Noun		harddrive
+1 Noun		drive
+1 Noun		path
+1 Noun		communication
+1 Noun		road
+1 Noun		car
+1 Noun		suggestion
+1 Noun		snark
+1 Noun		file
+ 
+# Plural nouns
+1 Noun_Pl		command
+1 Noun_Pl		lines
+1 Noun_Pl		things
+1 Noun_Pl		people
+1 Noun_Pl		editors
+1 Noun_Pl		dinosaurs
+1 Noun_Pl		colors
+1 Noun_Pl		questions
+1 Noun_Pl		rooms
+1 Noun_Pl		men
+1 Noun_Pl		sentences
+1 Noun_Pl		woods
+1 Noun_Pl		wood
+1 Noun_Pl		woodchucks
+1 Noun_Pl		revisions
+1 Noun_Pl		results
+1 Noun_Pl		websites
+1 Noun_Pl		suns
+1 Noun_Pl		earths
+1 Noun_Pl		phases
+1 Noun_Pl		moons
+1 Noun_Pl		names
+1 Noun_Pl		quests
+1 Noun_Pl		velocities
+1 Noun_Pl		swallows
+1 Noun_Pl		states
+1 Noun_Pl		art
+1 Noun_Pl		mortals
+1 Noun_Pl		sandwiches
+1 Noun_Pl		statuses
+1 Noun_Pl		extensions
+1 Noun_Pl		pages
+1 Noun_Pl		airspeeds
+1 Noun_Pl		advantages
+1 Noun_Pl		languages
+1 Noun_Pl		PEGs
+1 Noun_Pl		CFGs
+1 Noun_Pl		directories
+1 Noun_Pl		inodes
+1 Noun_Pl		references
+1 Noun_Pl		sizes
+1 Noun_Pl		routers
+1 Noun_Pl		housing
+1 Noun_Pl		lotteries
+1 Noun_Pl		differences
+1 Noun_Pl		hair
+1 Noun_Pl		hairs
+1 Noun_Pl		LiveCDs
+1 Noun_Pl		laptops
+1 Noun_Pl		harddrives
+1 Noun_Pl		drives
+1 Noun_Pl		paths
+1 Noun_Pl		communications
+1 Noun_Pl		roads
+1 Noun_Pl		cars
+1 Noun_Pl		suggestions
+1 Noun_Pl		snark
+1 Noun_Pl		files
+ 
+#################### Pronouns ####################
+ 
+# Personal pronouns
+1 Pers_Pro_1st		I
+1 Pers_Pro_2nd		you
+1 Pers_Pro_3rd		she
+1 Pers_Pro_3rd		he
+1 Pers_Pro_3rd		it
+1 Pers_Pro_1st_Pl	we
+1 Pers_Pro_3rd_Pl	they
+ 
+# Possessive personal pronouns (object)
+1 Poss_Pers_Pro_Obj	mine
+1 Poss_Pers_Pro_Obj	yours
+1 Poss_Pers_Pro_Obj	his
+1 Poss_Pers_Pro_Obj	hers
+1 Poss_Pers_Pro_Obj	its
+1 Poss_Pers_Pro_Obj	ours
+1 Poss_Pers_Pro_Obj	theirs
+ 
+# Possessive personal pronouns (subject)
+1 Poss_Pers_Pro_Subj	my
+1 Poss_Pers_Pro_Subj	your
+1 Poss_Pers_Pro_Subj	his
+1 Poss_Pers_Pro_Subj	her
+1 Poss_Pers_Pro_Subj	its
+1 Poss_Pers_Pro_Subj	our
+1 Poss_Pers_Pro_Subj	their
+ 
+# Objective personal pronouns
+1 Obj_Pers_Pro		me
+1 Obj_Pers_Pro		you
+1 Obj_Pers_Pro		him
+1 Obj_Pers_Pro		her
+1 Obj_Pers_Pro		it
+1 Obj_Pers_Pro		us
+1 Obj_Pers_Pro		them
+ 
+# Reflexive personal pronouns
+1 Reflex_Pers_Pro		myself
+1 Reflex_Pers_Pro		yourself
+1 Reflex_Pers_Pro		himself
+1 Reflex_Pers_Pro		herself
+1 Reflex_Pers_Pro		itself
+1 Reflex_Pers_Pro		ourselves
+1 Reflex_Pers_Pro		yourselves
+1 Reflex_Pers_Pro		themselves
+
+1 's		 	's
+
+1 Pronoun		many
+ 
+#################### Adjectives ####################
+ 
+# Colors
+1 Color			red
+1 Color			orange
+1 Color			yellow
+1 Color			green
+1 Color			blue
+1 Color			purple
+1 Color			white
+1 Color			black
+1 Color			grey
+ 
+# Numbers (spelled out)
+1 Num	  	zero
+1 Num_Sing	one
+1 Num		two
+1 Num		three
+1 Num		four
+1 Num		five
+1 Num		six
+1 Num		seven
+1 Num		eight
+1 Num		nine
+1 Num		ten
+1 Num		eleven
+1 Num		twelve
+1 Num		thirteen
+1 Num		fourteen
+1 Num		fifteen
+1 Num		sixteen
+1 Num		seventeen
+1 Num		eighteen
+1 Num		nineteen
+1 Num		twenty
+1 Num		thirty
+1 Num		fourty
+1 Num		fifty
+1 Num		sixty
+1 Num		seventy
+1 Num		eighty
+1 Num		ninety
+1 Num		hundred
+1 Num		thousand
+1 Num		million
+1 Num		billion
+ 
+# Numbers (numbers)
+1 Num_Sing		1
+1 Num			2
+1 Num			3
+1 Num			4
+1 Num			5
+1 Num			6
+1 Num			7
+1 Num			8
+1 Num			9
+1 Num			0
+ 
+# Position
+1 Adj_Pos			past
+1 Adj_Pos			current
+1 Adj_Pos			future
+1 Adj_Pos			last
+1 Adj_Pos			distant
+1 Adj_Pos			first
+1 Adj_Pos			near
+1 Adj_Pos			far
+1 Adj_Pos			here
+1 Adj_Pos			there
+ 
+# State
+1 Adj_State		bad
+1 Adj_State		good
+1 Adj_State		mortal
+1 Adj_State		true
+1 Adj_State		unladen
+1 Adj_State		trapped
+1 Adj_State		only
+1 Adj_State		hard
+1 Adj_State		secure
+1 Adj_State		helpful
+1 Adj_State		open
+ 
+# Directions
+1 Adj_Dir			up
+1 Adj_Dir			down
+1 Adj_Dir			left
+1 Adj_Dir			right
+
+# Superlatives
+1 Super			greater
+1 Super			best
+
+# Possesion
+1 Poss_Adj		own
+
+#################### Adverbs ####################
+
+1 Adv		     instead
+1 Adv		     ever
+1 Adv		     back
+1 Adv		     just
+ 
+#################### Conjunctions ####################
+ 
+# Coordinating conjunctions
+1 Coord_Conj		and
+1 Coord_Conj		for
+1 Coord_Conj		nor
+1 Coord_Conj		but
+1 Coord_Conj		or
+1 Coord_Conj		yet
+1 Coord_Conj		so
+ 
+# Subordinating conjunctions
+1 Subord_Conj		after
+1 Subord_Conj		although
+1 Subord_Conj		if
+1 Subord_Conj		unless
+1 Subord_Conj		so that
+1 Subord_Conj		therefore
+1 Subord_Conj		because
+1 Subord_Conj		than
+ 
+# Correlative conjunctions
+1 Corr_Conj_First		both
+1 Corr_Conj_First		neither
+1 Corr_Conj_First		either
+1 Corr_Conj_First		not
+1 Corr_Conj_First		not only
+1 Corr_Conj_Last		and
+1 Corr_Conj_Last		nor
+1 Corr_Conj_Last		or
+1 Corr_Conj_Last		but
+1 Corr_Conj_Last		but also
+ 
+#################### Determiners ####################
+ 
+# Quantifiers
+1 Quant_Plur		all
+1 Quant_Part		all
+1 Quant_Plur		some
+1 Quant_Part		some
+1 Quant_Sing		every
+1 Quant_Plur		most
+1 Quant_Part		most
+1 Quant_Plur		much
+1 Quant_Part		much
+1 Quant_Plur		more
+1 Quant_Part		more
+1 Quant_Part		no
+1 Quant_Plur		no
+1 Quant_Sing		no
+ 
+# Definite articles
+1 Def_Article		the
+1 Def_Article		that
+1 Def_Article		this
+1 Def_Article_Pl	these
+1 Def_Article_Pl	those
+1 Def_Article_Pl	the
+ 
+# Indefinite articles
+1 Indef_Article		a
+1 Indef_Article		an
+ 
+#################### Interrogatives ####################
+ 
+# Determiners
+1 Interrog_Det		which
+1 Interrog_Det_Poss	whose
+1 Interrog_Det		who
+1 Interrog_Det		when
+1 Interrog_Det		what
+ 
+# Pronouns
+1 Interrog_Pronoun	who
+1 Interrog_Pronoun	whom
+1 Interrog_Pronoun	what
+1 Interrog_Pronoun	which
+ 
+# Pro-adverbs
+1 Interrog_Proadverb	where
+1 Interrog_Proadverb	when
+1 Interrog_Proadverb	how
+1 Interrog_Proadverb	why
+
+# Inflections
+1 Infl			that
+1 Adj_Infl		that
+1 Adj_Infl		which
+1 Adj_Infl		who
+ 
+#################### Verbs ####################
+
+1 V_Inf_Tr		use
+1 V_Pres_Part_Tr	using
+1 V_Past_Part_Tr	used
+1 V_Base_Pres_Tr	use
+1 V_Base_Past_Tr	used
+1 V_3rdSing_Pres_Tr	uses
+
+1 V_Inf_Tr		select
+1 V_Pres_Part_Tr	selecting
+1 V_Past_Part_Tr	selected
+1 V_Base_Pres_Tr	select
+1 V_Base_Past_Tr	selected
+1 V_3rdSing_Pres_Tr	selects
+
+1 V_Inf_Tr		kill
+1 V_Pres_Part_Tr	killing
+1 V_Past_Part_Tr	killed
+1 V_Base_Pres_Tr	kill
+1 V_Base_Past_Tr	killed
+1 V_3rdSing_Pres_Tr	kills
+
+1 V_Inf_Tr		set
+1 V_Pres_Part_Tr	setting 
+1 V_Past_Part_Tr	set
+1 V_Base_Pres_Tr	set
+1 V_Base_Past_Tr	set
+1 V_3rdSing_Pres_Tr	sets
+
+1 V_Inf_Tr		answer
+1 V_Pres_Part_Tr	answering
+1 V_Past_Part_Tr	answered
+1 V_Base_Pres_Tr	answer
+1 V_Base_Past_Tr	answered
+1 V_3rdSing_Pres_Tr	answers
+
+1 V_Inf_Tr		reserve
+1 V_Pres_Part_Tr	reserving
+1 V_Past_Part_Tr	reserved
+1 V_Base_Pres_Tr	reserve
+1 V_Base_Past_Tr	reserved
+1 V_3rdSing_Pres_Tr	reserves
+
+1 V_Inf_Tr		revise
+1 V_Pres_Part_Tr	revising
+1 V_Past_Part_Tr	revised
+1 V_Base_Pres_Tr	revise
+1 V_Base_Past_Tr	revised
+1 V_3rdSing_Pres_Tr	revises
+
+1 V_Inf_Tr		change
+1 V_Pres_Part_Tr	changing
+1 V_Past_Part_Tr	changed
+1 V_Base_Pres_Tr	change
+1 V_Base_Past_Tr	changed
+1 V_3rdSing_Pres_Tr	changes
+
+1 V_Inf_Tr		make
+1 V_Pres_Part_Tr	making
+1 V_Past_Part_Tr	made
+1 V_Base_Pres_Tr	make
+1 V_Base_Past_Tr	made
+1 V_3rdSing_Pres_Tr	makes
+
+1 V_Inf_Tr		open
+1 V_Pres_Part_Tr	opening
+1 V_Past_Part_Tr	opened
+1 V_Base_Pres_Tr	open
+1 V_Base_Past_Tr	opened
+1 V_3rdSing_Pres_Tr	opens
+
+1 V_Inf_Tr		remove
+1 V_Pres_Part_Tr	removing
+1 V_Past_Part_Tr	removed
+1 V_Base_Pres_Tr	remove
+1 V_Base_Part_Tr	removed
+1 V_3rdSing_Pres_Tr	removes
+
+1 V_Inf_Tr		woo
+1 V_Pres_Part_Tr	wooing
+1 V_Past_Part_Tr	wooed
+1 V_Base_Pres_Tr	woo
+1 V_Base_Past_Tr	wooed
+1 V_3rdSing_Pres_Tr	woos
+
+1 V_Inf_Tr		chuck
+1 V_Pres_Part_Tr	chucking
+1 V_Past_Part_Tr	chucked
+1 V_Base_Pres_Tr	chuck
+1 V_Base_Past_Tr	chucked
+1 V_3rdSing_Pres_Tr	chucks
+ 
+1 V_Inf_In		happen
+1 V_Pres_Part_In	happening
+1 V_Past_Part_In	happened
+1 V_Base_Pres_In	happen
+1 V_Base_Past_In	happened
+1 V_3rdSing_Pres_In	happens	
+
+1 V_Inf_In		set
+1 V_Pres_Part_In	setting
+1 V_Past_Part_In	set
+1 V_Base_Pres_In	set
+1 V_Base_Past_In	set
+1 V_3rdSing_Pres_In	sets
+
+1 V_Inf_In		answer
+1 V_Pres_Part_In	answering
+1 V_Past_Part_In	answered
+1 V_Base_Pres_In	answer
+1 V_Base_Past_In	answered
+1 V_3rdSing_Pres_In	answers
+
+1 V_Inf_In		change
+1 V_Pres_Part_In	changing
+1 V_Past_Part_In	changed
+1 V_Base_Pres_In	change
+1 V_Base_Past_In	changed
+1 V_3rdSing_Pres_In	changes
+
+1 V_Inf_In		make
+1 V_Pres_Part_In	making
+1 V_Past_Part_In	made
+1 V_Base_Pres_In	make
+1 V_Base_Past_In	made
+1 V_3rdSing_Pres_In	makes
+
+1 V_Inf_In		open
+1 V_Pres_Part_In	opening
+1 V_Past_Part_In	opened
+1 V_Base_Pres_In	open
+1 V_Base_Past_In	opened
+1 V_3rdSing_Pres_In	opens
+
+1 V_Inf_In		go
+1 V_Pres_Part_In	going
+1 V_Past_Part_In	gone
+1 V_Base_Pres_In	go
+1 V_Base_Past_In	went
+1 V_3rdSing_Pres_In	goes
+ 
+1 V_Inf_Tr			get
+1 V_Pres_Part_Tr		getting
+1 V_Past_Part_Tr		gotten
+1 V_Base_Pres_Tr		get
+1 V_Base_Past_Tr		got
+1 V_3rdSing_Pres_In		gets
+
+1 V_Inf_In			speak
+1 V_Pres_Part_In		speaking
+1 V_Past_Part_In		spoken
+1 V_Base_Pres_In		speak
+1 V_Base_Past_In		spoke
+1 V_3rdSing_Pres_In		speaks
+ 
+1 V_Inf_Tr			know
+1 V_Pres_Part_Tr		knowing
+1 V_Past_Part_Tr		known
+1 V_Base_Pres_Tr		know
+1 V_Base_Past_Tr		knew
+1 V_3rdSing_Pres_Tr		knows
+
+1 V_Inf_Tr			feel
+1 V_Pres_Part_Tr		feeling
+1 V_Past_Part_Tr		felt
+1 V_Base_Pres_Tr		feel
+1 V_Base_Past_Tr		felt
+1 V_3rdSing_Pres_Tr		feels
+
+1 V_Inf_Tr			take
+1 V_Pres_Part_Tr		taking
+1 V_Past_Part_Tr		taken
+1 V_Base_Pres_Tr		take
+1 V_Base_Past_Tr		took
+1 V_3rdSing_Pres_Tr		takes
+
+1 V_Inf_Tr			specify
+1 V_Pres_Part_Tr		specifying
+1 V_Past_Part_Tr		specified
+1 V_Base_Pres_Tr		specify
+1 V_Base_Past_Tr		specified
+1 V_3rdSing_Pres_Tr		specifies
+
+1 V_Inf_In			count
+1 V_Pres_Part_In		counting
+1 V_Past_Part_In		counted
+1 V_Base_Pres_In		count
+1 V_Base_Past_In		counted
+1 V_3rdSing_Pres_In		counts
+
+1 V_Inf_Tr			count
+1 V_Pres_Part_Tr		counting
+1 V_Past_Part_Tr		counted
+1 V_Base_Pres_Tr		count
+1 V_Base_Past_Tr		counted
+1 V_3rdSing_Pres_Tr		counts
+
+1 V_Inf_Tr			bring
+1 V_Pres_Part_Tr		bringing
+1 V_Past_Part_Tr		brought
+1 V_Base_Pres_Tr		bring
+1 V_Base_Past_Tr		brought
+1 V_3rdSing_Pres_Tr		brings
+
+1 V_Inf_Tr			dye
+1 V_Pres_Part_Tr		dying
+1 V_Past_Part_Tr		dyed
+1 V_Base_Pres_Tr		dye
+1 V_Base_Past_Tr		dyed
+1 V_3rdSing_Pres_Tr		dyes
+
+1 V_Inf_Tr			trap
+1 V_Pres_Part_Tr		trapping
+1 V_Past_Part_Tr		trapped
+1 V_Base_Pres_Tr		trap
+1 V_Base_Past_Tr		trapped
+1 V_3rdSing_Pres_Tr		traps
+
+1 V_Inf_In			miss
+1 V_Pres_Part_In		missing
+1 V_Past_Part_In		missed
+1 V_Base_Pres_In		miss
+1 V_Base_Past_In		missed
+1 V_3rdSing_Pres_In		misses
+
+1 V_Inf_Tr			bootstrap
+1 V_Pres_Part_Tr		bootstrapping
+1 V_Past_Part_Tr		bootstrapped
+1 V_Base_Pres_Tr		bootstrap
+1 V_Base_Past_Tr		bootstrapped
+1 V_3rdSing_Pres_Tr		bootstraps
+
+1 V_Inf_In			walk
+1 V_Pres_Part_In		walking
+1 V_Past_Part_In		walked
+1 V_Base_Pres_In		walk
+1 V_Base_Past_In		walked
+1 V_3rdSing_Pres_In		walks
+
+1 V_Inf_Tr			walk
+1 V_Pres_Part_Tr		walking
+1 V_Past_Part_Tr		walked
+1 V_Base_Pres_Tr		walk
+1 V_Base_Past_Tr		walked
+1 V_3rdSing_Pres_Tr		walks
+
+1 V_Inf_In			try
+1 V_Pres_Part_In		trying
+1 V_Past_Part_In		tried
+1 V_Base_Pres_In		try
+1 V_Base_Past_In		tried
+1 V_3rdSing_Pres_In		tries
+
+1 V_Inf_Tr			try
+1 V_Pres_Part_Tr		trying
+1 V_Past_Part_Tr		tried
+1 V_Base_Pres_Tr		try
+1 V_Base_Past_Tr		tried
+1 V_3rdSing_Pres_Tr		tries
+
+ 
+#################### Modals ####################
+ 
+# present form
+1 Modal_Pres		shall
+1 Modal_Pres		will
+1 Modal_Pres_Neg	won't
+1 Modal_Pres		may
+1 Modal_Pres		can
+1 Modal_Pres_Neg	cannot
+1 Modal_Pres_Neg	can't
+1 Modal_Pres		must
+
+1 Not			not
+1 Have			have
+ 
+# preterite form
+1 Modal_Past		should
+1 Modal_Past_Neg	shouldn't
+1 Modal_Past		would
+1 Modal_Past_Neg	wouldn't
+1 Modal_Past		might
+1 Modal_Past		could
+1 Modal_Past_Neg 	couldn't
+1 Modal_Past		must
+
+#################### Auxiliaries ####################
+
+1 Aux_3rd	     does
+1 Aux_3rd	     will
+1 Aux		     do
+1 Aux	     	     will
+
+#################### Verb Exceptions ####################
+ 
+# Verb exceptions - being verbs 
+1 Be_Inf	    	  	be
+1 Be_Pres_Part			being
+1 Be_Past_Part			been
+1 Be_1stSing_Pres		am
+1 Be_2ndSing_Pres		are
+1 Be_3rdSing_Pres		is
+1 Be_1stPlur_Pres		are
+1 Be_2ndPlur_Pres		are
+1 Be_3rdPlur_Pres		are
+1 Be_1stSing_Past		was
+1 Be_2ndSing_Past		were
+1 Be_3rdSing_Past		was
+1 Be_1stPlur_Past		were
+1 Be_2ndPlur_Past		were
+1 Be_3rdPlur_Past		were
+
+1 Being_Inf	    	  	be
+1 Being_Pres_Part		being
+1 Being_Past_Part		been
+1 Being_1stSing_Pres		am
+1 Being_2ndSing_Pres		are
+1 Being_3rdSing_Pres		is
+1 Being_1stPlur_Pres		are
+1 Being_2ndPlur_Pres		are
+1 Being_3rdPlur_Pres		are
+1 Being_1stSing_Past		was
+1 Being_2ndSing_Past		were
+1 Being_3rdSing_Past		was
+1 Being_1stPlur_Past		were
+1 Being_2ndPlur_Past		were
+1 Being_3rdPlur_Past		were
+
+1 Being_Inf			feel
+1 Being_Pres_Part		feeling
+1 Being_Past_Part		felt
+1 Being_Base_Pres		feel
+1 Being_Base_Past		felt
+1 Being_3rdSing_Pres		feels
+
+1 Causal_Inf			get
+1 Causal_Pres_Part		getting
+1 Causal_Past_Part		gotten
+1 Causal_Base_Pres		get
+1 Causal_Base_Past		got
+1 Causal_3rdSing_Pres		gets
+ 
+# Verb exceptions - expressive verbs
+ 
+1 Exp_Inf			know
+1 Exp_Pres_Part		knowing
+1 Exp_Past_Part		known
+1 Exp_Base_Pres		know
+1 Exp_Base_Past		knew
+1 Exp_3rdSing_Pres		knows
+ 
+1 Exp_Inf			think
+1 Exp_Pres_Part		thinking
+1 Exp_Past_Part		thought
+1 Exp_Base_Pres		think
+1 Exp_Base_Past		thought
+1 Exp_3rdSing_Pres		thinks
+
+1 Do_Inf				do
+1 Do_Pres_Part			doing
+1 Do_Past_Part			done
+1 Do_Base_Pres			do
+1 Do_Base_Past			did
+1 Do_3rdSing_Pres			does
+ 
+#################### Punctuation ####################
+ 
+1 Comma		     ,
+1 Punc		     .
+1 PuncQ		     ?
+1 Punc		     !
+ 
+#################### Prepositions ####################
+ 
+1 Prep		     aboard
+1 Prep		     about
+1 Prep		     above
+1 Prep		     across
+1 Prep		     after
+1 Prep		     against
+1 Prep		     along
+1 Prep		     alongside
+1 Prep		     amid
+1 Prep		     amidst
+1 Prep		     among
+1 Prep		     amongst
+1 Prep		     around
+1 Prep		     as
+1 Prep		     aside
+1 Prep		     at
+1 Prep		     atop
+1 Prep		     before
+1 Prep		     behind
+1 Prep		     below
+1 Prep		     beneath
+1 Prep		     beside
+1 Prep		     between
+1 Prep		     beyond
+1 Prep		     by
+1 Prep		     for
+1 Prep		     from
+1 Prep		     in
+1 Prep		     inside
+1 Prep		     into
+1 Prep		     near
+1 Prep		     of
+1 Prep		     off
+1 Prep		     on
+1 Prep		     onto
+1 Prep		     opposite
+1 Prep		     outside
+1 Prep		     over
+1 Prep		     past
+1 Prep		     round
+1 Prep		     through
+1 Prep		     throughout
+1 Prep		     to
+1 Prep		     toward
+1 Prep		     towards
+1 Prep		     under
+1 Prep		     underneath
+1 Prep		     upon
+1 Prep		     via
+1 Prep		     with
+1 Prep		     within
+1 Prep		     without
+1 Prep		     like
+ 
+#################### Misc ####################
+ 
+1 File_Addr		     fs/binfmt_efl.c
+1 Web_Addr		     web.mit.edu/geofft/www
+1 Quote			     '
+1 Quote			     "
+
+1 Of		     of

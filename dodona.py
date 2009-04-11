@@ -24,7 +24,6 @@ while True:
     m = receive_from_subs(True)
     (mess, sender) = m
     sender = sender.partition("@")[0]
-    mess = mess.lower()
     # if the session with this sender does not
     # already exist, then create it
     if not sessions.has_key(sender):
@@ -37,7 +36,7 @@ while True:
     # ask another question
     if exit == False:
         sessions[sender].clear()
-        send('Please ask me another question, or type \"exit\" to end the session.', sender)
+        #send('Please ask me another question, or type \"exit\" to end the session.', sender)
     # if the user wants to exit, then delete
     # the session
     elif exit == True:
