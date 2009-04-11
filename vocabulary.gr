@@ -343,7 +343,7 @@
 1 Subord_Conj		so that
 1 Subord_Conj		therefore
 1 Subord_Conj		because
-Q1 Subord_Conj		than
+1 Subord_Conj		than
  
 # Correlative conjunctions
 1 Corr_Conj_First		both
@@ -845,8 +845,9 @@ Q1 Subord_Conj		than
  
 #################### Misc ####################
  
-1 Misc		     fs/binfmt_efl.c
-1 Misc		     web.mit.edu/geofft/www
-1 Misc		     '
+1 File_Addr		     fs/binfmt_efl.c
+1 Web_Addr		     web.mit.edu/geofft/www
+1 Quote			     '
+1 Quote			     "
 
 1 Of		     of
