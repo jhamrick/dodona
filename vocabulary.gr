@@ -27,7 +27,6 @@
 1 Program		Zephyr
 1 Program		SkyNet
 1 Program		UNIX
-1 Program		Itanium
 1 Program		Intrepid
 
 1 Command		\def
@@ -107,6 +106,7 @@
 1 Noun		suggestion
 1 Noun		snark
 1 Noun		file
+1 Noun		Itanium
  
 # Plural nouns
 1 Noun_Pl		command
@@ -167,6 +167,7 @@
 1 Noun_Pl		suggestions
 1 Noun_Pl		snark
 1 Noun_Pl		files
+1 Noun_Pl		Itaniums
  
 #################### Pronouns ####################
  
@@ -341,10 +342,8 @@
 1 Subord_Conj		although
 1 Subord_Conj		if
 1 Subord_Conj		unless
-1 Subord_Conj		so that
 1 Subord_Conj		therefore
 1 Subord_Conj		because
-1 Subord_Conj		than
  
 # Correlative conjunctions
 1 Corr_Conj_First		both
@@ -357,6 +356,8 @@
 1 Corr_Conj_Last		or
 1 Corr_Conj_Last		but
 1 Corr_Conj_Last		but also
+1 Corr_Conj_First		if
+1 Corr_Conj_Last		then
 
 1 Noun_Conj			and
 1 Noun_Conj			or
@@ -705,6 +706,13 @@
 1 V_Base_Past_In		called
 1 V_3rdSing_Pres_In		calls
  
+1 V_Inf_In			think
+1 V_Pres_Part_In		thinking
+1 V_Past_Part_In		thought
+1 V_Base_Pres_In		think
+1 V_Base_Past_In		thought
+1 V_3rdSing_Pres_In		thinks
+ 
 #################### Modals ####################
  
 # present form
@@ -809,6 +817,13 @@
 1 Do_Base_Pres			do
 1 Do_Base_Past			did
 1 Do_3rdSing_Pres		does
+
+1 Go_Inf			go
+1 Go_Pres_Part			going
+1 Go_Past_Part			gone
+1 Go_Base_Pres			go
+1 Go_Base_Past			went
+1 Go_3rdSing_Pres		goes
  
 #################### Punctuation ####################
  
@@ -859,6 +874,7 @@
 1 Prep		     over
 1 Prep		     past
 1 Prep		     round
+1 Prep		     than
 1 Prep		     through
 1 Prep		     throughout
 1 Prep		     to
@@ -881,3 +897,4 @@
 1 Quote_Double		     "
 
 1 Of		     of
+1 To		     to
