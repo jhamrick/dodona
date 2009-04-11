@@ -26,13 +26,12 @@ def find_object(parse, subject):
         return None
 
     lhs = parse.productions()[0].lhs()
-    if lhs == NT("NP_Obj"):
-# lhs == NT("NP") or \
-#        lhs == NT("NP_1st") or \
-#        lhs == NT("NP_2nd") or \
-#        lhs == NT("NP_3rd") or \
-#        lhs == NT("NP_3rd_Pl") or \
-#        lhs == NT("NP_Obj"):
+    if lhs == NT("NP") or \
+       lhs == NT("NP_1st") or \
+       lhs == NT("NP_2nd") or \
+       lhs == NT("NP_3rd") or \
+       lhs == NT("NP_3rd_Pl") or \
+       lhs == NT("NP_Obj"):
         return parse
 
     for subtree in parse:

@@ -31,22 +31,40 @@ class Session:
             - a single key
             - the status "d:none", if there are none
         """
+        if d == None: d = self.topics
         parse = parsetree.parse_sent(mess)
         if isinstance(parse, tuple):
             return "d:none", parse[1]
         
         sub = find_subject(parse)
         print sub
-        obj = find_object(parse, sub.leaves())
+        if sub:
+            obj = find_object(parse, sub.leaves())
+        else:
+            obj = find_object(parse, None)
         print obj
         verb = find_verb(parse)
         print verb
 
-        sub_prods = sub.productions()
-        if sub_prods[len(sub_prods)-1].lhs().symbol().startswith("Pers_Pro"):
-            return " ".join(obj.leaves())
+        if sub:
+            sub_prods = sub.productions()
+            if obj and not d.has_key(" ".join(obj.leaves())):
+                obj = None
+            if sub and not d.has_key(" ".join(sub.leaves())):
+                sub = None
+
+            if sub_prods[len(sub_prods)-1].lhs().symbol().startswith("Pers_Pro") and obj:
+                return " ".join(obj.leaves())
+            else:
+                if sub:
+                    return " ".join(sub.leaves())
+                else:
+                    return "d:none", tuple()
         else:
-            return " ".join(sub.leaves())        
+            if obj:
+                return " ".join(obj.leaves())
+            else:
+                return "d:none", tuple()
 
     def add_data(self, mess, newtopic):
         """
@@ -213,9 +231,9 @@ class Session:
 
         # if the user greets Dodona, then respond
         # in kind.
-        if "hi" in m or \
-                "hey" in m or \
-                "hello" in m != -1:
+        if "Hi" in m or \
+                "Hey" in m or \
+                "Hello" in m != -1:
             send("Hello, " + name + "!")
             return None
         
