@@ -4,6 +4,8 @@ import SocketServer
 
 socket.setdefaulttimeout(10)
 
+hostServerIP="18.111.23.79"
+
 class MyTCPHandler(SocketServer.BaseRequestHandler):
     """
     The RequestHandler class for our server.
@@ -12,6 +14,10 @@ class MyTCPHandler(SocketServer.BaseRequestHandler):
     override the handle() method to implement communication to the
     client.
     """
+
+    def __init__(self):
+        topics = load_topics("doctopics/topics.xml")
+        sessions['webDodona']=Session('webDododna',topics)
 
     def handle(self):
         """recieves statement from the user """
@@ -40,8 +46,8 @@ class MyTCPHandler(SocketServer.BaseRequestHandler):
 class ThreadedTCPServer(SocketServer.ThreadingMixIn, SocketServer.TCPServer):
     pass
 
-if __name__ == "__main__":
-    HOST, PORT = "18.111.23.79", 9999
+def startdaemon():
+    HOST, PORT = hostServerIP, 9999
 
     # Create the server, binding to localhost on port 9999
     server = ThreadedTCPServer((HOST, PORT), MyTCPHandler)
@@ -54,5 +60,8 @@ if __name__ == "__main__":
     #server_thread.start()
     print "Server daemon started..."
     server.serve_forever()
+
+if __name__ == "__main__":
+    startdaemon()
 
 
