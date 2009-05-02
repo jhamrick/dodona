@@ -1,19 +1,21 @@
 1 START			       S
 
 1 S			       Name Comma Ind_Clause_Ques PuncQ
+1 S			       Name Comma Ind_Clause_Ques_Aux PuncQ
 1 S			       Name Comma Ind_Clause Punc
 1 S			       Ind_Clause Punc
 1 S			       Ind_Clause_Ques PuncQ
+1 S			       Ind_Clause_Ques_Aux PuncQ
 1 S			       Ind_Clause Comma Name PuncQ
 1 S			       Ind_Clause_Ques Comma Name PuncQ
+1 S			       Ind_Clause_Ques_Aux Comma Name PuncQ
 1 S			       Ind_Clause Comma Subord_Conj Ind_Clause Punc
 1 S			       Name Comma Ind_Clause Comma Subord_Conj Ind_Clause Punc
 
 1 Ind_Clause_Ques	       Interrog_Det VP_3rd
 1 Ind_Clause_Ques	       Interrog_Det VP_3rd Prep
-1 Ind_Clause_Ques	       Interrog_Det Aux Ind_Clause_Inf_2nd 		
-1 Ind_Clause_Ques	       Interrog_Proadverb Aux Ind_Clause_Inf
-1 Ind_Clause_Ques	       Interrog_Proadverb Aux_3rd Ind_Clause_Inf_3rd
+1 Ind_Clause_Ques	       Interrog_Det Ind_Clause_Ques_Aux		
+1 Ind_Clause_Ques	       Interrog_Proadverb Ind_Clause_Ques_Aux
 1 Ind_Clause_Ques	       Interrog_Proadverb Interrog_Clause
 1 Ind_Clause_Ques	       Interrog_Proadverb AdjP Aux Ind_Clause_Inf
 1 Ind_Clause_Ques	       Interrog_Proadverb AdjP Aux_3rd Ind_Clause_Inf_3rd
@@ -22,6 +24,10 @@
 1 Ind_Clause_Ques	       Interrog_Proadverb Aux 
 1 Ind_Clause_Ques	       Interrog_Det Modal_Past Ind_Clause_Inf
 1 Ind_Clause_Ques	       Interrog_Det NP Modal_Past Ind_Clause_Inf
+
+1 Ind_Clause_Ques_Aux	       Aux Ind_Clause_Inf_2nd
+1 Ind_Clause_Ques_Aux	       Aux Ind_Clause_Inf
+1 Ind_Clause_Ques_Aux	       Aux_3rd Ind_Clause_Inf_3rd
 
 1 Ind_Clause		       NP_1st VP_1st
 1 Ind_Clause		       NP_2nd VP_2nd

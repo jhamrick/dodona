@@ -107,6 +107,9 @@
 1 Noun		snark
 1 Noun		file
 1 Noun		Itanium
+1 Noun		program
+1 Noun		bot
+1 Noun		robot
  
 # Plural nouns
 1 Noun_Pl		command
@@ -168,6 +171,9 @@
 1 Noun_Pl		snark
 1 Noun_Pl		files
 1 Noun_Pl		Itaniums
+1 Noun_Pl		programs
+1 Noun_Pl		robots
+1 Noun_Pl		bots
  
 #################### Pronouns ####################
  
@@ -306,6 +312,7 @@
 1 Adj_State		helpful
 1 Adj_State		open
 1 Adj_State		other
+1 Adj_State		sad
  
 # Directions
 1 Adj_Dir			up
@@ -327,6 +334,7 @@
 1 Adv		     back
 1 Adv		     just
 1 Adv		     best
+1 Adv		     very
  
 #################### Conjunctions ####################
  
@@ -714,6 +722,13 @@
 1 V_Base_Pres_In		think
 1 V_Base_Past_In		thought
 1 V_3rdSing_Pres_In		thinks
+
+1 V_Inf_In			tell
+1 V_Pres_Part_In		telling
+1 V_Past_Part_In		told
+1 V_Base_Pres_In		tell
+1 V_Base_Past_In		told
+1 V_3rdSing_Pres_In		tells
  
 #################### Modals ####################
  
@@ -729,6 +744,7 @@
 
 1 Not			not
 1 Have			have
+1 Not			n't
  
 # preterite form
 1 Modal_Past		should

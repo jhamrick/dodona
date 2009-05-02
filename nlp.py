@@ -3,7 +3,10 @@ from nltk.grammar import ContextFreeGrammar, Production
 from nltk.grammar import Nonterminal as NT
 from nltk.tree import Tree
 
-def find_subject(parse):
+def find_subject(parse, is_question=None):
+    if is_question == None and parse.productions()[-1].lhs() == NT("PuncQ"): is_question = True
+    elif is_question == None: is_question = False
+    print "Is a question?", is_question
     if isinstance(parse, str):
         return None
 
@@ -16,12 +19,15 @@ def find_subject(parse):
         return parse
 
     for subtree in parse:
-        subj = find_subject(subtree)
+        subj = find_subject(subtree, is_question)
         if subj: return subj
 
     return None
 
-def find_object(parse, subject):
+def find_object(parse, subject, is_question=None):
+    if is_question == None and parse.productions()[-1].lhs() == NT("PuncQ"): is_question = True
+    elif is_question == None: is_question = False
+    print "Is a question?", is_question
     if isinstance(parse, str):
         return None
 
@@ -35,12 +41,15 @@ def find_object(parse, subject):
         return parse
 
     for subtree in parse:
-        obj = find_object(subtree, subject)
+        obj = find_object(subtree, subject, is_question)
         if obj and obj.leaves() != subject: return obj
 
     return None
 
-def find_verb(parse):    
+def find_verb(parse, is_question=None):   
+    if is_question == None and parse.productions()[-1].lhs() == NT("PuncQ"): is_question = True
+    elif is_question == None: is_question = False
+    print "Is a question?", is_question 
     if isinstance(parse, str):
         return None
 
@@ -53,7 +62,7 @@ def find_verb(parse):
         return parse
 
     for subtree in parse:
-        verb = find_verb(subtree)
+        verb = find_verb(subtree, is_question)
         if verb: return verb
 
     return None

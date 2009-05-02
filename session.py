@@ -288,19 +288,24 @@ class Session:
         # if the key is a dictionary, then you know it is a
         # topic, and has subtopics.  Ask the user which subtopic
         # they would like to know about.
-        if isinstance(d[key], dict):
-            #key2 = self.AI(mess, d[key])
-            key2 = "d:none"
+        try:
+            if isinstance(d[key], dict):
+                #key2 = self.AI(mess, d[key])
+                key2 = "d:none"
 
-            if key2 == "d:none" or isinstance(key2, list):
-                send("Please pick a topic below, or tell me a new one! (in relation to " + key + ")\n\n" + print_list(d[key].keys()), name)
-                self.memory.push("topic", key)
-                self.memory.push("data", d[key])
-                return None
+                if key2 == "d:none" or isinstance(key2, list):
+                    send("Please pick a topic below, or tell me a new one! (in relation to " + key + ")\n\n" + print_list(d[key].keys()), name)
+                    self.memory.push("topic", key)
+                    self.memory.push("data", d[key])
+                    return None
 
-            else:
-                send(d[key][key2], name)
-                return False
+                else:
+                    send(d[key][key2], name)
+                    return False
+        except:
+            send("Sorry, I don't understand what you are asking me.")
+            return False
+            
 
         # if there is just a single key, then respond with
         # the knowledge which Dodona has about the topic
