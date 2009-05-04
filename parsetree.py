@@ -57,7 +57,7 @@ def parse_sent(sen):
         parse = None
 
     if parse: 
-        print parse[0]
+        for p in parse: print p
         return parse[0]
     else: 
         print "failure"

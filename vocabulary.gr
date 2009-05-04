@@ -729,6 +729,13 @@
 1 V_Base_Pres_In		tell
 1 V_Base_Past_In		told
 1 V_3rdSing_Pres_In		tells
+
+1 V_Inf_Tr			tell
+1 V_Pres_Part_Tr		telling
+1 V_Past_Part_Tr		told
+1 V_Base_Pres_Tr		tell
+1 V_Base_Past_Tr		told
+1 V_3rdSing_Pres_Tr		tells
  
 #################### Modals ####################
  

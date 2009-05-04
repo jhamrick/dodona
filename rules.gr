@@ -430,13 +430,9 @@
 1 After_Verb_Tr		       NP_Obj PP
 1 After_Verb_Tr		       Prep
 1 After_Verb_Tr		       PP
-1 After_Verb_Tr		       PP_No_Prep NP_Obj
-1 After_Verb_Tr		       PP_No_Prep NP_Obj PP
 
 1 After_Verb_In		       Prep
 1 After_Verb_In		       PP
-1 After_Verb_In		       PP_No_Prep
-1 After_Verb_In		       PP_No_Prep PP
 
 1 Verbal_1st_In		       V_1stSing_Pres_In
 1 Verbal_1st_In		       V_1stSing_Past_In
@@ -554,7 +550,6 @@
 1 Verb_As_Noun		       V_Pres_Part_In
 
 1 PP			       Prep NP_Obj
-1 PP_No_Prep		       NP_Obj
 
 1 NP			       NP PP
 1 NP			       NP_1st
