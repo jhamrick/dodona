@@ -5,7 +5,7 @@ import zephyr
 from zephyrUI import send
 from fuzzystack import FuzzyStack
 from helper import print_list, tokenize, integrate_lists, find_partial_key
-from nlp import find_subject, find_object, find_verb 
+from nlp import get_sentence_type, QUESTION, STATEMENT, COMMAND
 from xml_parser import update_files
 import parsetree
 

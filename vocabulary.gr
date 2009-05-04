@@ -736,11 +736,19 @@
 1 V_Base_Pres_Tr		tell
 1 V_Base_Past_Tr		told
 1 V_3rdSing_Pres_Tr		tells
+
+1 V_Inf_Tr			want
+1 V_Pres_Part_Tr		wanting
+1 V_Past_Part_Tr		wanted
+1 V_Base_Pres_Tr		want
+1 V_Base_Past_Tr		wanted
+1 V_3rdSing_Pres_Tr		wants
  
 #################### Modals ####################
  
 # present form
 1 Modal_Pres		shall
+1 Modal_Pres		should
 1 Modal_Pres		will
 1 Modal_Pres_Neg	won't
 1 Modal_Pres		may

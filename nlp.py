@@ -17,7 +17,6 @@ def get_sentence_type(parse):
         return QUESTION
     elif lhs == NT("Ind_Clause") or \
          lhs == NT("Ind_Clause_Pl"):
-        print parse.productions()[0].rhs()
         if parse.productions()[0].rhs()[0] == NT("VP_Inf"):
             return COMMAND
         else:
@@ -26,6 +25,36 @@ def get_sentence_type(parse):
     for subtree in parse:
         type = get_sentence_type(subtree)
         if type: return type
+
+    return None
+
+def find_topic(parse, type=None):
+    if type == None: type = get_sentence_type(parse)
+    if isinstance(parse, str): return None
+
+    tree = parse.productions()[0]
+
+    if type == QUESTION:
+        pass
+
+    elif type == STATEMENT:
+        pass
+
+    elif type == COMMAND:
+        if tree.lhs() == NT("VP_Inf"):
+            rhs = tree.rhs()
+            if rhs[-1] == NT("PP"):
+                return " ".join(parse[-1][-1].leaves())
+            elif \
+               rhs[-1] == NT("After_Verb_Tr") or \
+               rhs[-1] == NT("After_Verb_In") or \
+               rhs[-1] == NT("V_Inf_In_Neg") or \
+               rhs[-1] == NT("VP_Inf"):
+                return find_topic(rhs[-1], type)                
+        else:
+            for subtree in parse:
+                subj = find_topic(subtree, type)
+                if subj: return subj
 
     return None
 
