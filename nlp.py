@@ -2,6 +2,7 @@ from nltk.parse.featurechart import EarleyChartParser
 from nltk.grammar import ContextFreeGrammar, Production
 from nltk.grammar import Nonterminal as NT
 from nltk.tree import Tree
+from parsetree import *
 
 QUESTION = 1
 STATEMENT = 2
@@ -35,7 +36,23 @@ def find_topic(parse, type=None):
     tree = parse.productions()[0]
 
     if type == QUESTION:
-        pass
+        if tree.lhs() == NT("Interrog_Clause"):
+            rhs = tree.rhs()
+            print rhs
+            if rhs[-1] == NT("Passive_Interrog_Tr After_Verb_In"):
+                print "here"
+                return find_topic(rhs[-1], type)
+            if rhs[-1] == NT("Passive_Interrog_In"):
+                return " ".join(parse[-1][-1].leaves())
+            if rhs[-1] == NT("Passive_Interrog_Tr"):
+                return " ".join(parse[-1][-1].leaves())
+            else:
+                return find_topic(rhs[-1], type)
+        else:
+            for subtree in parse:
+                subj = find_topic(subtree, type)
+                if subj: return subj
+
 
     elif type == STATEMENT:
         pass
@@ -57,6 +74,8 @@ def find_topic(parse, type=None):
                 if subj: return subj
 
     return None
+
+
 
 # def find_subject(parse, is_question=None):
 #     if is_question == None and parse.productions()[-1].lhs() == NT("PuncQ"): is_question = True
