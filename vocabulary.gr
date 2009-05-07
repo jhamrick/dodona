@@ -17,6 +17,7 @@
 1 Event		DEFCON
  
 # Programs
+1 Program		scheme
 1 Program		emacs
 1 Program		BarnOwl
 1 Program		Google
@@ -31,6 +32,7 @@
 
 1 Command		\def
 1 Command		\newcommand
+1 Comand		^M
  
 # Organizations
 1 Org		SIPB
@@ -110,8 +112,63 @@
 1 Noun		program
 1 Noun		bot
 1 Noun		robot
+1 Noun		prevention
+1 Noun		removal
+1 Noun		autofill
+1 Noun		autosave
+1 Noun		recovery
+1 Noun		spellcheck
+1 Noun		copy
+1 Noun		key
+1 Noun		mouse
+1 Noun		customization
+1 Noun		function
+1 Noun		file
+1 Noun		menu
+1 Noun		help
+1 Noun		browser
+1 Noun		language
+1 Noun		line
+1 Noun		number
+1 Noun		button
+1 Noun		cursor
+1 Noun		mail
+1 Noun		query
+1 Noun		replacement
+1 Noun		source
+1 Noun		tag
+1 Noun		version
+1 Noun		window
+1 Noun		size
  
 # Plural nouns
+1 Noun_Pl		tags
+1 Noun_Pl		versions
+1 Noun_Pl		windows
+1 Noun_Pl		sizes
+1 Noun_Pl		sources
+1 Noun_Pl		queries
+1 Noun_Pl		replacements
+1 Noun_Pl		cursors
+1 Noun_Pl		mail
+1 Noun_Pl		lines
+1 Noun_Pl		numbers
+1 Noun_Pl		buttons
+1 Noun_Pl		browsers
+1 Noun_Pl		languages
+1 Noun_Pl		functions
+1 Noun_Pl		menus
+1 Noun_Pl		files
+1 Noun_Pl		customizations
+1 Noun_Pl		keys
+1 Noun_Pl		mice
+1 Noun_Pl		copies
+1 Noun_Pl		spellchecks
+1 Noun_Pl		removals
+1 Noun_Pl		autofills
+1 Noun_Pl		autosaves
+1 Noun_Pl		recoveries
+1 Noun_Pl		preventions
 1 Noun_Pl		command
 1 Noun_Pl		lines
 1 Noun_Pl		things
@@ -744,6 +801,76 @@
 1 V_Base_Pres_Tr		want
 1 V_Base_Past_Tr		wanted
 1 V_3rdSing_Pres_Tr		wants
+
+1 V_Inf_Tr			prevent
+1 V_Pres_Part_Tr		preventing
+1 V_Past_Part_Tr		prevented
+1 V_Base_Pres_Tr		prevent
+1 V_Base_Past_Tr		prevented
+1 V_3rdSing_Pres_Tr		prevents
+
+1 V_Inf_Tr			
+1 V_Pres_Part_Tr		
+1 V_Past_Part_Tr		
+1 V_Base_Pres_Tr		
+1 V_Base_Past_Tr		
+1 V_3rdSing_Pres_Tr		
+
+1 V_Inf_Tr			remove
+1 V_Pres_Part_Tr		removing
+1 V_Past_Part_Tr		removed
+1 V_Base_Pres_Tr		remove
+1 V_Base_Past_Tr		removed
+1 V_3rdSing_Pres_Tr		removes
+
+1 V_Inf_Tr			check
+1 V_Pres_Part_Tr		checking
+1 V_Past_Part_Tr		checked
+1 V_Base_Pres_Tr		check
+1 V_Base_Past_Tr		checked
+1 V_3rdSing_Pres_Tr		checks
+
+1 V_Inf_Tr			copy
+1 V_Pres_Part_Tr		copying
+1 V_Past_Part_Tr		copied
+1 V_Base_Pres_Tr		copy
+1 V_Base_Past_Tr		copied
+1 V_3rdSing_Pres_Tr		copies
+
+1 V_Inf_Tr			paste
+1 V_Pres_Part_Tr		pasting
+1 V_Past_Part_Tr		pasted
+1 V_Base_Pres_Tr		paste
+1 V_Base_Past_Tr		pasted
+1 V_3rdSing_Pres_Tr		pastes
+
+1 V_Inf_Tr			customize
+1 V_Pres_Part_Tr		customizing
+1 V_Past_Part_Tr		customized
+1 V_Base_Pres_Tr		customize
+1 V_Base_Past_Tr		customized
+1 V_3rdSing_Pres_Tr		customizes
+
+1 V_Inf_Tr			disable
+1 V_Pres_Part_Tr		disabling
+1 V_Past_Part_Tr		disabled
+1 V_Base_Pres_Tr		disable
+1 V_Base_Past_Tr		disabled
+1 V_3rdSing_Pres_Tr		disables
+
+1 V_Inf_Tr			help
+1 V_Pres_Part_Tr		helping
+1 V_Past_Part_Tr		helped
+1 V_Base_Pres_Tr		help
+1 V_Base_Past_Tr		helped
+1 V_3rdSing_Pres_Tr		helps
+
+1 V_Inf_Tr			move
+1 V_Pres_Part_Tr		moving
+1 V_Past_Part_Tr		moved
+1 V_Base_Pres_Tr		move
+1 V_Base_Past_Tr		moved
+1 V_3rdSing_Pres_Tr		moves
  
 #################### Modals ####################
  
