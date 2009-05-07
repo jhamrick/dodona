@@ -407,7 +407,7 @@
 # Determiners which can work as an object
 1 Interrog_Obj	    	which
 1 Interrog_Obj		whose
-1 Interrog_Obj		whatu
+1 Interrog_Obj		what
 
 # Determiners
 1 Interrog_Det		which
@@ -415,6 +415,7 @@
 1 Interrog_Det		who
 1 Interrog_Det		when
 1 Interrog_Det		what
+1 Interrog_Det		where
  
 # Pronouns
 1 Interrog_Pronoun	who
