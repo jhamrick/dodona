@@ -28,7 +28,7 @@ emacs -geometry 132x48+50+100 &amp;
 You can also resize the window after placing it: see the stock answer `How to MOVE or resize windows' under the XWINDOWS topic in the olc_answers program.
 	</answer>
 
-	<answer question="disable menu">
+	<answer question="disabling the menu">
 To disable the menu bar, place the following line in your .emacs file:
 (menu-bar-mode -1)
 To disable the scrollbar, use the following line:
@@ -82,7 +82,7 @@ To move to the beginning of the buffer:		ESC &lt;	or   M-&lt;
 Notice how most of the commands are mnemonic.  
 	</answer>
 
-	<answer question="copy and paste : mouse">
+	<answer question="copy and paste using the mouse">
 The cut and paste behavior of Emacs is similar to most other standard X applications.  
 
   - Dragging with the LEFT mouse button now puts the selected region in the kill ring so you can paste it into other X applications. The old method of clicking at the beginning with the LEFT mouse button and at the end with the RIGHT mouse button still works, but the cursor will end up at the end of the region instead of at the beginning.
@@ -94,7 +94,7 @@ The cut and paste behavior of Emacs is similar to most other standard X applicat
   - As before, clicking the RIGHT mouse button in the same place kills the region selected.
 	</answer>
 
-	<answer question="copy and paste : keys">
+	<answer question="copy and paste using keys">
 Ctrl-&lt;space&gt; or Ctrl-@:  Either of these commands will set a mark.  A mark is an or an invisible pointer which will be used to mark the starting character of the region you wish to delete or move.  If you place the mark in the wrong place, you can set it elsewhere with the same command.
 
 Ctrl-w: This command will kill all of the text between the mark location and the current emacs cursor position. This text can be retrieved with the following command unless you kill another block of text.
@@ -115,7 +115,7 @@ To disable this behavior, place the following lines in your .emacs file:
    (setq interprogram-paste-function nil)
 	</answer>
 
-	<answer question="query replace">
+	<answer question="query replacement">
 To replace a character string everywhere that it occurs within the current buffer, there is two ways to do it
 
         M-x replace-string
@@ -177,7 +177,7 @@ If you want Emacs to be in Auto Fill mode every time you use it, then you need t
 The first line makes Text Mode the default for all files without another defined mode (such as C Mode).  (You can leave that line out if you wish.)  The other lines make Auto Fill mode the default for all Text Mode buffers, and make the lines break at the 72nd column.
 	</answer>
 
-	<answer question="autosave and recover">
+	<answer question="autosave and recovery">
 Unless you have specified otherwise in your '.emacs' file, Emacs will periodically save the file you are editing into the /var/tmp directory on your workstation.
 
 If:
@@ -222,7 +222,7 @@ This is so you can recover from the old auto-save file again, just in case you c
 Now look at the two files, resume.tex and resume.recover, and take the one you like, or parts of both.
 	</answer>
 
-	<answer question="customization : file">
+	<answer question="customization files">
 To customize Emacs, you need to write some Lisp code.  It's not really that difficult.  The code should be put in a file named '.emacs' in your home directory.  Every time Emacs starts up, it automatically reads any Lisp code you have put into your '.emacs' file.
 
 To define a key binding, use an expression of this form:
@@ -249,7 +249,7 @@ The section below gives some typical customizations you might perform in your '.
 (display-time) - Display current time and load average on mode line.
 	</answer>
 
-	<answer question="customization : X functions">
+	<answer question="customization of X functions">
 Any X-related code that you want to put in your .emacs file should be enclosed in elisp which causes it to be called only if you're on an X workstation, and not if you're dialed in, like so: 
 
         (if window-system-version
@@ -276,7 +276,7 @@ For example, you might set the following three function keys:
    (global-set-key [f3] 'discuss)
 	</answer>
 
-	<answer question="check spelling">
+	<answer question="spellcheck">
 Several options are available for users who want emacs to check the spelling of their documents.    
 
 The first is:
@@ -378,7 +378,7 @@ That will give you backspace capabilities in everything but emacs.  In emacs, ad
 That will fix the backspace key, and set "M-h" to give you help (regularly c-h does that).
 	</answer>
 
-	<answer question="^M : prevention">
+	<answer question="^M prevention">
 To prevent "^M" from appearing at the ends of lines in emacs shell mode, run these two commands:
 
 	unset lineedit edit
@@ -389,7 +389,7 @@ You can also have this done automatically every time you start up a shell mode b
 	unset lineedit edit; stty nl -echo
 	</answer>
 
-	<answer question="^M: remove">
+	<answer question="^M removal">
 To remove '^M' (control-M) characters from the end of each line in a file, you can use a shell script called 'clean'.
 
 To use the shell script, you first need to attach the Consultants' Software Library to your workstation.  Use this command:

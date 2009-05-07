@@ -5,7 +5,7 @@ import zephyr
 from zephyrUI import send
 from fuzzystack import FuzzyStack
 from helper import print_list, tokenize, integrate_lists, find_partial_key
-from nlp import get_sentence_type, QUESTION, STATEMENT, COMMAND
+from nlp import get_sentence_type, find_topic, QUESTION, STATEMENT, COMMAND
 from xml_parser import update_files
 import parsetree
 
@@ -35,36 +35,51 @@ class Session:
         parse = parsetree.parse_sent(mess)
         if isinstance(parse, tuple):
             return "d:none", parse[1]
+
+        type = get_sentence_type(parse)
+        topic = find_topic(parse, type)
+
+        if topic:
+            print "TOPIC:", " ".join(topic.leaves())
+            return " ".join(topic.leaves())
+        else:
+            print "NO TOPIC FOUND"
+            return "d:none", tuple()
+
+#         if d == None: d = self.topics
+#         parse = parsetree.parse_sent(mess)
+#         if isinstance(parse, tuple):
+#             return "d:none", parse[1]
         
-        sub = find_subject(parse)
-        print sub
-        if sub:
-            obj = find_object(parse, sub.leaves())
-        else:
-            obj = find_object(parse, None)
-        print obj
-        verb = find_verb(parse)
-        print verb
+#         sub = find_subject(parse)
+#         print sub
+#         if sub:
+#             obj = find_object(parse, sub.leaves())
+#         else:
+#             obj = find_object(parse, None)
+#         print obj
+#         verb = find_verb(parse)
+#         print verb
 
-        if sub:
-            sub_prods = sub.productions()
-            if obj and not d.has_key(" ".join(obj.leaves())):
-                obj = None
-            if sub and not d.has_key(" ".join(sub.leaves())):
-                sub = None
+#         if sub:
+#             sub_prods = sub.productions()
+#             if obj and not d.has_key(" ".join(obj.leaves())):
+#                 obj = None
+#             if sub and not d.has_key(" ".join(sub.leaves())):
+#                 sub = None
 
-            if sub_prods[len(sub_prods)-1].lhs().symbol().startswith("Pers_Pro") and obj:
-                return " ".join(obj.leaves())
-            else:
-                if sub:
-                    return " ".join(sub.leaves())
-                else:
-                    return "d:none", tuple()
-        else:
-            if obj:
-                return " ".join(obj.leaves())
-            else:
-                return "d:none", tuple()
+#             if sub_prods[len(sub_prods)-1].lhs().symbol().startswith("Pers_Pro") and obj:
+#                 return " ".join(obj.leaves())
+#             else:
+#                 if sub:
+#                     return " ".join(sub.leaves())
+#                 else:
+#                     return "d:none", tuple()
+#         else:
+#             if obj:
+#                 return " ".join(obj.leaves())
+#             else:
+#                 return "d:none", tuple()
 
     def add_data(self, mess, newtopic):
         """
