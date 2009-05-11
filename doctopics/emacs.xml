@@ -165,7 +165,7 @@ or
         M-=
 	</answer>
 
-	<answer question="auto fill">
+	<answer question="autofill">
 If you want Emacs to be in Auto Fill mode every time you use it, then you need to put the following lines into a file named ~/.emacs:
 
 (setq default-major-mode 'text-mode)

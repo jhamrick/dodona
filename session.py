@@ -34,48 +34,49 @@ class Session:
         if d == None: d = self.topics
         parse = parsetree.parse_sent(mess)
         if isinstance(parse, tuple):
-            return "d:none", parse[1]
-
-        type = get_sentence_type(parse)
-        topic = find_topic(parse, type)
-
-        if topic:
-            compound = find_compound_noun(topic)
-            print "TOPIC:", " ".join(topic.leaves())
-            if compound:
-                c = compound.leaves()
-                if d.has_key(c[0]) and isinstance(d[c[0]], dict):
-                    topic = c[0]
-                    subtopic = " ".join(c[1:])
-                    if d[topic].has_key(subtopic):
-                        ans = d[topic][subtopic]
-                    else:
-                        ans = "Sorry, I know about " + topic + ", but I don't know about " + subtopic + "."
-                elif d.has_key(c[0]):
-                    ans = d[c[0]]
-                else:
-                    if type == QUESTION:
-                        ans = "Sorry, I don't know what you are asking me."
-                    else:
-                        ans = "Sorry, I don't know what you are saying."       
-            else:
-                topic = " ".join(topic.leaves())
-                if d.has_key(topic):
-                    if isinstance(d[topic], dict):
-                        ans = print_list(d[topic].keys())
-                    else:
-                        ans = d[topic]
-                else:
-                    if type == QUESTION:
-                        ans = "Sorry, I don't know what you are asking me."
-                    else:
-                        ans = "Sorry, I don't know what you are saying."
+            ans = "Sorry, I don't understand the following words: " + str(parse[0])
         else:
-            if type == QUESTION:
-                ans = "Sorry, I don't know what you are asking me."
-            else:
-                ans = "Sorry, I don't know what you are saying."
+            type = get_sentence_type(parse)
+            topic = find_topic(parse, type)
 
+            if topic:
+                compound = find_compound_noun(topic)
+                print "TOPIC:", " ".join(topic.leaves())
+                if compound:
+                    c = compound.leaves()
+                    if d.has_key(c[0]) and isinstance(d[c[0]], dict):
+                        topic = c[0]
+                        subtopic = " ".join(c[1:])
+                        if d[topic].has_key(subtopic):
+                            ans = d[topic][subtopic]
+                        else:
+                            ans = "Sorry, I know about " + topic + ", but I don't know about " + subtopic + "."
+                    elif d.has_key(c[0]):
+                        ans = d[c[0]]
+                    else:
+                        if type == QUESTION:
+                            ans = "Sorry, I don't know what you are asking me."
+                        else:
+                            ans = "Sorry, I don't know what you are saying."       
+                else:
+                    topic = " ".join(topic.leaves())
+                    if d.has_key(topic):
+                        if isinstance(d[topic], dict):
+                            ans = "Multiple keywords match your query.  What did you mean to ask about?\n\n" + print_list(d[topic].keys())
+                        else:
+                            ans = d[topic]
+                    else:
+                        if type == QUESTION:
+                            ans = "Sorry, I don't know what you are asking me."
+                        else:
+                            ans = "Sorry, I don't know what you are saying."
+            else:
+                if type == QUESTION:
+                    ans = "Sorry, I don't know what you are asking me."
+                else:
+                    ans = "Sorry, I don't know what you are saying."
+
+        print ans
         return ans
 
 

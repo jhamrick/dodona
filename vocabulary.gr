@@ -32,7 +32,7 @@
 
 1 Command		\def
 1 Command		\newcommand
-1 Comand		^M
+1 Command		^M
  
 # Organizations
 1 Org		SIPB
@@ -140,10 +140,18 @@
 1 Noun		version
 1 Noun		window
 1 Noun		size
+1 Noun		backspace
+1 Noun		fill
+1 Noun		auto-fill
+1 Noun		auto-save
  
 # Plural nouns
 
+1 Noun_Pl		auto-saves
+1 Noun_Pl		auto-fills
 1 Noun_Pl		tags
+1 Noun_Pl		autofills
+1 Noun_Pl		backspaces
 1 Noun_Pl		versions
 1 Noun_Pl		windows
 1 Noun_Pl		sizes
@@ -166,7 +174,6 @@
 1 Noun_Pl		copies
 1 Noun_Pl		spellchecks
 1 Noun_Pl		removals
-1 Noun_Pl		autofills
 1 Noun_Pl		autosaves
 1 Noun_Pl		recoveries
 1 Noun_Pl		preventions
@@ -232,6 +239,7 @@
 1 Noun_Pl		programs
 1 Noun_Pl		robots
 1 Noun_Pl		bots
+1 Noun_Pl		fills
  
 #################### Pronouns ####################
  
@@ -371,6 +379,7 @@
 1 Adj_State		open
 1 Adj_State		other
 1 Adj_State		sad
+1 Adj_State		auto
  
 # Directions
 1 Adj_Dir			up
@@ -810,12 +819,12 @@
 1 V_Base_Past_Tr		prevented
 1 V_3rdSing_Pres_Tr		prevents
 
-1 V_Inf_Tr			
-1 V_Pres_Part_Tr		
-1 V_Past_Part_Tr		
-1 V_Base_Pres_Tr		
-1 V_Base_Past_Tr		
-1 V_3rdSing_Pres_Tr		
+1 V_Inf_Tr			fill
+1 V_Pres_Part_Tr		filling
+1 V_Past_Part_Tr		filled
+1 V_Base_Pres_Tr		fill
+1 V_Base_Past_Tr		filled
+1 V_3rdSing_Pres_Tr		fills
 
 1 V_Inf_Tr			remove
 1 V_Pres_Part_Tr		removing
