@@ -41,7 +41,26 @@ def find_topic(parse, type=None):
         for i in xrange(len(tree)):
             if tree[i].node == "Interrog_Clause":
                 for j in xrange(len(tree[i])):
+                    print tree[i][j].node
                     if tree[i][j].node == "Passive_Interrog_In":
+                        for k in xrange(len(tree[i][j])):
+                           if re.match("^NP_.*$", tree[i][j][k].node):
+                                return tree[i][j][k].leaves()[0]
+                    if tree[i][j].node == "Passive_Interrog_Tr":
+                        
+                        for k in xrange(len(tree[i][j])):
+                           if re.match("^NP_.*$", tree[i][j][k].node):
+                                return tree[i][j][k].leaves()[0]
+
+            if tree[i].node == "Ind_Clause_Ques_Aux":
+                for j in xrange(len(tree[i])):
+                    if tree[i][j].node == "Ind_Clause_Inf":
+                        
+                        for k in xrange(len(tree[i][j])):
+                           if re.match("^NP_.*$", tree[i][j][k].node):
+                                return tree[i][j][k].leaves()[0]
+                    if tree[i][j].node == "Passive_Interrog_Tr":
+                        print "here"
                         for k in xrange(len(tree[i][j])):
                            if re.match("^NP_.*$", tree[i][j][k].node):
                                 return tree[i][j][k].leaves()[0]
@@ -58,7 +77,6 @@ def find_topic(parse, type=None):
                 if subj: return subj
 
     elif type == COMMAND:
-        #print tree
         if tree.lhs() == NT("VP_Inf"):
             rhs = tree.rhs()
             if rhs[-1] == NT("PP"):
