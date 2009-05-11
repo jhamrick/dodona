@@ -3,6 +3,7 @@ from nltk.grammar import ContextFreeGrammar, Production
 from nltk.grammar import Nonterminal as NT
 from nltk.tree import Tree
 from parsetree import *
+import re
 
 QUESTION = 1
 STATEMENT = 2
@@ -10,7 +11,7 @@ COMMAND = 3
 
 def get_sentence_type(parse):
     if isinstance(parse, str):
-        return 0
+        return None
 
     lhs = parse.productions()[0].lhs()
     if lhs == NT("Ind_Clause_Ques") or \
@@ -27,55 +28,42 @@ def get_sentence_type(parse):
         type = get_sentence_type(subtree)
         if type: return type
 
-    return 0
+    return None
 
 def find_topic(parse, type=None):
     if type == None: type = get_sentence_type(parse)
     if isinstance(parse, str): return None
+    #print parse
+    #tree = parse.productions()[0]
+    tree = parse[0]
 
-    tree = parse.productions()[0]
-    
+
     if type == QUESTION:
-        if tree.lhs() == NT("Interrog_Clause"):
-            rhs = tree.rhs()
-            print rhs
-            if rhs[-1] == NT("Passive_Interrog_Tr After_Verb_In"):
-                print "here"
-                return find_topic(rhs[-1], type)
-            if rhs[-1] == NT("Passive_Interrog_In"):
-                return " ".join(parse[-1][-1].leaves())
-            if rhs[-1] == NT("Passive_Interrog_Tr"):
-                return " ".join(parse[-1][-1].leaves())
-            else:
-                return find_topic(rhs[-1], type)
-        else:
-            for subtree in parse:
-                subj = find_topic(subtree, type)
-                if subj: return subj
+        
+        for i in xrange(len(tree)):
+            if tree[i].node == "Interrog_Clause":
+                for j in xrange(len(tree[i])):
+                    if tree[i][j].node == "Passive_Interrog_In":
+                        for k in xrange(len(tree[i][j])):
+                           if re.match("^NP_.*$", tree[i][j][k].node)
+                                return tree[i][j][k].leaves()[0]
 
 
     elif type == STATEMENT:
-        if tree.lhs() == NT("VP_1st"):
-            rhs = tree.rhs()
-            if rhs[-1] == NT("After_Verb_Tr") or \
-               rhs[-1] == NT("After_Verb_In"):
-                return parse[-1][-1]
-        else:
-            for subtree in parse:
-                subj = find_topic(subtree, type)
-                if subj: return subj
+        pass
 
     elif type == COMMAND:
         if tree.lhs() == NT("VP_Inf"):
+            print "command!"
             rhs = tree.rhs()
             if rhs[-1] == NT("PP"):
-                return parse[-1][-1]
+                return " ".join(parse[-2][-1].leaves())
             elif \
                rhs[-1] == NT("After_Verb_Tr") or \
                rhs[-1] == NT("After_Verb_In") or \
                rhs[-1] == NT("V_Inf_In_Neg") or \
                rhs[-1] == NT("VP_Inf"):
-                return find_topic(parse[-1][-1], type)                
+                return find_topic(rhs[-1], type)                
         else:
             for subtree in parse:
                 subj = find_topic(subtree, type)
