@@ -83,3 +83,17 @@ def find_topic(parse, type=None):
                 if subj: return subj
 
     return None
+
+def find_compound_noun(parse):
+    if isinstance(parse, str): return None
+    tree = parse.productions()[0]
+
+    if tree.lhs() == NT("CompoundNoun") or \
+       tree.lhs() == NT("CompoundNoun_Pl"):
+        return parse
+    else:
+        for subtree in parse:
+            c = find_compound_noun(subtree)
+            if c: return c
+    
+    return None

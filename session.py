@@ -5,7 +5,7 @@ import zephyr
 from zephyrUI import send
 from fuzzystack import FuzzyStack
 from helper import print_list, tokenize, integrate_lists, find_partial_key
-from nlp import get_sentence_type, find_topic, QUESTION, STATEMENT, COMMAND
+from nlp import get_sentence_type, find_topic, find_compound_noun, QUESTION, STATEMENT, COMMAND
 from xml_parser import update_files
 import parsetree
 
@@ -40,46 +40,44 @@ class Session:
         topic = find_topic(parse, type)
 
         if topic:
+            compound = find_compound_noun(topic)
             print "TOPIC:", " ".join(topic.leaves())
-            return " ".join(topic.leaves())
+            if compound:
+                c = compound.leaves()
+                if d.has_key(c[0]) and isinstance(d[c[0]], dict):
+                    topic = c[0]
+                    subtopic = " ".join(c[1:])
+                    if d[topic].has_key(subtopic):
+                        ans = d[topic][subtopic]
+                    else:
+                        ans = "Sorry, I know about " + topic + ", but I don't know about " + subtopic + "."
+                elif d.has_key(c[0]):
+                    ans = d[c[0]]
+                else:
+                    if type == QUESTION:
+                        ans = "Sorry, I don't know what you are asking me."
+                    else:
+                        ans = "Sorry, I don't know what you are saying."       
+            else:
+                topic = " ".join(topic.leaves())
+                if d.has_key(topic):
+                    if isinstance(d[topic], dict):
+                        ans = print_list(d[topic].keys())
+                    else:
+                        ans = d[topic]
+                else:
+                    if type == QUESTION:
+                        ans = "Sorry, I don't know what you are asking me."
+                    else:
+                        ans = "Sorry, I don't know what you are saying."
         else:
-            print "NO TOPIC FOUND"
-            return "d:none", tuple()
+            if type == QUESTION:
+                ans = "Sorry, I don't know what you are asking me."
+            else:
+                ans = "Sorry, I don't know what you are saying."
 
-#         if d == None: d = self.topics
-#         parse = parsetree.parse_sent(mess)
-#         if isinstance(parse, tuple):
-#             return "d:none", parse[1]
-        
-#         sub = find_subject(parse)
-#         print sub
-#         if sub:
-#             obj = find_object(parse, sub.leaves())
-#         else:
-#             obj = find_object(parse, None)
-#         print obj
-#         verb = find_verb(parse)
-#         print verb
+        return ans
 
-#         if sub:
-#             sub_prods = sub.productions()
-#             if obj and not d.has_key(" ".join(obj.leaves())):
-#                 obj = None
-#             if sub and not d.has_key(" ".join(sub.leaves())):
-#                 sub = None
-
-#             if sub_prods[len(sub_prods)-1].lhs().symbol().startswith("Pers_Pro") and obj:
-#                 return " ".join(obj.leaves())
-#             else:
-#                 if sub:
-#                     return " ".join(sub.leaves())
-#                 else:
-#                     return "d:none", tuple()
-#         else:
-#             if obj:
-#                 return " ".join(obj.leaves())
-#             else:
-#                 return "d:none", tuple()
 
     def add_data(self, mess, newtopic):
         """
@@ -265,67 +263,70 @@ class Session:
         k = self.memory.read("topic")
         # if there is no current topic, then decipher one
         # from the most recent message.
-        if k == None:  key = self.AI(mess)
+        if k == None:  ans = self.AI(mess)
         # if there is a current topic, search for a subtopic
-        else:  key = self.AI(mess, d)
+        else:  ans = self.AI(mess, d)
+
+        send(ans)
+        return False
         
-        missing = None
-        if isinstance(key, tuple):
-            missing = key[1]
-            key = key[0]
+        # missing = None
+#         if isinstance(key, tuple):
+#             missing = key[1]
+#             key = key[0]
 
-        # if there is no matching key, then ask the user to
-        # tell Dodona about the topic.
-        if key == "d:none":
-            if missing: 
-                topic = ", ".join(missing)
-                #self.memory.push("topic", topic)
-                send("Sorry, I don't know understand the following words: " + topic)
-                #self.memory.push("status", "unknown")
-                return False
-            else:
-                send("Sorry, I don't understand what you are asking me.")
-                return False
+#         # if there is no matching key, then ask the user to
+#         # tell Dodona about the topic.
+#         if key == "d:none":
+#             if missing: 
+#                 topic = ", ".join(missing)
+#                 #self.memory.push("topic", topic)
+#                 send("Sorry, I don't know understand the following words: " + topic)
+#                 #self.memory.push("status", "unknown")
+#                 return False
+#             else:
+#                 send("Sorry, I don't understand what you are asking me.")
+#                 return False
         
-        # if the key is a list, tihs means that there are
-        # multiple matching keywords.  Prompt the user as to
-        # which one they want.
-        if isinstance(key, list):
-            send("Multiple keywords match your query.  What did you mean to ask about?\n\n" + print_list(key), name)
-            shortd = {}
-            for item in key:
-                shortd[item] = d[item]
-            self.memory.push("data", shortd)
-            while(self.memory.read("message") != None):
-                self.memory.pop("message")
-            return None
+#         # if the key is a list, this means that there are
+#         # multiple matching keywords.  Prompt the user as to
+#         # which one they want.
+#         if isinstance(key, list):
+#             send("Multiple keywords match your query.  What did you mean to ask about?\n\n" + print_list(key), name)
+#             shortd = {}
+#             for item in key:
+#                 shortd[item] = d[item]
+#             self.memory.push("data", shortd)
+#             while(self.memory.read("message") != None):
+#                 self.memory.pop("message")
+#             return None
 
-        # if the key is a dictionary, then you know it is a
-        # topic, and has subtopics.  Ask the user which subtopic
-        # they would like to know about.
-        try:
-            if isinstance(d[key], dict):
-                #key2 = self.AI(mess, d[key])
-                key2 = "d:none"
+#         # if the key is a dictionary, then you know it is a
+#         # topic, and has subtopics.  Ask the user which subtopic
+#         # they would like to know about.
+#         try:
+#             if isinstance(d[key], dict):
+#                 #key2 = self.AI(mess, d[key])
+#                 key2 = "d:none"
 
-                if key2 == "d:none" or isinstance(key2, list):
-                    send("Please pick a topic below, or tell me a new one! (in relation to " + key + ")\n\n" + print_list(d[key].keys()), name)
-                    self.memory.push("topic", key)
-                    self.memory.push("data", d[key])
-                    return None
+#                 if key2 == "d:none" or isinstance(key2, list):
+#                     send("Please pick a topic below, or tell me a new one! (in relation to " + key + ")\n\n" + print_list(d[key].keys()), name)
+#                     self.memory.push("topic", key)
+#                     self.memory.push("data", d[key])
+#                     return None
 
-                else:
-                    send(d[key][key2], name)
-                    return False
-        except:
-            send("Sorry, I don't understand what you are asking me.")
-            return False
+#                 else:
+#                     send(d[key][key2], name)
+#                     return False
+#         except:
+#             send("Sorry, I don't understand what you are asking me.")
+#             return False
             
 
-        # if there is just a single key, then respond with
-        # the knowledge which Dodona has about the topic
-        send(custom_fill(d[key]), name)
-        return False
+#         # if there is just a single key, then respond with
+#         # the knowledge which Dodona has about the topic
+#         send(custom_fill(d[key]), name)
+#         return False
  
 # -*- indent-tabs-mode: nil; tab-width: 4; -*-
 # vi: set ts=4 sw=4 et:
