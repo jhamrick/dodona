@@ -38,26 +38,37 @@ class Session:
                 ans = "Sorry, I don't understand what you are saying."
         else:
             type = get_sentence_type(parse)
-            topic = find_topic(parse, type)
+            top = find_topic(parse, type)
 
             if type == STATEMENT:
-                topic = find_PP(topic)
-                print topic
+                top = find_PP(top)
+                print top
 
-            if topic:
-                compound = find_compound_noun(topic)
-                print "TOPIC:", " ".join(topic.leaves())
+            if type == QUESTION and top:
+                ques_word = top[1]
+                top = top[0]
+
+            if top:
+                compound = find_compound_noun(top)
+                print "TOPIC:", " ".join(top.leaves())
                 if compound:
                     c = compound.leaves()
                     ans = ""
                     t = None
-                    for i in xrange(1, len(c)-1):
+                    for i in xrange(1, len(c)):
                         topic = " ".join(c[:i])
                         subtopic = " ".join(c[i:])
+                        print "topic:", topic
+                        print "subtopic:", subtopic
 
                         if d.has_key(topic) and isinstance(d[topic], dict):
                             if d[topic].has_key(subtopic):
                                 ans = d[topic][subtopic]
+                            else:
+                                ans = "Sorry, I know about " + topic + ", but I don't know about " + subtopic + "."
+                        elif topic == k:
+                            if d.has_key(subtopic):
+                                ans = d[subtopic]
                             else:
                                 ans = "Sorry, I know about " + topic + ", but I don't know about " + subtopic + "."
                         if not ans:
@@ -75,14 +86,14 @@ class Session:
                         else:
                             ans = "Sorry, I don't know what you are saying."       
                 if (compound and ans.startswith("Sorry")) or not compound:
-                    topic = " ".join(topic.leaves())
-                    if d.has_key(topic):
-                        if isinstance(d[topic], dict):
-                            ans = "Multiple keywords match your query.  What did you mean to ask about?\n\n" + print_list(d[topic].keys())
-                            self.memory.push("topic", topic)
-                            self.memory.push("data", d[topic])
+                    top = " ".join(top.leaves())
+                    if d.has_key(top):
+                        if isinstance(d[top], dict):
+                            ans = "Multiple keywords match your query.  What did you mean to ask about?\n\n" + print_list(d[top].keys())
+                            self.memory.push("topic", top)
+                            self.memory.push("data", d[top])
                         else:
-                            ans = d[topic]
+                            ans = d[top]
                     else:
                         if type == QUESTION:
                             ans = "Sorry, I don't know what you are asking me."

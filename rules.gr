@@ -16,16 +16,20 @@
 
 1 Ind_Clause_Ques	       Interrog_Det VP_3rd
 1 Ind_Clause_Ques	       Interrog_Det VP_3rd Prep
-1 Ind_Clause_Ques	       Interrog_Det Ind_Clause_Ques_Aux		
+
+1 Ind_Clause_Ques	       Interrog_Det Ind_Clause_Ques_Aux	
 1 Ind_Clause_Ques	       Interrog_Proadverb Ind_Clause_Ques_Aux
+
 1 Ind_Clause_Ques	       Interrog_Proadverb Interrog_Clause
-1 Ind_Clause_Ques	       Interrog_Proadverb AdjP Aux Ind_Clause_Inf
-1 Ind_Clause_Ques	       Interrog_Proadverb AdjP Aux_3rd Ind_Clause_Inf_3rd
 1 Ind_Clause_Ques	       Interrog_Proadverb AdjP Interrog_Clause
 1 Ind_Clause_Ques	       Interrog_Clause
-1 Ind_Clause_Ques	       Interrog_Proadverb Aux 
+
+1 Ind_Clause_Ques	       Interrog_Proadverb AdjP Aux Ind_Clause_Inf
+1 Ind_Clause_Ques	       Interrog_Proadverb AdjP Aux_3rd Ind_Clause_Inf_3rd
 1 Ind_Clause_Ques	       Interrog_Det Modal_Past Ind_Clause_Inf
 1 Ind_Clause_Ques	       Interrog_Det NP Modal_Past Ind_Clause_Inf
+
+1 Ind_Clause_Ques	       Interrog_Proadverb Aux
 
 1 Ind_Clause_Ques_Aux	       Aux Ind_Clause_Inf_2nd
 1 Ind_Clause_Ques_Aux	       Aux Ind_Clause_Inf
