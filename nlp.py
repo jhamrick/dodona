@@ -30,6 +30,33 @@ def get_sentence_type(parse):
 
     return 0
 
+def find_PP(parse):
+    if isinstance(parse, str): return None
+    tree = parse.productions()[0]
+
+    if tree.lhs() == NT("PP"):
+        return parse[-1]
+    else:
+        for subtree in parse:
+            pp = find_PP(subtree)
+            if pp: return pp
+
+    return None
+
+def find_compound_noun(parse):
+    if isinstance(parse, str): return None
+    tree = parse.productions()[0]
+
+    if tree.lhs() == NT("CompoundNoun") or \
+       tree.lhs() == NT("CompoundNoun_Pl"):
+        return parse
+    else:
+        for subtree in parse:
+            c = find_compound_noun(subtree)
+            if c: return c
+    
+    return None
+
 def find_topic(parse, type=None):
     if type == None: type = get_sentence_type(parse)
     if isinstance(parse, str): return None
@@ -52,6 +79,7 @@ def find_topic(parse, type=None):
             for subtree in parse:
                 subj = find_topic(subtree, type)
                 if subj: return subj
+
     elif type == STATEMENT:
         if tree.lhs() == NT("VP_1st"):
             rhs = tree.rhs()
@@ -82,18 +110,4 @@ def find_topic(parse, type=None):
                 subj = find_topic(subtree, type)
                 if subj: return subj
 
-    return None
-
-def find_compound_noun(parse):
-    if isinstance(parse, str): return None
-    tree = parse.productions()[0]
-
-    if tree.lhs() == NT("CompoundNoun") or \
-       tree.lhs() == NT("CompoundNoun_Pl"):
-        return parse
-    else:
-        for subtree in parse:
-            c = find_compound_noun(subtree)
-            if c: return c
-    
     return None

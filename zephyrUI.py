@@ -33,6 +33,8 @@ def send(mess, name = None, cls = "dodona-test"):
         foo = str(z.__dict__)
         z.send()
         #print "Dodona: " + mess
+    except KeyboardInterrupt:
+        raise
     except:
         print "There was an error sending the last message."
 
@@ -47,6 +49,8 @@ def receive_from_subs(return_sender=False, cls = "dodona-test"):
         try:
             m = zephyr.receive(True)
             received = True
+        except KeyboardInterrupt:
+            raise
         except:
             continue
 
@@ -54,6 +58,8 @@ def receive_from_subs(return_sender=False, cls = "dodona-test"):
     while m.sender == 'dodona@ATHENA.MIT.EDU':
         try:
             m = zephyr.receive(True)
+        except KeyboardInterrupt:
+            raise
         except:
             continue
 
@@ -61,6 +67,8 @@ def receive_from_subs(return_sender=False, cls = "dodona-test"):
     while m.__dict__['fields'][1].lower().strip() == "":
         try:
             m = zephyr.receive(True)
+        except KeyboardInterrupt:
+            raise
         except:
             continue
 
@@ -69,6 +77,8 @@ def receive_from_subs(return_sender=False, cls = "dodona-test"):
     while m.cls != cls:
         try:
             m = zephyr.receive(True)
+        except KeyboardInterrupt:
+            raise
         except:
             continue
 

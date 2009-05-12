@@ -5,7 +5,7 @@ import zephyr
 from zephyrUI import send
 from fuzzystack import FuzzyStack
 from helper import print_list, tokenize, integrate_lists, find_partial_key
-from nlp import get_sentence_type, find_topic, find_compound_noun, QUESTION, STATEMENT, COMMAND
+from nlp import get_sentence_type, find_topic, find_compound_noun, find_PP, QUESTION, STATEMENT, COMMAND
 from xml_parser import update_files
 import parsetree
 
@@ -23,46 +23,64 @@ class Session:
         self.name = name
         self.topics = topics
 
-    def AI(self, mess, d = None):
+    def AI(self, mess, d = None, k = None):
         """
-        Determines the keywords in the message,
-        and returns either:
-            - a list of keys, if there is more than one
-            - a single key
-            - the status "d:none", if there are none
+
         """
         if d == None: d = self.topics
         parse = parsetree.parse_sent(mess)
         if isinstance(parse, tuple):
-            ans = "Sorry, I don't understand the following words: " + str(parse[0])
+            print parse
+            if parse[1]:
+                foreign = ", ".join(parse[1])
+                ans = "Sorry, I don't understand the following words: " + foreign
+            else:
+                ans = "Sorry, I don't understand what you are saying."
         else:
             type = get_sentence_type(parse)
             topic = find_topic(parse, type)
+
+            if type == STATEMENT:
+                topic = find_PP(topic)
+                print topic
 
             if topic:
                 compound = find_compound_noun(topic)
                 print "TOPIC:", " ".join(topic.leaves())
                 if compound:
                     c = compound.leaves()
-                    if d.has_key(c[0]) and isinstance(d[c[0]], dict):
-                        topic = c[0]
-                        subtopic = " ".join(c[1:])
-                        if d[topic].has_key(subtopic):
-                            ans = d[topic][subtopic]
-                        else:
-                            ans = "Sorry, I know about " + topic + ", but I don't know about " + subtopic + "."
-                    elif d.has_key(c[0]):
-                        ans = d[c[0]]
-                    else:
+                    ans = ""
+                    t = None
+                    for i in xrange(1, len(c)-1):
+                        topic = " ".join(c[:i])
+                        subtopic = " ".join(c[i:])
+
+                        if d.has_key(topic) and isinstance(d[topic], dict):
+                            if d[topic].has_key(subtopic):
+                                ans = d[topic][subtopic]
+                            else:
+                                ans = "Sorry, I know about " + topic + ", but I don't know about " + subtopic + "."
+                        if not ans:
+                            if d.has_key(topic):
+                                ans = "Multiple keywords match your query.  What did you mean to ask about?\n\n" + print_list(d[topic].keys())
+                                t = topic
+
+                    if t:
+                        self.memory.push("topic", t)
+                        self.memory.push("data", d[t])
+
+                    if not ans:
                         if type == QUESTION:
                             ans = "Sorry, I don't know what you are asking me."
                         else:
                             ans = "Sorry, I don't know what you are saying."       
-                else:
+                if (compound and ans.startswith("Sorry")) or not compound:
                     topic = " ".join(topic.leaves())
                     if d.has_key(topic):
                         if isinstance(d[topic], dict):
                             ans = "Multiple keywords match your query.  What did you mean to ask about?\n\n" + print_list(d[topic].keys())
+                            self.memory.push("topic", topic)
+                            self.memory.push("data", d[topic])
                         else:
                             ans = d[topic]
                     else:
@@ -71,6 +89,7 @@ class Session:
                         else:
                             ans = "Sorry, I don't know what you are saying."
             else:
+                print "TOPIC: None found"
                 if type == QUESTION:
                     ans = "Sorry, I don't know what you are asking me."
                 else:
@@ -264,12 +283,22 @@ class Session:
         k = self.memory.read("topic")
         # if there is no current topic, then decipher one
         # from the most recent message.
-        if k == None:  ans = self.AI(mess)
-        # if there is a current topic, search for a subtopic
-        else:  ans = self.AI(mess, d)
+        print "k:", k
+        if k == None:
+            ans = self.AI(mess)
+            send(ans)
+            if self.memory.read("topic"):
+                return None
+            else:
+                return False
 
-        send(ans)
-        return False
+        # if there is a current topic, search for a subtopic
+        else:
+            ans = self.AI(mess, d, k)
+            send(ans)
+            self.memory.pop("topic")
+            self.memory.pop("data")
+            return False
         
         # missing = None
 #         if isinstance(key, tuple):

@@ -144,9 +144,11 @@
 1 Noun		fill
 1 Noun		auto-fill
 1 Noun		auto-save
+1 Noun		rebound
  
 # Plural nouns
 
+1 Noun_Pl		rebounds
 1 Noun_Pl		auto-saves
 1 Noun_Pl		auto-fills
 1 Noun_Pl		tags
@@ -812,6 +814,13 @@
 1 V_Base_Past_Tr		wanted
 1 V_3rdSing_Pres_Tr		wants
 
+1 V_Inf_Tr			mean
+1 V_Pres_Part_Tr		meaning
+1 V_Past_Part_Tr		meant
+1 V_Base_Pres_Tr		mean
+1 V_Base_Past_Tr		meant
+1 V_3rdSing_Pres_Tr		means
+
 1 V_Inf_Tr			prevent
 1 V_Pres_Part_Tr		preventing
 1 V_Past_Part_Tr		prevented
@@ -881,6 +890,13 @@
 1 V_Base_Pres_Tr		move
 1 V_Base_Past_Tr		moved
 1 V_3rdSing_Pres_Tr		moves
+
+1 V_Inf_Tr			ask
+1 V_Pres_Part_Tr		asking
+1 V_Past_Part_Tr		asked
+1 V_Base_Pres_Tr		ask
+1 V_Base_Past_Tr		asked
+1 V_3rdSing_Pres_Tr		asks
  
 #################### Modals ####################
  
