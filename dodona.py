@@ -36,7 +36,7 @@ while True:
     # ask another question
     if exit == False:
         sessions[sender].clear()
-        #send('Please ask me another question, or type \"exit\" to end the session.', sender)
+        send('Please ask me another question, or type \"exit\" to end the session.', sender)
     # if the user wants to exit, then delete
     # the session
     elif exit == True:

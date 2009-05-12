@@ -244,6 +244,7 @@ class Session:
         name = self.name
         mess = self.memory.read("message")
         m = tokenize(mess)
+        mess = " ".join(m)
 
         if mess == None: return False
 
@@ -286,7 +287,7 @@ class Session:
         print "k:", k
         if k == None:
             ans = self.AI(mess)
-            send(ans)
+            send(ans, name)
             if self.memory.read("topic"):
                 return None
             else:
@@ -295,7 +296,7 @@ class Session:
         # if there is a current topic, search for a subtopic
         else:
             ans = self.AI(mess, d, k)
-            send(ans)
+            send(ans, name)
             self.memory.pop("topic")
             self.memory.pop("data")
             return False
