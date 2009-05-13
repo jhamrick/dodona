@@ -1,4 +1,4 @@
-bimport site
+import site
 site.addsitedir('/afs/athena.mit.edu/user/b/r/broder/lib/python2.5/site-packages')
 import zephyr
 from helper import custom_fill, tokenize
@@ -96,7 +96,13 @@ def receive_from_subs(return_sender=False, cls = "dodona-test"):
     m = m.__dict__['fields'][1]
     # clean the message of trailing whitespce
     # and convert it to lowercase
-    m = str(m.strip().lower())
+    try:
+        m = str(m.strip().lower())
+    except KeyboardInterrupt:
+        send(traceback.format_exc())
+        raise
+    except:
+        send(traceback.format_exc())
 
     if return_sender:  return [m, sender]
     else:  return m

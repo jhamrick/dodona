@@ -1,12 +1,12 @@
 import site
 site.addsitedir('/afs/athena.mit.edu/user/b/r/broder/lib/python2.5/site-packages')
-
 import zephyr
 from zephyrUI import init, send, receive_from_subs
 from fuzzystack import FuzzyStack
 from session import Session
 from xml_parser import load_topics
 import traceback
+from optparse import OptionParser
 
 ###################################
 # This file runs Dodona.  It keeps
