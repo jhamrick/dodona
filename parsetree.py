@@ -49,7 +49,7 @@ def parse_file():
 def parse_sent(sen):
     foreign = []
     try:
-        parse = parser.nbest_parse(sen.strip().split(" "), trace=1)
+        parse = parser.nbest_parse(sen.strip().split(" "), trace=0)
     except:
         sen = sen.strip().split(" ")
         for word in sen:
@@ -57,7 +57,7 @@ def parse_sent(sen):
         parse = None
 
     if parse: 
-        for p in parse: print p
+        #for p in parse: print p
         return parse[0]
     else: 
         print "failure"

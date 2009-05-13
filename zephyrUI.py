@@ -90,7 +90,7 @@ def receive_from_subs(return_sender=False, cls = "dodona-test"):
     m = m.__dict__['fields'][1]
     # clean the message of trailing whitespce
     # and convert it to lowercase
-    m = str(m.strip())
+    m = m.strip()
 
     if return_sender:  return [m, sender]
     else:  return m
