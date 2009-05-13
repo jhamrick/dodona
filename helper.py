@@ -8,6 +8,8 @@ def print_list(list):
     list.sort()
     printed = ""
     for item in list:
+        
+        if str(item).startswith("DEFAULT"): continue
         printed = printed + " - " + str(item) + "\n"
     return printed
 
