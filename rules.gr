@@ -562,8 +562,10 @@
 1 Verbal_3rd_Pl_In	       Modal_Past_Neg Have Be_Past_Part V_Pres_Part_In
 
 1 Verb_As_Noun_Obj	       V_Pres_Part_Tr NP_Obj
+1 Verb_As_Noun_Obj	       V_Pres_Part_Tr
 1 Verb_As_Noun_Obj	       V_Pres_Part_In
 1 Verb_As_Noun		       V_Pres_Part_Tr NP_Obj
+1 Verb_As_Noun		       V_Pres_Part_Tr
 1 Verb_As_Noun		       V_Pres_Part_In
 
 1 PP			       Prep NP_Obj
@@ -574,6 +576,7 @@
 1 NP			       NP_3rd
 1 NP			       NP_1st_Pl
 1 NP			       NP_3rd_Pl
+1 NP			       NP Noun_Conj NP
 
 1 NP_1st		       Pers_Pro_1st
 1 NP_2nd		       Pers_Pro_2nd

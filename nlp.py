@@ -58,7 +58,14 @@ def find_noun(parse, exceptions=[]):
     if isinstance(parse, str): return None
     tree = parse.productions()[0]
 
-    if tree.lhs() == NT("Name") or \
+    if (tree.lhs() == NT("NP") or \
+       tree.lhs() == NT("NP_1st") or \
+       tree.lhs() == NT("NP_2nd") or \
+       tree.lhs() == NT("NP_3rd") or \
+       tree.lhs() == NT("NP_1st_Pl") or \
+       tree.lhs() == NT("NP_3rd_Pl") or \
+       tree.lhs() == NT("NP_Obj") or \
+       tree.lhs() == NT("Name") or \
        tree.lhs() == NT("Place") or \
        tree.lhs() == NT("Program") or \
        tree.lhs() == NT("Org") or \
@@ -68,8 +75,9 @@ def find_noun(parse, exceptions=[]):
        tree.lhs() == NT("File_Addr") or \
        tree.lhs() == NT("Web_Addr") or \
        tree.lhs() == NT("Nominal") or \
-       tree.lhs() == NT("Nominal_Pl"):
-        if " ".join(parse.leaves()) not in exceptions: return parse
+       tree.lhs() == NT("Nominal_Pl")) and \
+       " ".join(parse.leaves()) not in exceptions: 
+        return parse
     else:
         for subtree in parse:
             n = find_noun(subtree, exceptions)
