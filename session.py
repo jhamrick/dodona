@@ -5,9 +5,9 @@ import zephyr
 from zephyrUI import send
 from fuzzystack import FuzzyStack
 from helper import print_list, tokenize, integrate_lists, find_partial_key
-from nlp import get_sentence_type, find_topic, find_compound_noun, find_PP, QUESTION, STATEMENT, COMMAND
+from nlp import get_sentence_type, find_topic, find_compound_noun, find_PP, find_noun, QUESTION, STATEMENT, COMMAND
 from xml_parser import update_files
-import parsetree
+from parsetree import Parser
 
 #######################################
 # The Session class stores a "session",
@@ -22,42 +22,90 @@ class Session:
         self.memory.push("name", name)
         self.name = name
         self.topics = topics
+        self.parser = Parser()
 
     def AI(self, mess, d = None, k = None):
         """
 
         """
         if d == None: d = self.topics
-        parse = parsetree.parse_sent(mess)
+        parse = self.parser.parse_sent(mess)
+        print "PARSE:\n", parse
         if isinstance(parse, tuple):
-            print parse
             if parse[1]:
                 foreign = ", ".join(parse[1])
-                ans = "Sorry, I don't understand the following words: " + foreign
+                send("Sorry, I don't understand the following words: " + foreign + ".", self.name)
+                self.memory.push("topic", list(parse[1]))
+                self.learn()
+                return
             else:
                 ans = "Sorry, I don't understand what you are saying."
         else:
             type = get_sentence_type(parse)
-            topic = find_topic(parse, type)
+            top = find_topic(parse, type)
+            subtop = None
 
-            if type == STATEMENT:
-                topic = find_PP(topic)
-                print topic
+            if type == QUESTION and top:
+                ques_word = top[1]
+                top = top[0]
 
-            if topic:
-                compound = find_compound_noun(topic)
-                print "TOPIC:", " ".join(topic.leaves())
+            if top:
+                pp = find_PP(top)
+                if pp:
+                    pp_noun = find_noun(pp)
+                    b_pp = find_noun(top, exceptions=[" ".join(pp_noun.leaves())])
+                    if pp_noun: top = pp_noun
+                    if b_pp: subtop = b_pp
+
+            if top and subtop:
+                topic = " ".join(top.leaves())
+                subtopic = " ".join(subtop.leaves())
+                print "TOPIC:", topic
+                print "SUBTOPIC:", subtopic
+
+                if d.has_key(topic) and isinstance(d[topic], dict):
+                    if d[topic].has_key(subtopic):
+                        ans = d[topic][subtopic]
+                    else:
+                        ans = "Sorry, I know about " + topic + ", but I don't know about " + subtopic + "."
+                elif topic == k:
+                    if d.has_key(subtopic):
+                        ans = d[subtopic]
+                    else:
+                        ans = "Sorry, I know about " + topic + ", but I don't know about " + subtopic + "."
+
+                if not ans and d.has_key(topic):
+                        ans = "Multiple keywords match your query.  What did you mean to ask about?\n\n" + print_list(d[topic].keys())
+                        self.memory.push("topic", topic)
+                        self.memory.push("data", d[topic])
+
+                elif not ans:
+                    if type == QUESTION:
+                        ans = "Sorry, I don't know what you are asking me."
+                    else:
+                        ans = "Sorry, I don't know what you are saying." 
+
+            elif top:
+                compound = find_compound_noun(top)
+                print "TOPIC:", " ".join(top.leaves())
                 if compound:
                     c = compound.leaves()
                     ans = ""
                     t = None
-                    for i in xrange(1, len(c)-1):
+                    for i in xrange(1, len(c)):
                         topic = " ".join(c[:i])
                         subtopic = " ".join(c[i:])
+                        print "topic:", topic
+                        print "subtopic:", subtopic
 
                         if d.has_key(topic) and isinstance(d[topic], dict):
                             if d[topic].has_key(subtopic):
                                 ans = d[topic][subtopic]
+                            else:
+                                ans = "Sorry, I know about " + topic + ", but I don't know about " + subtopic + "."
+                        elif topic == k:
+                            if d.has_key(subtopic):
+                                ans = d[subtopic]
                             else:
                                 ans = "Sorry, I know about " + topic + ", but I don't know about " + subtopic + "."
                         if not ans:
@@ -70,33 +118,30 @@ class Session:
                         self.memory.push("data", d[t])
 
                     if not ans:
-                        if type == QUESTION:
-                            ans = "Sorry, I don't know what you are asking me."
-                        else:
-                            ans = "Sorry, I don't know what you are saying."       
+                        ans = "Sorry, I don't know about " + " ".join(top.leaves()) + "."
+ 
                 if (compound and ans.startswith("Sorry")) or not compound:
-                    topic = " ".join(topic.leaves())
-                    if d.has_key(topic):
-                        if isinstance(d[topic], dict):
-                            ans = "Multiple keywords match your query.  What did you mean to ask about?\n\n" + print_list(d[topic].keys())
-                            self.memory.push("topic", topic)
-                            self.memory.push("data", d[topic])
+                    top = " ".join(top.leaves())
+                    if d.has_key(top):
+                        if isinstance(d[top], dict):
+                            ans = "Multiple keywords match your query.  What did you mean to ask about?\n\n" + print_list(d[top].keys())
+                            self.memory.push("topic", top)
+                            self.memory.push("data", d[top])
+                        elif top == k:
+                            ans = "Multiple keywords match your query.  What did you mean to ask about?\n\n" + print_list(d.keys())
                         else:
-                            ans = d[topic]
+                            ans = d[top]
                     else:
-                        if type == QUESTION:
-                            ans = "Sorry, I don't know what you are asking me."
-                        else:
-                            ans = "Sorry, I don't know what you are saying."
+                        ans = "Sorry, I don't know about " + top + "."
             else:
                 print "TOPIC: None found"
                 if type == QUESTION:
-                    ans = "Sorry, I don't know what you are asking me."
+                    ans = "Sorry, I don't understand what you are asking me."
                 else:
-                    ans = "Sorry, I don't know what you are saying."
+                    ans = "Sorry, I don't understand what you are saying."
 
         print ans
-        return ans
+        send(ans, self.name)
 
 
     def add_data(self, mess, newtopic):
@@ -109,14 +154,14 @@ class Session:
         add_data_false, depending on whether the
         topic is brand new or not, respectively.
         """
-        subtopic = self.memory.pop("topic")[1]
-        topic = self.memory.pop("topic")[1]
-        print topics[topic]
-        topics[topic][subtopic] =  mess
-        if newtopic: update_files(topic, topics)
-        else: update_files(topic, topics, False)
-        send("Thanks!", self.name)
-        return False
+#         subtopic = self.memory.pop("topic")[1]
+#         topic = self.memory.pop("topic")[1]
+#         print topics[topic]
+#         topics[topic][subtopic] =  mess
+#         if newtopic: update_files(topic, topics)
+#         else: update_files(topic, topics, False)
+#         send("Thanks!", self.name)
+#         return False
 
     def sub_topic(self, mess, subtopic = None):
         """
@@ -147,6 +192,138 @@ class Session:
 
         return None
 
+    def add_new_word(self, word, pos):
+        vocab = open("vocabulary.gr", "a")
+        vocab.write("\n1\t" + pos + "\t" + word)
+        vocab.close()
+        self.parser.add_new_vocab_rule([pos, [word]])
+
+    def part_of_speech(self, mess, step):
+        word = self.memory.pop("topic")[1]
+        name = self.name
+
+        if step == "first":
+            if mess.find("plural noun") != -1:
+                self.add_new_word(word, "Noun_Pl")
+                self.memory.pop("status")
+                return self.learn()
+
+            elif mess.find("noun") != -1:
+                self.add_new_word(word, "Noun")
+                self.memory.pop("status")
+                return self.learn()
+
+            elif mess.find("adjective") != -1:
+                self.add_new_word(word, "Adj_State")
+                self.memory.pop("status")
+                return self.learn()
+
+            elif mess.find("adverb") != -1:
+                self.add_new_word(word, "Adv")
+                self.memory.pop("status")
+                return self.learn()
+
+            elif mess.find("intransitive verb") != -1:
+                send("What is the infinitive for the verb " + word + "?", name)
+                self.memory.pop("status")
+                self.memory.push("status", "pos_verb1in")
+                self.memory.push("topic", word)
+
+            elif mess.find("transitive verb") != -1:
+                send("What is the infinitive for the verb " + word + "?", name)
+                self.memory.pop("status")
+                self.memory.push("status", "pos_verb1tr")
+                self.memory.push("topic", word)
+
+            elif mess.find("preposition") != -1:
+                self.add_new_word(word, "Prep")
+                self.memory.pop("status")
+                return self.learn()
+
+            else:
+                self.memory.pop("topic")
+                self.memory.pop("status")
+                return False
+        
+        elif step.startswith("verb1"):
+            if step.endswith("in"):
+                self.add_new_word(mess, "V_Inf_In")
+                self.memory.pop("status")
+                self.memory.push("status", "pos_verb2in")
+            elif step.endswith("tr"):
+                self.add_new_word(mess, "V_Inf_Tr")
+                self.memory.pop("status")
+                self.memory.push("status", "pos_verb2tr")
+
+            self.memory.push("topic", word)
+            send("What is the present participle for the verb " + word + "?", name)
+            return None
+
+        elif step.startswith("verb2"):
+            if step.endswith("in"):
+                self.add_new_word(mess, "V_Pres_Part_In")
+                self.memory.pop("status")
+                self.memory.push("status", "pos_verb3in")
+            elif step.endswith("tr"):
+                self.add_new_word(mess, "V_Pres_Part_Tr")
+                self.memory.pop("status")
+                self.memory.push("status", "pos_verb3tr")
+
+            self.memory.push("topic", word)
+            send("What is the past participle for the verb " + word + "?", name)
+            return None
+
+        elif step.startswith("verb3"):
+            if step.endswith("in"):
+                self.add_new_word(mess, "V_Past_Part_In")
+                self.memory.pop("status")
+                self.memory.push("status", "pos_verb4in")
+            elif step.endswith("tr"):
+                self.add_new_word(mess, "V_Past_Part_Tr")
+                self.memory.pop("status")
+                self.memory.push("status", "pos_verb4tr")
+
+            self.memory.push("topic", word)
+            send("What is the 1st person singular present for the verb " + word + "?", name)
+            return None
+
+        elif step.startswith("verb4"):
+            if step.endswith("in"):
+                self.add_new_word(mess, "V_Base_Pres_In")
+                self.memory.pop("status")
+                self.memory.push("status", "pos_verb5in")
+            elif step.endswith("tr"):
+                self.add_new_word(mess, "V_Base_Pres_Tr")
+                self.memory.pop("status")
+                self.memory.push("status", "pos_verb5tr")
+
+            self.memory.push("topic", word)
+            send("What is the 3rd person singular present for the verb " + word + "?", name)
+            return None
+
+        elif step.startswith("verb5"):
+            if step.endswith("in"):
+                self.add_new_word(mess, "V_3rdSing_Pres_In")
+                self.memory.pop("status")
+                self.memory.push("status", "pos_verb6in")
+            elif step.endswith("tr"):
+                self.add_new_word(mess, "V_3rdSing_Pres_Tr")
+                self.memory.pop("status")
+                self.memory.push("status", "pos_verb6tr")
+
+            self.memory.push("topic", word)
+            send("What is the 1st person singular past for the verb " + word + "?", name)
+            return None
+
+        elif step.startswith("verb6"):
+            if step.endswith("in"):
+                self.add_new_word(mess, "V_Base_Past_In")
+            elif step.endswith("tr"):
+                self.add_new_word(mess, "V_Base_Past_Tr")
+
+            self.memory.pop("status")
+            return self.learn()
+
     def learn(self):
         """
         Begins the learning process.  Determines the topic
@@ -157,22 +334,38 @@ class Session:
         enter a subtopic.
         """
         name = self.name
-        subtopic = self.memory.pop("topic")[1]
-        topic = self.memory.pop("topic")
-        # if the topic is foreign, then prompt the user
-        # for a subtopic and set the status to subtopic
-        if topic == False:
-            topic = subtopic
-            topics[subtopic] = {}
-            send("What subtopic under " + topic + " would you like to tell me about?", name)
-            self.memory.push("topic", topic)
+        unknown_all = list(self.memory.pop("topic"))[1]
+        if unknown_all != []:
+            unknown = unknown_all[0]
+            del unknown_all[0]
+            pos = ["Noun", "Plural Noun", "Adjective", "Adverb", "Transitive Verb", "Intransitive Verb", "Preposition", "Other"]
+
+            send("Which of the following parts of speech is \'" + unknown + "\'?\n" + print_list(pos), name)
+            self.memory.push("topic", unknown_all)
+            self.memory.push("topic", unknown)
             self.memory.pop("status")
-            self.memory.push("status", "subtopic")
+            self.memory.push("status", "pos_first")
             return None
-        # if not, then go directly to sub_topic
         else:
-            self.memory.push("topic", topic[1])
-            return self.sub_topic("", subtopic)
+            self.memory.pop("status")            
+            return False
+
+#         subtopic = self.memory.pop("topic")[1]
+#         topic = self.memory.pop("topic")
+#         # if the topic is foreign, then prompt the user
+#         # for a subtopic and set the status to subtopic
+#         if topic == False:
+#             topic = subtopic
+#             topics[subtopic] = {}
+#             send("What subtopic under " + topic + " would you like to tell me about?", name)
+#             self.memory.push("topic", topic)
+#             self.memory.pop("status")
+#             self.memory.push("status", "subtopic")
+#             return None
+#         # if not, then go directly to sub_topic
+#         else:
+#             self.memory.push("topic", topic[1])
+#             return self.sub_topic("", subtopic)
 
     def unknown(self, mess):
         """
@@ -250,7 +443,7 @@ class Session:
 
         # if the user wants to exit, then
         # return True (kill the session)
-        if mess == "exit" or \
+        if mess.startswith("exit") or \
                 "bye" in m or \
                 "goodbye" in m:
             send("Glad to be of help :)", name)
@@ -265,16 +458,19 @@ class Session:
 
         # if the user greets Dodona, then respond
         # in kind.
-        if "Hi" in m or \
-                "Hey" in m or \
-                "Hello" in m != -1:
-            send("Hello, " + name + "!")
+        if "hi" in m or \
+                "hey" in m or \
+                "hello" in m != -1:
+            send("hello, " + name + "!")
             return None
         
         # check the status, and return the corresponding
         # function if necessary
         s = self.memory.read("status")
-        if s == "unknown":  return self.unknown(mess)
+        #if s == "unknown":  return self.unknown(mess)
+        if s == "learn":  return self.learn()
+        if s:
+            if s.startswith("pos"):  return self.part_of_speech(mess, s.split("_")[1])
         if s == "conv_topic":  return self.conv_topic(mess)
         if s == "subtopic":  return self.sub_topic(mess)
         if s == "add_data_true":  return self.add_data(mess, True)
@@ -284,10 +480,8 @@ class Session:
         k = self.memory.read("topic")
         # if there is no current topic, then decipher one
         # from the most recent message.
-        print "k:", k
         if k == None:
-            ans = self.AI(mess)
-            send(ans, name)
+            self.AI(mess)
             if self.memory.read("topic"):
                 return None
             else:
@@ -295,8 +489,7 @@ class Session:
 
         # if there is a current topic, search for a subtopic
         else:
-            ans = self.AI(mess, d, k)
-            send(ans, name)
+            self.AI(mess, d, k)
             self.memory.pop("topic")
             self.memory.pop("data")
             return False

@@ -16,16 +16,20 @@
 
 1 Ind_Clause_Ques	       Interrog_Det VP_3rd
 1 Ind_Clause_Ques	       Interrog_Det VP_3rd Prep
-1 Ind_Clause_Ques	       Interrog_Det Ind_Clause_Ques_Aux		
+
+1 Ind_Clause_Ques	       Interrog_Det Ind_Clause_Ques_Aux	
 1 Ind_Clause_Ques	       Interrog_Proadverb Ind_Clause_Ques_Aux
+
 1 Ind_Clause_Ques	       Interrog_Proadverb Interrog_Clause
-1 Ind_Clause_Ques	       Interrog_Proadverb AdjP Aux Ind_Clause_Inf
-1 Ind_Clause_Ques	       Interrog_Proadverb AdjP Aux_3rd Ind_Clause_Inf_3rd
 1 Ind_Clause_Ques	       Interrog_Proadverb AdjP Interrog_Clause
 1 Ind_Clause_Ques	       Interrog_Clause
-1 Ind_Clause_Ques	       Interrog_Proadverb Aux 
+
+1 Ind_Clause_Ques	       Interrog_Proadverb AdjP Aux Ind_Clause_Inf
+1 Ind_Clause_Ques	       Interrog_Proadverb AdjP Aux_3rd Ind_Clause_Inf_3rd
 1 Ind_Clause_Ques	       Interrog_Det Modal_Past Ind_Clause_Inf
 1 Ind_Clause_Ques	       Interrog_Det NP Modal_Past Ind_Clause_Inf
+
+1 Ind_Clause_Ques	       Interrog_Proadverb Aux
 
 1 Ind_Clause_Ques_Aux	       Aux Ind_Clause_Inf_2nd
 1 Ind_Clause_Ques_Aux	       Aux Ind_Clause_Inf
@@ -41,9 +45,8 @@
 1 Ind_Clause_Inf	       NP VP_Inf
 1 Ind_Clause_Inf_3rd	       NP_3rd VP_Inf
 
-1 Interrog_Clause	       Passive_Interrog_In 
-1 Interrog_Clause	       Passive_Interrog_In After_Verb_In
-1 Interrog_Clause	       Passive_Interrog_Tr After_Verb_Tr
+1 Interrog_Clause	       Passive_Interrog_In
+1 Interrog_Clause	       Passive_Interrog_Tr
 
 1 Passive_1stSing_Pres	       Be_1stSing_Pres
 1 Passive_2ndSing_Pres	       Be_2ndSing_Pres
@@ -400,9 +403,6 @@
 1 VP_Inf		       V_Inf_In After_Verb_In
 1 VP_Inf		       V_Inf_In
 1 VP_Inf		       V_Inf_Tr
-1 VP_Inf		       V_Inf_In PP
-1 VP_Inf		       V_Inf_Tr NP_Obj
-1 VP_Inf		       V_Inf_Tr NP_Obj PP
 1 VP_Inf		       Causal_Inf NP_Obj V_Past_Part_Tr
 1 VP_Inf		       Causal_Inf NP_Obj V_Past_Part_In
 1 VP_Inf		       Causal_Inf NP_Obj V_Past_Part_Tr PP
@@ -417,9 +417,6 @@
 1 VP_Inf		       V_Inf_In Adv After_Verb_In
 1 VP_Inf		       V_Inf_In Adv
 1 VP_Inf		       V_Inf_Tr Adv
-1 VP_Inf		       V_Inf_In Adv PP
-1 VP_Inf		       V_Inf_Tr Adv NP_Obj
-1 VP_Inf		       V_Inf_Tr Adv NP_Obj PP
 1 VP_Inf		       Causal_Inf Adv NP_Obj V_Past_Part_Tr
 1 VP_Inf		       Causal_Inf Adv NP_Obj V_Past_Part_In
 1 VP_Inf		       Causal_Inf Adv NP_Obj V_Past_Part_Tr PP
@@ -437,6 +434,22 @@
 
 1 After_Verb_In		       Prep
 1 After_Verb_In		       PP
+
+1 Infinitive		       To V_Inf_Tr
+1 Infinitive		       To V_Inf_In
+
+1 Verbal_1st_In		       Verbal_1st_In Infinitive
+1 Verbal_1st_Tr		       Verbal_1st_Tr Infinitive
+1 Verbal_2nd_In		       Verbal_2nd_In Infinitive
+1 Verbal_2nd_Tr		       Verbal_2nd_Tr Infinitive
+1 Verbal_3rd_In		       Verbal_3rd_In Infinitive
+1 Verbal_3rd_Tr		       Verbal_3rd_Tr Infinitive
+1 Verbal_1st_Pl_In	       Verbal_1st_In Infinitive
+1 Verbal_1st_Pl_Tr	       Verbal_1st_Tr Infinitive
+1 Verbal_2nd_Pl_In	       Verbal_2nd_In Infinitive
+1 Verbal_2nd_Pl_Tr	       Verbal_2nd_Tr Infinitive
+1 Verbal_3rd_Pl_In	       Verbal_3rd_In Infinitive
+1 Verbal_3rd_Pl_Tr	       Verbal_3rd_Tr Infinitive
 
 1 Verbal_1st_In		       V_1stSing_Pres_In
 1 Verbal_1st_In		       V_1stSing_Past_In
@@ -633,11 +646,6 @@
 1 Nominal		       Color Nominal
 1 Nominal		       Quote_Single Word Quote_Single
 1 Nominal		       Quote_Double Word Quote_Double
-1 Nominal		       To V_Inf_Tr
-1 Nominal		       To V_Inf_In
-1 Nominal		       To V_Inf_Tr NP_Obj
-1 Nominal		       To V_Inf_Tr PP
-1 Nominal		       To V_Inf_In PP
 
 1 Nominal_Pl		       Noun_Pl
 1 Nominal_Pl		       CompoundNoun_Pl
