@@ -15,11 +15,11 @@ from optparse import OptionParser
 # with different users.
 ###################################
 
-parser = OptionParser()
-parser.add_option("-v", "--v", action="store_true", dest="verbose", default=False, help="send informative zephyrs about how sentences are parsed and analyzed")
+# parser = OptionParser()
+# parser.add_option("-v", "--v", action="store_true", dest="verbose", default=False, help="send informative zephyrs about how sentences are parsed and analyzed")
 
-(options, args) = parser.parse_args()
-verbose = options.verbose
+# (options, args) = parser.parse_args()
+# verbose = options.verbose
 
 sessions = {}
 # load the data the Dodona pulls from
@@ -28,13 +28,13 @@ init()
 
 while True:
     # recieve a message and return the sender as well
-    m = receive_from_subs(True, v=verbose)
+    m = receive_from_subs(True)
     (mess, sender) = m
     sender = sender.partition("@")[0]
     # if the session with this sender does not
     # already exist, then create it
     if not sessions.has_key(sender):
-        sessions[sender] = Session(sender, topics, verbose)
+        sessions[sender] = Session(sender, topics)
     # add the message to the memory
     sessions[sender].memory.push("message", mess)
     
@@ -42,27 +42,16 @@ while True:
     try:
         exit = sessions[sender].question()
     except KeyboardInterrupt:
-        if verbose:
-            send(traceback.format_exc(), v=verbose)
-        else:
-            send("Dodona is no longer running.", v=verbose)
+        send("Dodona is no longer running.")
         raise
     except:
-        if verbose:
-            send(traceback.format_exc(), sender, v=verbose)
+        print traceback.format_exc()
     else:
-        print sessions[sender].memory.read("topic")
-        print sessions[sender].memory.read("status")
-
-        if verbose:
-            send("Remembered topic: " + str(sessions[sender].memory.read("topic")) + \
-                 "\nRemembered status: " + str(sessions[sender].memory.read("status")), sender, v=verbose)
-
         # reset the session and prompt the user to
         # ask another question
         if exit == False:
             sessions[sender].clear()
-            send('Please ask me another question, or type \"exit\" to end the session.', sender, v=verbose)
+            send('Please ask me another question, or type \"exit\" to end the session.', sender)
         # if the user wants to exit, then delete
         # the session
         elif exit == True:
