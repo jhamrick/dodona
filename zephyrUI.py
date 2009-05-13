@@ -6,7 +6,7 @@ import traceback
 
 cls = ""
 
-def init(c = "jhamrick-test"):
+def init(c = "dodona-test"):
     """
     Initializes the python-zephyr utilities.
     """
@@ -18,7 +18,7 @@ def init(c = "jhamrick-test"):
     # send an initialization message
     send(custom_fill('Dodona is now running.  If you find that a topic you wish answered is not accounted for, please send mail to dodona AT mit DOT edu'))
 
-def send(mess, name = None, cls = "jhamrick-test"):
+def send(mess, name = None, cls = "dodona-test"):
     """
     Sends a zephyr to the specified cls, addressing
     a specific person if specified.
@@ -39,7 +39,7 @@ def send(mess, name = None, cls = "jhamrick-test"):
     except:
         print traceback.format_exc()
 
-def receive_from_subs(return_sender=False, cls = "jhamrick-test"):
+def receive_from_subs(return_sender=False, cls = "dodona-test"):
     """
     Receive a message from the cls specified in the 
     init method, and returns the message and the sender of the
