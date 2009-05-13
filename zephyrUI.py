@@ -6,7 +6,7 @@ import traceback
 
 cls = ""
 
-def init(c = "dodona-test"):
+def init(c = "jhamrick-test"):
     """
     Initializes the python-zephyr utilities.
     """
@@ -18,7 +18,7 @@ def init(c = "dodona-test"):
     # send an initialization message
     send(custom_fill('Dodona is now running.  If you find that a topic you wish answered is not accounted for, please send mail to dodona AT mit DOT edu'))
 
-def send(mess, name = None, cls = "dodona-test"):
+def send(mess, name = None, cls = "jhamrick-test", v = False):
     """
     Sends a zephyr to the specified cls, addressing
     a specific person if specified.
@@ -35,12 +35,13 @@ def send(mess, name = None, cls = "dodona-test"):
         z.send()
         #print "Dodona: " + mess
     except KeyboardInterrupt:
-        send(traceback.format_exc())
+        if v: send(traceback.format_exc())
+        else: send("Dodona is no longer running.")
         raise
     except:
-        print "There was an error sending the last message."
+        if v: send(traceback.format_exc())
 
-def receive_from_subs(return_sender=False, cls = "dodona-test"):
+def receive_from_subs(return_sender=False, cls = "jhamrick-test", v = False):
     """
     Receive a message from the cls specified in the 
     init method, and returns the message and the sender of the
@@ -52,7 +53,8 @@ def receive_from_subs(return_sender=False, cls = "dodona-test"):
             m = zephyr.receive(True)
             received = True
         except KeyboardInterrupt:
-            send(traceback.format_exc())
+            if v: send(traceback.format_exc())
+            else: send("Dodona is no longer running.")
             raise
         except:
             continue
@@ -62,7 +64,8 @@ def receive_from_subs(return_sender=False, cls = "dodona-test"):
         try:
             m = zephyr.receive(True)
         except KeyboardInterrupt:
-            send(traceback.format_exc())
+            if v: send(traceback.format_exc())
+            else: send("Dodona is no longer running.")
             raise
         except:
             continue
@@ -72,7 +75,8 @@ def receive_from_subs(return_sender=False, cls = "dodona-test"):
         try:
             m = zephyr.receive(True)
         except KeyboardInterrupt:
-            send(traceback.format_exc())
+            if v: send(traceback.format_exc())
+            else: send("Dodona is no longer running.")
             raise
         except:
             continue
@@ -83,7 +87,8 @@ def receive_from_subs(return_sender=False, cls = "dodona-test"):
         try:
             m = zephyr.receive(True)
         except KeyboardInterrupt:
-            send(traceback.format_exc())
+            if v: send(traceback.format_exc())
+            else: send("Dodona is no longer running.")
             raise
         except:
             continue
@@ -99,10 +104,11 @@ def receive_from_subs(return_sender=False, cls = "dodona-test"):
     try:
         m = str(m.strip().lower())
     except KeyboardInterrupt:
-        send(traceback.format_exc())
+        if v: send(traceback.format_exc())
+        else: send("Dodona is no longer running.")
         raise
     except:
-        send(traceback.format_exc())
+        if v: send(traceback.format_exc())
 
     if return_sender:  return [m, sender]
     else:  return m
