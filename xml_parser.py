@@ -43,7 +43,7 @@ def load_topic(file):
                 answers[answer_question.encode('ascii')] = answer.firstChild.data
             elif answer.localName == "default":
                 default_answer = answer.firstChild.data
-                #answers["DEFAULT"] = default_answer
+                answers["DEFAULT"] = default_answer
     return answers
 
 def update_files(topic, topics, newtopic=True):

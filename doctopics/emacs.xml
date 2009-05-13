@@ -1,7 +1,8 @@
 <?xml version="1.0" ?>
 <topic>
 	<default>
-		Overview of emacs
+This document gets you started using the GNU Emacs text editor (Athena's primary supported editor), the extensible, customizable, self-documenting real-time
+display editor. 
 	</default>
 	<answer question="version">
 Several versions of Emacs are available on Athena. GNU Emacs 21 (version 21.1.1) is the default version as of Athena 9.1. If you login to an older Athena 9.0 workstation, the default Emacs will be GNU Emacs 20 (version 20.7) Other versions of GNU Emacs are often available in the emacs locker.
