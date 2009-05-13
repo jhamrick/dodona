@@ -34,6 +34,7 @@ def load_topic(file):
     with said information.
     """
     answers = {}
+    print "Loading " + file + "..."
     xmldoc = minidom.parse(file)
     topicNode = xmldoc.firstChild
     for answer in topicNode.childNodes:
