@@ -45,6 +45,7 @@ class Session:
         # if the parse is returned as a tuple, then we know
         # that the parse failed.
         if isinstance(parse, tuple):
+
             # if the second value in the tuple is valid, then there were
             # words that were not in the grammar.  Tell the user about the
             # words, and then enter a function to learn the foreign words.
@@ -54,9 +55,10 @@ class Session:
                 self.memory.push("topic", list(parse[1]))
                 self.learn()
                 return
+
             # otherwise, we just couldn't parse the sentence
             else:
-                ans = "Sorry, I couldn't parse what you just said.."
+                ans = "Sorry, I couldn't parse what you just said."
 
         # otherwise, the parse succeeded
         else:
@@ -269,6 +271,7 @@ class Session:
         vocab.write("\n1\t" + pos + "\t" + word)
         vocab.close()
         self.parser.add_new_vocab_rule([pos, [word]])
+        send("Thanks!", self.name)
 
     def part_of_speech(self, mess, step):
         """
@@ -425,7 +428,7 @@ class Session:
         """
         name = self.name
         unknown_all = list(self.memory.pop("topic"))[1]
-        if unknown_all != []:
+        if unknown_all:
             unknown = unknown_all[0]
             del unknown_all[0]
             pos = ["Noun", \
