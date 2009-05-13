@@ -1,7 +1,7 @@
 import site
 site.addsitedir('/afs/athena.mit.edu/user/b/r/broder/lib/python2.5/site-packages')
 import zephyr
-from zephyrUI import init, send, receive_from_subs
+from zephyrUI import IO
 from fuzzystack import FuzzyStack
 from session import Session
 from xml_parser import load_topics
@@ -15,26 +15,28 @@ from optparse import OptionParser
 # with different users.
 ###################################
 
-# parser = OptionParser()
-# parser.add_option("-v", "--v", action="store_true", dest="verbose", default=False, help="send informative zephyrs about how sentences are parsed and analyzed")
+parser = OptionParser()
+parser.add_option("-c", "--class", dest="cls", default="dodona-test", help="set the class which Dodona listens on")
 
-# (options, args) = parser.parse_args()
-# verbose = options.verbose
+(options, args) = parser.parse_args()
+print options
+print args
+cls = options.cls
 
 sessions = {}
 # load the data the Dodona pulls from
 topics = load_topics("doctopics/topics.xml")
-init()
+bot = IO(cls)
 
 while True:
     # recieve a message and return the sender as well
-    m = receive_from_subs(True)
+    m = bot.receive_from_subs(True)
     (mess, sender) = m
     sender = sender.partition("@")[0]
     # if the session with this sender does not
     # already exist, then create it
     if not sessions.has_key(sender):
-        sessions[sender] = Session(sender, topics)
+        sessions[sender] = Session(sender, topics, bot)
     # add the message to the memory
     sessions[sender].memory.push("message", mess)
     
@@ -42,7 +44,7 @@ while True:
     try:
         exit = sessions[sender].question()
     except KeyboardInterrupt:
-        send("Dodona is no longer running.")
+        bot.send("Dodona is no longer running.")
         raise
     except:
         print traceback.format_exc()
@@ -51,7 +53,7 @@ while True:
         # ask another question
         if exit == False:
             sessions[sender].clear()
-            send('Please ask me another question, or type \"exit\" to end the session.', sender)
+            bot.send('Please ask me another question, or type \"exit\" to end the session.', sender)
         # if the user wants to exit, then delete
         # the session
         elif exit == True:

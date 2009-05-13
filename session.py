@@ -2,7 +2,6 @@ import site
 site.addsitedir('/afs/athena.mit.edu/user/b/r/broder/lib/python2.5/site-packages')
 
 import zephyr
-from zephyrUI import send
 from fuzzystack import FuzzyStack
 from helper import print_list, tokenize, integrate_lists, find_partial_key
 from nlp import get_sentence_type, find_topic, find_compound_noun, find_PP, find_noun, QUESTION, STATEMENT, COMMAND
@@ -16,13 +15,14 @@ from parsetree import Parser
 #######################################
 
 class Session:
-    def __init__(self, name, topics):
+    def __init__(self, name, topics, bot):
         self.memory = FuzzyStack(20)
         self.memory.push("data", topics)
         self.memory.push("name", name)
         self.name = name
         self.topics = topics
         self.parser = Parser()
+        self.bot = bot
 
     def AI(self, mess, d = None, k = None):
         """
@@ -48,7 +48,7 @@ class Session:
             # words that were not in the grammar.  Tell the user about the
             # words, and then enter a function to learn the foreign words.
             if parse[1]:
-                send("Sorry, I don't understand the following words: " + \
+                self.bot.send("Sorry, I don't understand the following words: " + \
                          ", ".join(parse[1]) + ".", self.name)
                 self.memory.push("topic", list(parse[1]))
                 self.learn()
@@ -99,7 +99,7 @@ class Session:
                     elif b_pp:
                         top = b_pp
             
-            # if we found both a topic and subtopic
+            # if we found self.both a topic and subtopic
             if top and subtop:
                 # convert the tree structures into strings
                 topic = " ".join(top.leaves())
@@ -248,7 +248,7 @@ class Session:
         # print the answer out to the terminal, and send the answer
         # to the user.
         print ans
-        send(ans, self.name)
+        self.bot.send(ans, self.name)
 
     def add_new_word(self, word, pos):
         """
@@ -259,7 +259,7 @@ class Session:
         vocab.write("\n1\t" + pos + "\t" + word)
         vocab.close()
         self.parser.add_new_vocab_rule([pos, [word]])
-        send("Thanks!", self.name)
+        self.bot.send("Thanks!", self.name)
 
     def part_of_speech(self, mess, step):
         """
@@ -300,14 +300,14 @@ class Session:
 
             # intransitive verb
             elif mess.find("intransitive verb") != -1:
-                send("What is the infinitive for the verb " + word + "?", name)
+                self.bot.send("What is the infinitive for the verb " + word + "?", name)
                 self.memory.pop("status")
                 self.memory.push("status", "pos_verb1in")
                 self.memory.push("topic", word)
 
             # transitive verb
             elif mess.find("transitive verb") != -1:
-                send("What is the infinitive for the verb " + word + "?", name)
+                self.bot.send("What is the infinitive for the verb " + word + "?", name)
                 self.memory.pop("status")
                 self.memory.push("status", "pos_verb1tr")
                 self.memory.push("topic", word)
@@ -335,7 +335,7 @@ class Session:
                 self.memory.push("status", "pos_verb2tr")
 
             self.memory.push("topic", word)
-            send("What is the present participle for the verb " + word + "?", name)
+            self.bot.send("What is the present participle for the verb " + word + "?", name)
             return None
 
         # step 3, stores the present participle
@@ -350,7 +350,7 @@ class Session:
                 self.memory.push("status", "pos_verb3tr")
 
             self.memory.push("topic", word)
-            send("What is the past participle for the verb " + word + "?", name)
+            self.bot.send("What is the past participle for the verb " + word + "?", name)
             return None
 
         # step 4, stores the past participle
@@ -365,7 +365,7 @@ class Session:
                 self.memory.push("status", "pos_verb4tr")
 
             self.memory.push("topic", word)
-            send("What is the 1st person singular present for the verb " + word + "?", name)
+            self.bot.send("What is the 1st person singular present for the verb " + word + "?", name)
             return None
 
         # step 5, stores the present base
@@ -380,7 +380,7 @@ class Session:
                 self.memory.push("status", "pos_verb5tr")
 
             self.memory.push("topic", word)
-            send("What is the 3rd person singular present for the verb " + word + "?", name)
+            self.bot.send("What is the 3rd person singular present for the verb " + word + "?", name)
             return None
 
         # step 6, stores the 3rd person singular
@@ -395,7 +395,7 @@ class Session:
                 self.memory.push("status", "pos_verb6tr")
 
             self.memory.push("topic", word)
-            send("What is the 1st person singular past for the verb " + word + "?", name)
+            self.bot.send("What is the 1st person singular past for the verb " + word + "?", name)
             return None
 
         # step 7, stores the past base
@@ -428,7 +428,7 @@ class Session:
                    "Preposition", \
                    "Other"]
 
-            send("Which of the following parts of speech is \'" + \
+            self.bot.send("Which of the following parts of speech is \'" + \
                      unknown + "\'?\n" + print_list(pos), name)
             self.memory.push("topic", unknown_all)
             self.memory.push("topic", unknown)
@@ -465,13 +465,13 @@ class Session:
         if mess.startswith("exit") or \
                 "bye" in m or \
                 "goodbye" in m:
-            send("Glad to be of help :)", name)
+            self.bot.send("Glad to be of help :)", name)
             return True
 
         # if the user says "nevermind", then
         # clear the session
         if mess.find("nevermind") != -1:
-            send("Ok.", name)
+            self.bot.send("Ok.", name)
             self.clear()
             return False
 
@@ -480,7 +480,7 @@ class Session:
         if "hi" in m or \
                 "hey" in m or \
                 "hello" in m != -1:
-            send("hello, " + name + "!")
+            self.bot.send("hello, " + name + "!")
             return None
         
         # check the status, and return the corresponding
