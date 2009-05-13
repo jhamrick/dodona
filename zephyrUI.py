@@ -1,4 +1,4 @@
-import site
+bimport site
 site.addsitedir('/afs/athena.mit.edu/user/b/r/broder/lib/python2.5/site-packages')
 import zephyr
 from helper import custom_fill, tokenize

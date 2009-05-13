@@ -5,11 +5,16 @@ from nltk.tree import Tree
 from parsetree import *
 import re
 
+# sentence types
 QUESTION = 1
 STATEMENT = 2
 COMMAND = 3
 
 def get_sentence_type(parse):
+    """
+    Determines the sentence type recursively, based on the rules the
+    tree is built out of.
+    """
     if isinstance(parse, str):
         return 0
 
@@ -31,6 +36,9 @@ def get_sentence_type(parse):
     return 0
 
 def find_PP(parse):
+    """
+    Finds the first prepositional phrase in the parse.
+    """
     if isinstance(parse, str): return None
     tree = parse.productions()[0]
 
@@ -44,6 +52,9 @@ def find_PP(parse):
     return None
 
 def find_noun(parse, exceptions=[]):
+    """
+    Finds the first noun in the parse.
+    """
     if isinstance(parse, str): return None
     tree = parse.productions()[0]
 
@@ -67,6 +78,9 @@ def find_noun(parse, exceptions=[]):
     return None
 
 def find_compound_noun(parse):
+    """
+    Finds the first compound noun in the parse.
+    """
     if isinstance(parse, str): return None
     tree = parse.productions()[0]
 
@@ -81,6 +95,9 @@ def find_compound_noun(parse):
     return None
 
 def find_after_verb(parse):
+    """
+    Finds the first "After_Verb_*" structure in the parse.
+    """
     if isinstance(parse, str): return None
     tree = parse.productions()[0]
     
@@ -93,12 +110,28 @@ def find_after_verb(parse):
             if subj: return subj
 
 def find_topic(parse, type=None, qword=None):
+    """
+    Finds the topic of a sentence, based on the sentence type:
+    either QUESTION, STATEMENT, or COMMAND.
+    """
+    
+    # find the sentence type if it's not specified
     if type == None: type = get_sentence_type(parse)
     if isinstance(parse, str): return None
     tree = parse.productions()[0]
     print type, "- tree:", tree
 
+    # for questions
     if type == QUESTION:
+
+        # All questions start with the "Ind_Clause_Ques*" structure.
+        # After that, there are several possibilities:
+        #    - VP_3rd
+        #    - Ind_Clause_Ques_Aux
+        #    - Interrog_Clause
+        #    - Ind_Clause_Inf*
+        # Depending on which one of these comes next, keep searching
+        # for the topic.
         if tree.lhs() == NT("Ind_Clause_Ques") or \
            tree.lhs() == NT("Ind_Clause_Ques_Aux"):
             if not qword: 
@@ -110,6 +143,8 @@ def find_topic(parse, type=None, qword=None):
                 print "VP_3rd"
                 return parse[-1][-1], qword
 
+            # this acts just like a statement, so call find_topic
+            # again, but specifying the type=STATEMENT
             elif rhs[-1] == NT("Ind_Clause_Ques_Aux"):
                 print "Ind_Clause_Ques_Aux"
                 return find_topic(parse[-1][-1], type=STATEMENT), qword
@@ -119,6 +154,8 @@ def find_topic(parse, type=None, qword=None):
                 print parse[-1][-1]
                 return find_after_verb(parse[-1][-1]), qword
 
+            # this acts just like a statement, so call find_topic
+            # again, but specifying the type=STATEMENT
             elif rhs[-1] == NT("Ind_Clause_Inf") or \
                  rhs[-1] == NT("Ind_Clause_Inf_3rd"):
                 print "Ind_Clause_Inf"
@@ -128,6 +165,7 @@ def find_topic(parse, type=None, qword=None):
                 subj = find_topic(subtree, type)
                 if subj: return subj
 
+    # for statements
     elif type == STATEMENT:
         if tree.lhs() == NT("VP_1st") or \
            tree.lhs() == NT("VP_Inf"):
@@ -140,6 +178,7 @@ def find_topic(parse, type=None, qword=None):
                 subj = find_topic(subtree, type)
                 if subj: return subj
 
+    # for commands
     elif type == COMMAND:
         if tree.lhs() == NT("VP_Inf"):
             rhs = tree.rhs()

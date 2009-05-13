@@ -36,54 +36,12 @@ def tokenize(mess):
     temp = mess
     offset = 0
 
-    #print mess
     for w in xrange(len(temp)):
         if mess[w-offset] == "": 
             del mess[w-offset]
             offset += 1
 
-    #print mess
     return mess
-
-#     words = []
-#     oldchars = ""
-#     for char in mess:
-#         if char == "," or \
-#            char == "." or \
-#            char == "?" or \
-#            char == "!":
-#             # if the previous characters are not whitespace,
-#             # then make them a new entry in the list
-#             if not oldchars == "":
-#                 words.append(oldchars)
-#                 oldchars = ""
-#             # if the current character is punctuation,
-#             # then make it a new entry in the list
-#             words.append(char)
-#         # if the current character is a space and the
-#         # previous characters are not whitespace, then
-#         # make the previous characters into an entry in
-#         # the list
-#         elif char == " " and not oldchars == "":
-#             words.append(oldchars)
-#             oldchars = ""
-#         # if the current character is a space and the
-#         # previous characters are whitespace, then do
-#         # nothing.
-#         elif char == " " and oldchars == "":
-#             pass
-#         # otherwise, add the current character to the string
-#         # of previous characters
-#         else:
-#             oldchars += char
-    
-#     # once you're at the end of the word, make any
-#     # previous characters which are not whitespace
-#     # to the list
-#     if oldchars != "":
-#         words.append(oldchars)
-
-#     return words
 
 def integrate_lists(list1, list2):
     """
