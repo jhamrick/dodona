@@ -36,10 +36,10 @@ while True:
     try:
         exit = sessions[sender].question()
     except KeyboardInterrupt:
-        send(traceback.format_exc(), name)
+        send(traceback.format_exc(), sender)
         raise
     except:
-        send(traceback.format_exc(), name)
+        send(traceback.format_exc(), sender)
     else:
         # reset the session and prompt the user to
         # ask another question

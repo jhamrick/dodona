@@ -31,6 +31,7 @@ class Session:
         if d == None: d = self.topics
         parse = self.parser.parse_sent(mess)
         print "PARSE:\n", parse
+        ans = None
         if isinstance(parse, tuple):
             if parse[1]:
                 foreign = ", ".join(parse[1])
@@ -52,8 +53,8 @@ class Session:
             if top:
                 pp = find_PP(top)
                 if pp:
-                    pp_noun = find_noun(pp)
-                    b_pp = find_noun(top, exceptions=[" ".join(pp_noun.leaves())])
+                    b_pp = find_noun(top)
+                    pp_noun = find_noun(top, exceptions=[" ".join(b_pp.leaves())])
                     if pp_noun: top = pp_noun
                     if b_pp: subtop = b_pp
 
