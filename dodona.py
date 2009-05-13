@@ -51,6 +51,13 @@ while True:
         if verbose:
             send(traceback.format_exc(), sender, v=verbose)
     else:
+        print sessions[sender].memory.read("topic")
+        print sessions[sender].memory.read("status")
+
+        if verbose:
+            send("Remembered topic: " + str(sessions[sender].memory.read("topic")) + \
+                 "\nRemembered status: " + str(sessions[sender].memory.read("status")), sender, v=verbose)
+
         # reset the session and prompt the user to
         # ask another question
         if exit == False:
