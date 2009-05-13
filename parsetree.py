@@ -25,7 +25,7 @@ while line:
         line = line[2:]
         parts = line.partition("\t")
         lhs = parts[0].strip()
-        rhs = parts[2].strip().split(" ")
+        rhs = parts[2].strip().lower().split(" ")
         rules.append(Production(NT(lhs), rhs))
     line = vocab.readline()
 vocab.close()
