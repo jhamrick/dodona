@@ -6,6 +6,7 @@ from zephyrUI import init, send, receive_from_subs
 from fuzzystack import FuzzyStack
 from session import Session
 from xml_parser import load_topics
+import traceback
 
 ###################################
 # This file runs Dodona.  It keeps
@@ -30,14 +31,22 @@ while True:
         sessions[sender] = Session(sender, topics)
     # add the message to the memory
     sessions[sender].memory.push("message", mess)
+    
     # parse the message
-    exit = sessions[sender].question()
-    # reset the session and prompt the user to
-    # ask another question
-    if exit == False:
-        sessions[sender].clear()
-        send('Please ask me another question, or type \"exit\" to end the session.', sender)
-    # if the user wants to exit, then delete
-    # the session
-    elif exit == True:
-        del sessions[sender]
+    try:
+        exit = sessions[sender].question()
+    except KeyboardInterrupt:
+        send(traceback.format_exc(), name)
+        raise
+    except:
+        send(traceback.format_exc(), name)
+    else:
+        # reset the session and prompt the user to
+        # ask another question
+        if exit == False:
+            sessions[sender].clear()
+            send('Please ask me another question, or type \"exit\" to end the session.', sender)
+        # if the user wants to exit, then delete
+        # the session
+        elif exit == True:
+            del sessions[sender]
