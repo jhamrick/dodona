@@ -19,8 +19,6 @@ parser = OptionParser()
 parser.add_option("-c", "--class", dest="cls", default="dodona-test", help="set the class which Dodona listens on")
 
 (options, args) = parser.parse_args()
-print options
-print args
 cls = options.cls
 
 sessions = {}

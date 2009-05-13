@@ -96,6 +96,24 @@ class Parser:
             print "failure"
             return None, foreign
 
+    def parse_NP(self, sen):
+        """
+        Parses a partial sentence (that is, usually a noun phrase.
+        Returns the parse, or returns a tuple.
+        """
+        try:
+            cfg_temp = ContextFreeGrammar(NT("NP"), self.rules)
+            parser_temp = EarleyChartParser(cfg_temp, trace=0)
+            parse = parser_temp.nbest_parse(sen.strip().split(" "), trace=0)
+        except:
+            print traceback.format_exc()
+        
+        if parse:
+            return parse[0]
+        else:
+            print "failure"
+            return None
+
     def rand_sent(self, left=None):
         """
         Creates a random sentence from self.cfg.

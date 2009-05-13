@@ -24,6 +24,170 @@ class Session:
         self.parser = Parser()
         self.bot = bot
 
+    def topic(self, top, d=None, subtop=None):
+        if d == None: d = self.topics
+        # look for a PP
+        pp = find_PP(top)
+
+        # if a PP exists, then look for the nouns:  in the most
+        # common cases, there will be either one or two, for
+        # example "keys in emacs" or "about emacs"
+        if pp:
+            b_pp = find_noun(top)
+            pp_noun = find_noun(top, exceptions=[" ".join(b_pp.leaves())])
+            print "First noun found:", b_pp
+            print "Second noun found:", pp_noun
+
+            if pp_noun and b_pp: 
+                top = pp_noun
+                subtop = b_pp
+            elif b_pp:
+                top = b_pp
+
+        # if we found self.both a topic and subtopic
+        if top and subtop:
+            # convert the tree structures into strings
+            topic = " ".join(top.leaves())
+            subtopic = " ".join(subtop.leaves())
+            print "TOPIC:", topic
+            print "SUBTOPIC:", subtopic
+
+            # check to see if topic is a key in the knowledge
+            # dictionary, and that the the entry corresponding
+            # to topic is also a dictionary
+            if d.has_key(topic) and isinstance(d[topic], dict):
+
+                # if subtopic is a key in the entry corresponding
+                # to topic, then set the subtopic entry as the answer.
+                # otherwise, say that we know about topic, but not
+                # subtopic.
+                if d[topic].has_key(subtopic):
+                    ans = d[topic][subtopic]
+                else:
+                    ans = "Sorry, I know about " + topic + \
+                        ", but I don't know about " + subtopic + "."
+
+            # check to see if the current topic stored in memory is
+            # the same as the topic we found.
+            elif topic == k:
+
+                # is the subtopic we found a key in the dictionary?
+                # if so, set it's entry as the anser.  Otherwise,
+                # say that we know about topic, but not subtopic
+                if d.has_key(subtopic):
+                    ans = d[subtopic]
+                else:
+                    ans = "Sorry, I know about " + topic + \
+                        ", but I don't know about " + subtopic + "."
+
+            # otherwise, we don't know what's going on
+            else:
+                if type == QUESTION:
+                    ans = "Sorry, I don't know what you are asking me."
+                else:
+                    ans = "Sorry, I don't know what you are saying." 
+
+        # or, if there is no subtopic
+        elif top:
+
+            # check for compound nouns.  Just because we didn't
+            # find a subtopic out of prepositional phrases doesn't
+            # mean that one doesn't exist.  For example, we want
+            # TOPIC=emacs, SUBTOPIC=keys from "emacs keys"
+            compound = find_compound_noun(top)
+
+            if compound:
+                c = compound.leaves()
+                ans = ""
+                t = None
+
+                # we want to check all groupings of topics and
+                # subtopics.  So, if there are three words, A B C,
+                # we could have TOPIC=A, SUBTOPIC="B C", or TOPIC="A B",
+                # SUBTOPIC=C
+                for i in xrange(1, len(c)):
+
+                    # convert the tree structures into strings
+                    topic = " ".join(c[:i])
+                    subtopic = " ".join(c[i:])
+                    print "TOPIC:", topic
+                    print "SUBTOPIC:", subtopic
+
+                    # check to see if the dictionary has topic as a key
+                    # and if the entry corresponding to that is also a
+                    # dictionary
+                    if d.has_key(topic) and isinstance(d[topic], dict):
+
+                        # is subtopic a key in the sub-dictionary?
+                        if d[topic].has_key(subtopic):
+                            ans = d[topic][subtopic]
+                        else:
+                            ans = "Sorry, I know about " + topic + \
+                                ", but I don't know about " + subtopic + \
+                                "."
+
+                    # check to see if the current topic in memory
+                    # is the topic that we've found
+                    elif topic == k:
+
+                        # does the dictionary have subtopic as a key?
+                        if d.has_key(subtopic):
+                            ans = d[subtopic]
+                        else:
+                            ans = "Sorry, I know about " + topic + \
+                                ", but I don't know about " + subtopic + \
+                                "."
+
+                # if we didn't find an answer, then say we don't know
+                # about the topic
+                if not ans:
+                    ans = "Sorry, I don't know about " + \
+                        " ".join(top.leaves()) + "."
+
+
+            # if the topic isn't a compound noun, or it is but we weren't
+            # able to find a topic and subtopic (because it's possible that
+            # the topic itself is multiple words, and there is no
+            # subtopic):
+            if (compound and ans.startswith("Sorry")) or not compound:
+
+                # convert the tree structure into a string
+                topic = " ".join(top.leaves())
+                print "TOPIC:", topic
+
+                # if the topic is a key in the dictionary
+                if d.has_key(topic):
+
+                    # if the entry matching topic is a dictionary, then
+                    # we should ask what subtopic they want to know about
+                    if isinstance(d[topic], dict):
+                        ans = d[topic]['default'] + "\n" + \
+                            "Multiple keywords match your query.  " + \
+                            "What did you mean to ask about?\n\n" + \
+                            print_list(d[topic].keys())
+                        self.memory.push("topic", topic)
+                        self.memory.push("data", d[topic])
+
+                    # otherwise, just give them the entry that corresponds
+                    # to topic
+                    else:
+                        ans = d[topic]
+
+                # if the topic we found is the same as the topic in
+                # memory, then ask (again) which subtopic they
+                # want to ask about
+                elif topic == k:
+                    ans = d['default'] + "\n" + \
+                        "Multiple keywords match your query.  " + \
+                        "What did you mean to ask about?\n\n" + \
+                        print_list(d.keys())
+
+                # otherwise, we don't know what they're talking about
+                else:
+                    ans = "Sorry, I don't know about " + topic + "."
+
+        return ans
+
     def AI(self, mess, d = None, k = None):
         """
         Parses the message, and attempts to locate a topic.  If it is
@@ -56,7 +220,12 @@ class Session:
 
             # otherwise, we just couldn't parse the sentence
             else:
-                ans = "Sorry, I couldn't parse what you just said."
+                parse = self.parser.parse_NP(mess)
+                print "NP PARSE:\n", parse
+                if parse:
+                    ans = self.topic(parse, d=d)
+                else:
+                    ans = "Sorry, I couldn't parse what you just said."
 
         # otherwise, the parse succeeded
         else:
@@ -68,7 +237,6 @@ class Session:
             # we don't yet know what the subtopic is, so just set it to
             # None.
             top = find_topic(parse, type)
-            subtop = None
 
             # if the sentence is a question and find_topic() found a
             # topic, then top is a tuple, and we need to store the
@@ -81,163 +249,7 @@ class Session:
             # prepositional phrase.  For example, we want to be able
             # to get TOPIC=emacs, SUBTOPIC=keys from "keys in emacs"
             if top:
-                # look for a PP
-                pp = find_PP(top)
-
-                # if a PP exists, then look for the nouns:  in the most
-                # common cases, there will be either one or two, for
-                # example "keys in emacs" or "about emacs"
-                if pp:
-                    b_pp = find_noun(top)
-                    pp_noun = find_noun(top, exceptions=[" ".join(b_pp.leaves())])
-                    print "First noun found:", b_pp
-                    print "Second noun found:", pp_noun
-
-                    if pp_noun and b_pp: 
-                        top = pp_noun
-                        subtop = b_pp
-                    elif b_pp:
-                        top = b_pp
-            
-            # if we found self.both a topic and subtopic
-            if top and subtop:
-                # convert the tree structures into strings
-                topic = " ".join(top.leaves())
-                subtopic = " ".join(subtop.leaves())
-                print "TOPIC:", topic
-                print "SUBTOPIC:", subtopic
-
-                # check to see if topic is a key in the knowledge
-                # dictionary, and that the the entry corresponding
-                # to topic is also a dictionary
-                if d.has_key(topic) and isinstance(d[topic], dict):
-
-                    # if subtopic is a key in the entry corresponding
-                    # to topic, then set the subtopic entry as the answer.
-                    # otherwise, say that we know about topic, but not
-                    # subtopic.
-                    if d[topic].has_key(subtopic):
-                        ans = d[topic][subtopic]
-                    else:
-                        ans = "Sorry, I know about " + topic + \
-                            ", but I don't know about " + subtopic + "."
-
-                # check to see if the current topic stored in memory is
-                # the same as the topic we found.
-                elif topic == k:
-
-                    # is the subtopic we found a key in the dictionary?
-                    # if so, set it's entry as the anser.  Otherwise,
-                    # say that we know about topic, but not subtopic
-                    if d.has_key(subtopic):
-                        ans = d[subtopic]
-                    else:
-                        ans = "Sorry, I know about " + topic + \
-                            ", but I don't know about " + subtopic + "."
-
-                # otherwise, we don't know what's going on
-                else:
-                    if type == QUESTION:
-                        ans = "Sorry, I don't know what you are asking me."
-                    else:
-                        ans = "Sorry, I don't know what you are saying." 
-
-            # or, if there is no subtopic
-            elif top:
-
-                # check for compound nouns.  Just because we didn't
-                # find a subtopic out of prepositional phrases doesn't
-                # mean that one doesn't exist.  For example, we want
-                # TOPIC=emacs, SUBTOPIC=keys from "emacs keys"
-                compound = find_compound_noun(top)
-
-                if compound:
-                    c = compound.leaves()
-                    ans = ""
-                    t = None
-
-                    # we want to check all groupings of topics and
-                    # subtopics.  So, if there are three words, A B C,
-                    # we could have TOPIC=A, SUBTOPIC="B C", or TOPIC="A B",
-                    # SUBTOPIC=C
-                    for i in xrange(1, len(c)):
-
-                        # convert the tree structures into strings
-                        topic = " ".join(c[:i])
-                        subtopic = " ".join(c[i:])
-                        print "TOPIC:", topic
-                        print "SUBTOPIC:", subtopic
-
-                        # check to see if the dictionary has topic as a key
-                        # and if the entry corresponding to that is also a
-                        # dictionary
-                        if d.has_key(topic) and isinstance(d[topic], dict):
-
-                            # is subtopic a key in the sub-dictionary?
-                            if d[topic].has_key(subtopic):
-                                ans = d[topic][subtopic]
-                            else:
-                                ans = "Sorry, I know about " + topic + \
-                                    ", but I don't know about " + subtopic + \
-                                    "."
-
-                        # check to see if the current topic in memory
-                        # is the topic that we've found
-                        elif topic == k:
-
-                            # does the dictionary have subtopic as a key?
-                            if d.has_key(subtopic):
-                                ans = d[subtopic]
-                            else:
-                                ans = "Sorry, I know about " + topic + \
-                                    ", but I don't know about " + subtopic + \
-                                    "."
-                    
-                    # if we didn't find an answer, then say we don't know
-                    # about the topic
-                    if not ans:
-                        ans = "Sorry, I don't know about " + \
-                            " ".join(top.leaves()) + "."
-
-
-                # if the topic isn't a compound noun, or it is but we weren't
-                # able to find a topic and subtopic (because it's possible that
-                # the topic itself is multiple words, and there is no
-                # subtopic):
-                if (compound and ans.startswith("Sorry")) or not compound:
-
-                    # convert the tree structure into a string
-                    topic = " ".join(top.leaves())
-                    print "TOPIC:", topic
-
-                    # if the topic is a key in the dictionary
-                    if d.has_key(topic):
-                        
-                        # if the entry matching topic is a dictionary, then
-                        # we should ask what subtopic they want to know about
-                        if isinstance(d[topic], dict):
-                            ans = d[topic]['default'] + "\n" + "Multiple keywords match your query.  " + \
-                                "What did you mean to ask about?\n\n" + \
-                                print_list(d[topic].keys())
-                            self.memory.push("topic", topic)
-                            self.memory.push("data", d[topic])
-
-                        # if the topic we found is the same as the topic in
-                        # memory, then ask (again) which subtopic they
-                        # want to ask about
-                        elif topic == k:
-                            ans = d[topic]['default'] + "\n" + "Multiple keywords match your query.  " + \
-                                "What did you mean to ask about?\n\n" + \
-                                print_list(d.keys())
-
-                        # otherwise, just give them the entry that corresponds
-                        # to topic
-                        else:
-                            ans = d[topic]
-
-                    # otherwise, we don't know what they're talking about
-                    else:
-                        ans = "Sorry, I don't know about " + topic + "."
+                ans = self.topic(top, d=d)
 
             # otherwise, we couldn't find a topic from the sentence, so
             # tell them so
