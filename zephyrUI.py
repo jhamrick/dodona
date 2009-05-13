@@ -2,6 +2,7 @@ import site
 site.addsitedir('/afs/athena.mit.edu/user/b/r/broder/lib/python2.5/site-packages')
 import zephyr
 from helper import custom_fill, tokenize
+import traceback
 
 cls = ""
 
@@ -34,6 +35,7 @@ def send(mess, name = None, cls = "dodona-test"):
         z.send()
         #print "Dodona: " + mess
     except KeyboardInterrupt:
+        send(traceback.format_exc())
         raise
     except:
         print "There was an error sending the last message."
@@ -50,6 +52,7 @@ def receive_from_subs(return_sender=False, cls = "dodona-test"):
             m = zephyr.receive(True)
             received = True
         except KeyboardInterrupt:
+            send(traceback.format_exc())
             raise
         except:
             continue
@@ -59,6 +62,7 @@ def receive_from_subs(return_sender=False, cls = "dodona-test"):
         try:
             m = zephyr.receive(True)
         except KeyboardInterrupt:
+            send(traceback.format_exc())
             raise
         except:
             continue
@@ -68,6 +72,7 @@ def receive_from_subs(return_sender=False, cls = "dodona-test"):
         try:
             m = zephyr.receive(True)
         except KeyboardInterrupt:
+            send(traceback.format_exc())
             raise
         except:
             continue
@@ -78,6 +83,7 @@ def receive_from_subs(return_sender=False, cls = "dodona-test"):
         try:
             m = zephyr.receive(True)
         except KeyboardInterrupt:
+            send(traceback.format_exc())
             raise
         except:
             continue
