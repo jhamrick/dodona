@@ -90,6 +90,13 @@ class Session:
                 if pp:
                     b_pp = find_noun(top)
                     pp_noun = find_noun(top, exceptions=[" ".join(b_pp.leaves())])
+                    print "First noun found:", b_pp
+                    print "Second noun found:", pp_noun
+                    if self.verbose:
+                        send("First noun found: " + str(b_pp) + \
+                             "\nSecond noun found: " + \
+                             str(pp_noun), self.name)
+
                     if pp_noun and b_pp: 
                         top = pp_noun
                         subtop = b_pp

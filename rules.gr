@@ -678,7 +678,6 @@
 1 AdjP			       Adj_State
 1 AdjP			       Adj_Dir
 1 AdjP			       Poss_Adj
-1 AdjP			       Noun PP
 
 1 Modal_Pres_Neg_Neg	       Modal_Pres_Neg Not
 1 Modal_Past_Neg	       Modal_Past Not
