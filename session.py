@@ -40,9 +40,6 @@ class Session:
 
         for topic in nouns:
             for subtopic in nouns:
-                print "TOPIC:", topic
-                print "SUBTOPIC:", subtopic
-
                 # check to see if topic is a key in the knowledge
                 # dictionary, and that the the entry corresponding
                 # to topic is also a dictionary
@@ -51,6 +48,8 @@ class Session:
                     # if subtopic is a key in the entry corresponding
                     # to topic, then set the subtopic entry as the answer.
                     if d[topic].has_key(subtopic):
+                        print "TOPIC:", topic
+                        print "SUBTOPIC:", subtopic
                         ans = d[topic][subtopic]
 
                 # check to see if the current topic stored in memory is
@@ -60,13 +59,12 @@ class Session:
                     # is the subtopic we found a key in the dictionary?
                     # if so, set it's entry as the anser.
                     if d.has_key(subtopic):
+                        print "TOPIC:", topic
+                        print "SUBTOPIC:", subtopic
                         ans = d[subtopic]
-
-                print ans
 
         if not ans:
             for topic in nouns:
-                print "TOPIC:", topic
 
                 # if the topic is a key in the dictionary
                 if d.has_key(topic):
@@ -74,6 +72,7 @@ class Session:
                     # if the entry matching topic is a dictionary, then
                     # we should ask what subtopic they want to know about
                     if isinstance(d[topic], dict):
+                        print "TOPIC:", topic
                         ans = d[topic]['default'] + "\n" + \
                             "Multiple keywords match your query.  " + \
                             "What did you mean to ask about?\n\n" + \
@@ -84,12 +83,14 @@ class Session:
                     # otherwise, just give them the entry that corresponds
                     # to topic
                     else:
+                        print "TOPIC:", topic
                         ans = d[topic]
 
                 # if the topic we found is the same as the topic in
                 # memory, then ask (again) which subtopic they
                 # want to ask about
                 elif topic == k:
+                    print "TOPIC:", topic
                     ans = d['default'] + "\n" + \
                         "Multiple keywords match your query.  " + \
                         "What did you mean to ask about?\n\n" + \

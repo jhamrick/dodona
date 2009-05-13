@@ -75,14 +75,14 @@ class Parser:
             if parse: print parse[0]
             else: print "failure"
 
-    def parse_sent(self, sen):
+    def parse_sent(self, sen, tr=0):
         """
         Parses a single sentence.  Returns the parse, or returns a
         tuple (None, foreign_words).
         """
         foreign = []
         try:
-            parse = self.parser.nbest_parse(sen.strip().split(" "), trace=0)
+            parse = self.parser.nbest_parse(sen.strip().split(" "), trace=tr)
         except:
             sen = sen.strip().split(" ")
             for word in sen:
@@ -96,7 +96,7 @@ class Parser:
             print "failure"
             return None, foreign
 
-    def parse_NP(self, sen):
+    def parse_NP(self, sen, tr=0):
         """
         Parses a partial sentence (that is, usually a noun phrase.
         Returns the parse, or returns a tuple.
@@ -104,7 +104,7 @@ class Parser:
         try:
             cfg_temp = ContextFreeGrammar(NT("NP"), self.rules)
             parser_temp = EarleyChartParser(cfg_temp, trace=0)
-            parse = parser_temp.nbest_parse(sen.strip().split(" "), trace=0)
+            parse = parser_temp.nbest_parse(sen.strip().split(" "), trace=tr)
         except:
             print traceback.format_exc()
         

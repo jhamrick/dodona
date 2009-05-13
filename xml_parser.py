@@ -15,12 +15,12 @@ def load_topics(file):
     topicsNode = xmldoc.firstChild
     for topic in topicsNode.childNodes:
         if topic.nodeType == topic.ELEMENT_NODE and topic.localName == "topic":
-            topic_name = topic.attributes["name"].value
+            topic_name = topic.attributes["name"].value.lower()
             topic_file = topic.attributes["file"].value
             topics[topic_name.encode('ascii')] = load_topic(topic_file)
     for topic in topicsNode.childNodes:
         if topic.nodeType == topic.ELEMENT_NODE and topic.localName == "alias":
-            topic_name = topic.attributes["name"].value
+            topic_name = topic.attributes["name"].value.lower()
             topic_file = topic.attributes["to"].value
             topics[topic_name.encode('ascii')] = topics[(topic_file)]
 
@@ -34,12 +34,13 @@ def load_topic(file):
     with said information.
     """
     answers = {}
+    print "Loading " + file + "..."
     xmldoc = minidom.parse(file)
     topicNode = xmldoc.firstChild
     for answer in topicNode.childNodes:
         if answer.nodeType == answer.ELEMENT_NODE:
             if answer.localName == "answer":
-                answer_question = answer.attributes["question"].value
+                answer_question = answer.attributes["question"].value.lower()
                 answers[answer_question.encode('ascii')] = answer.firstChild.data
             elif answer.localName == "default":
                 default_answer = answer.firstChild.data

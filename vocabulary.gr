@@ -1,46 +1,46 @@
 #################### Nouns ######################
  
 # Names
-1 Name		Dodona
-1 Name		jhamrick
-1 Name		Jessica
-1 Name		Socrates
-1 Name		geofft
-1 Name		God
+1 Noun		Dodona
+1 Noun		jhamrick
+1 Noun		Jessica
+1 Noun		Socrates
+1 Noun		geofft
+1 Noun		God
  
 # Places (do not require "the")
-1 Place		Cambridge
-1 Place		Somerville
+1 Noun		Cambridge
+1 Noun		Somerville
 1 Place		MIT
 
 # Events
-1 Event		DEFCON
- 
-# Programs
-1 Program		scheme
-1 Program		emacs
-1 Program		BarnOwl
-1 Program		Google
-1 Program		Linux
-1 Program		git
-1 Program		Ubuntu
-1 Program		Athena
-1 Program		Zephyr
-1 Program		SkyNet
-1 Program		UNIX
-1 Program		Intrepid
+1 Noun		DEFCON
 
-1 Command		\def
-1 Command		\newcommand
-1 Command		^M
+# Programs
+1 Noun		scheme
+1 Noun		emacs
+1 Noun		BarnOwl
+1 Noun		Google
+1 Noun		Linux
+1 Noun		git
+1 Noun		Ubuntu
+1 Noun		Athena
+1 Noun		Zephyr
+1 Noun		SkyNet
+1 Noun		UNIX
+1 Noun		Intrepid
+
+1 Noun		\def
+1 Noun		\newcommand
+1 Noun		^M
  
 # Organizations
-1 Org		SIPB
+1 Noun		SIPB
  
 # Field of study
-1 Field		NLP
-1 Field		CS
-1 Field		EE
+1 Noun		NLP
+1 Noun		CS
+1 Noun		EE
  
 # Singular nouns
 1 Noun		green

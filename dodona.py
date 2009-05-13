@@ -25,6 +25,7 @@ sessions = {}
 # load the data the Dodona pulls from
 topics = load_topics("doctopics/topics.xml")
 bot = IO(cls)
+print "\nDodona successfully started!\n"
 
 while True:
     # recieve a message and return the sender as well

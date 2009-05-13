@@ -567,6 +567,9 @@
 1 Verb_As_Noun		       V_Pres_Part_Tr NP_Obj
 1 Verb_As_Noun		       V_Pres_Part_Tr
 1 Verb_As_Noun		       V_Pres_Part_In
+1 Verb_As_Noun		       To V_Inf_Tr NP_Obj
+1 Verb_As_Noun		       To V_Inf_Tr
+1 Verb_As_Noun		       To V_Inf_In
 
 1 PP			       Prep NP_Obj
 
