@@ -16,5 +16,5 @@
 <topic name="motorcycles" file="doctopics/motorcycles.xml"/>
 <topic name="words" file="doctopics/words.xml"/>
 <topic name="printing" file="doctopics/printing.xml"/>
-<alias name="print" file="printing"/>
+<alias name="print" to="printing"/>
 </topics>

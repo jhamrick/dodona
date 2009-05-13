@@ -3,12 +3,7 @@
 <default>Athena provides various methods for printing documents and managaging queues. Please
 see the subtopics for more information.</default>
 
-<answer question="intro">
-Athena provides various methods for printing documents and managaging queues. Please
-see the subtopics for more information. 
-</answer>
-
-<answer question="print a document">
+<answer question="printing a document">
 To print a file to your default printer, type:
 
   athena% lpr filename
@@ -30,7 +25,7 @@ The | is a vertical bar, also known as a "pipe" (Shift-\ on most keyboards). A p
   athena% ls | lpr -Pprintername
 </answer>
 
-<answer question="print double-sided">
+<answer question="printing double-sided">
 
 To print a document double-sided, add a numeral 2 to the regular printername in the print command. For example, to print file mydoc in duplex mode on the printer ajax, type:
 
@@ -80,7 +75,7 @@ Specifying ajax or ajax2 shows all the jobs in line for that printer. The lpq co
 
 You might also receive Zephyr windowgrams from the print server telling you about problems. For example, if the printer runs out of paper while your job is printing, you may receive a zephyr telling you so.
 </answer>
-<answer question="remove a print job">
+<answer question="to remove a print job">
 If you want to send your file to a different printer (e.g., if the printer is down or the queue is too long), or if you sent the wrong file or no longer want the printout, you can remove your job from the queue. To remove an entry from the queue:
 
   athena% lprm jobnumber

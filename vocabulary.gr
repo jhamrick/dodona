@@ -515,6 +515,13 @@
 1 V_Base_Past_Tr	used
 1 V_3rdSing_Pres_Tr	uses
 
+1 V_Inf_Tr		print
+1 V_Pres_Part_Tr	printing
+1 V_Past_Part_Tr	printed
+1 V_Base_Pres_Tr	print
+1 V_Base_Past_Tr	printed
+1 V_3rdSing_Pres_Tr	prints
+
 1 V_Inf_Tr		select
 1 V_Pres_Part_Tr	selecting
 1 V_Past_Part_Tr	selected
@@ -1154,3 +1161,9 @@
 1	V_Base_Past_In	ran
 1	Noun		paste
 1	Noun_Pl		pastes
+
+1	Noun			job
+1	Noun   		queue
+1 	Noun			document
+
+1	Noun	document
