@@ -74,6 +74,9 @@ def find_noun(parse, exceptions=[]):
        tree.lhs() == NT("Command") or \
        tree.lhs() == NT("File_Addr") or \
        tree.lhs() == NT("Web_Addr") or \
+       tree.lhs() == NT("CompoundNoun") or \
+       tree.lhs() == NT("Noun") or \
+       tree.lhs() == NT("Noun_Pl") or \
        tree.lhs() == NT("Nominal") or \
        tree.lhs() == NT("Nominal_Pl")) and \
        " ".join(parse.leaves()) not in exceptions: 

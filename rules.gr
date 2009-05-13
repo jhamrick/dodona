@@ -1,18 +1,18 @@
 1 START			       S
 
-1 S			       Name Comma Ind_Clause_Ques PuncQ
-1 S			       Name Comma Ind_Clause_Ques_Aux PuncQ
-1 S			       Name Comma Ind_Clause Punc
+1 S			       Noun Comma Ind_Clause_Ques PuncQ
+1 S			       Noun Comma Ind_Clause_Ques_Aux PuncQ
+1 S			       Noun Comma Ind_Clause Punc
 1 S			       Ind_Clause Punc
 1 S			       Ind_Clause_Ques PuncQ
 1 S			       Ind_Clause_Ques_Aux PuncQ
-1 S			       Ind_Clause Comma Name PuncQ
-1 S			       Ind_Clause_Ques Comma Name PuncQ
-1 S			       Ind_Clause_Ques_Aux Comma Name PuncQ
+1 S			       Ind_Clause Comma Noun PuncQ
+1 S			       Ind_Clause_Ques Comma Noun PuncQ
+1 S			       Ind_Clause_Ques_Aux Comma Noun PuncQ
 1 S			       Ind_Clause Comma Subord_Conj Ind_Clause Punc
-1 S			       Name Comma Ind_Clause Comma Subord_Conj Ind_Clause Punc
+1 S			       Noun Comma Ind_Clause Comma Subord_Conj Ind_Clause Punc
 1 S			       Ind_Clause Subord_Conj Ind_Clause Punc
-1 S			       Name Comma Ind_Clause Subord_Conj Ind_Clause Punc
+1 S			       Noun Comma Ind_Clause Subord_Conj Ind_Clause Punc
 
 1 Ind_Clause_Ques	       Interrog_Det VP_3rd
 1 Ind_Clause_Ques	       Interrog_Det VP_3rd Prep
