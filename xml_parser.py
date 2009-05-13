@@ -24,7 +24,7 @@ def load_topics(file):
             topic_file = topic.attributes["to"].value
             topics[topic_name.encode('ascii')] = topics[(topic_file)]
 
-    #print topics
+    print topics.keys()
     return topics
 
 def load_topic(file):
