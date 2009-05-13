@@ -145,6 +145,7 @@
 1 Noun		auto-fill
 1 Noun		auto-save
 1 Noun		rebound
+1 Noun		service
  
 # Plural nouns
 
@@ -242,6 +243,7 @@
 1 Noun_Pl		robots
 1 Noun_Pl		bots
 1 Noun_Pl		fills
+1 Noun_Pl		services
  
 #################### Pronouns ####################
  
@@ -1132,3 +1134,5 @@
 1	Noun_Pl	dogs
 1	Noun_Pl	kitties
 1	Noun_Pl	fishies
+
+1	Noun	default

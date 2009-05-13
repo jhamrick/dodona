@@ -227,7 +227,7 @@ class Session:
                         # if the entry matching topic is a dictionary, then
                         # we should ask what subtopic they want to know about
                         if isinstance(d[topic], dict):
-                            ans = d[topic]['DEFAULT'] + "Multiple keywords match your query.  " + \
+                            ans = d[topic]['default'] + "\n" + "Multiple keywords match your query.  " + \
                                 "What did you mean to ask about?\n\n" + \
                                 print_list(d[topic].keys())
                             self.memory.push("topic", topic)
@@ -237,7 +237,7 @@ class Session:
                         # memory, then ask (again) which subtopic they
                         # want to ask about
                         elif topic == k:
-                            ans = "Multiple keywords match your query.  " + \
+                            ans = d[topic]['default'] + "\n" + "Multiple keywords match your query.  " + \
                                 "What did you mean to ask about?\n\n" + \
                                 print_list(d.keys())
 

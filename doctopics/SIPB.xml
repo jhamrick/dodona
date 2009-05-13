@@ -1,7 +1,32 @@
 <?xml version="1.0" ?>
 <topic>
-<default>Overview of SIPB</default>
+<default>
+SIPB is MIT's volunteer student computing group, improving computing at MIT since 1969. Today, SIPB projects provide innovative services and special expertise to the MIT community. Their office is just outside the Athena cluster in the student center W20, and you are welcome to come by to ask SIPB for help or to hang around, use the computers, and maybe get involved.
+</default>
 <answer question="acronym">
 Student Information Processing Board
 </answer>
+
+<answer question="services">
+scripts.mit.edu: Get your own blog or wiki, or run any web app! 
+                 The SIPB scripts server runs CGI scripts out 
+		   of your Athena locker.
+
+xvm.mit.edu: Your own virtual server. Reliable, easy, and flexible.
+
+debathena.mit.edu: Bringing MIT's Athena environment to Debian 
+                   and Ubuntu, first for our laptops, and then 
+                   back to the clusters.
+
+linerva.mit.edu: Remote login access to Athena on a powerful 
+                 Debian GNU/Linux server running Debathena.
+
+Documentation: Helpful and informative documents about various 
+               computing topics at MIT, written by SIPB.
+
+Computer Help: Have a computing question or need some help? 
+               Come drop by our office.
+</answer>
+
+
 </topic>

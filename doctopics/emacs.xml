@@ -1,7 +1,7 @@
 <?xml version="1.0" ?>
 <topic>
 	<default>
-This document gets you started using the GNU Emacs text editor (Athena's primary supported editor), the extensible, customizable, self-documenting real-time
+The GNU Emacs text editor (Athena's primary supported editor) is an extensible, customizable, self-documenting real-time
 display editor. 
 	</default>
 	<answer question="version">
