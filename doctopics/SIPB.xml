@@ -28,5 +28,31 @@ Computer Help: Have a computing question or need some help?
                Come drop by our office.
 </answer>
 
+<answer question="events">
+
+IAP classes:     Teach or learn. Knowledge is power. 
+                 http://sipb.mit.edu/iap/
+
+SIPB Cluedumps:  Every year, SIPB hosts a number of computer-related 
+                 technical talks on a variety of subjects.
+
+Hackathons:      Like coding? Come work on cool projects with us 
+		   at SIPB! We're always looking for new members, 
+                 so feel free to drop by our Hackathons to help us 
+                 improve computing at MIT.
+
+SIPB Computer Tours:   At the beginning of each year, SIPB offers 
+                       tours of the MIT computing infrastructure, including 
+                       Athena server rooms, interesting labs.
+SIPB Computer Stories: Come listen to interesting computer stories 
+                       about MIT in this annual event.
+
+</answer>
+
+<answer question="contact">
+
+The SIPB office is W20-557 in the Student Center at 84 Mass Ave. You can call 617/253-7788 (x3-7788) or e-mail sipb@mit.edu with questions.
+</answer>
+
 
 </topic>
