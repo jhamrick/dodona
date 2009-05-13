@@ -16,14 +16,13 @@ from parsetree import Parser
 #######################################
 
 class Session:
-    def __init__(self, name, topics, verbose):
+    def __init__(self, name, topics):
         self.memory = FuzzyStack(20)
         self.memory.push("data", topics)
         self.memory.push("name", name)
         self.name = name
         self.topics = topics
         self.parser = Parser()
-        self.verbose = verbose
 
     def AI(self, mess, d = None, k = None):
         """
@@ -39,7 +38,6 @@ class Session:
         # parse the sentence, and print the parse
         parse = self.parser.parse_sent(mess)
         print "PARSE:\n", parse
-        if self.verbose: send("PARSE:\n" + str(parse), self.name)
         ans = None
 
         # if the parse is returned as a tuple, then we know
@@ -51,7 +49,7 @@ class Session:
             # words, and then enter a function to learn the foreign words.
             if parse[1]:
                 send("Sorry, I don't understand the following words: " + \
-                         ", ".join(parse[1]) + ".", self.name, v=self.verbose)
+                         ", ".join(parse[1]) + ".", self.name)
                 self.memory.push("topic", list(parse[1]))
                 self.learn()
                 return
@@ -64,7 +62,7 @@ class Session:
         else:
             # find the sentence type: STATEMENT, QUESTION, or COMMAND
             type = get_sentence_type(parse)
-            if self.verbose: send("TYPE: " + str(type), self.name)
+            print "TYPE: " + str(type)
 
             # based on the sentence type, find the topic of the sentence.
             # we don't yet know what the subtopic is, so just set it to
@@ -94,10 +92,6 @@ class Session:
                     pp_noun = find_noun(top, exceptions=[" ".join(b_pp.leaves())])
                     print "First noun found:", b_pp
                     print "Second noun found:", pp_noun
-                    if self.verbose:
-                        send("First noun found: " + str(b_pp) + \
-                             "\nSecond noun found: " + \
-                             str(pp_noun), self.name)
 
                     if pp_noun and b_pp: 
                         top = pp_noun
@@ -112,8 +106,6 @@ class Session:
                 subtopic = " ".join(subtop.leaves())
                 print "TOPIC:", topic
                 print "SUBTOPIC:", subtopic
-                if self.verbose:
-                    send("TOPIC: " + topic + "\nSUBTOPIC: " + subtopic, self.name)
 
                 # check to see if topic is a key in the knowledge
                 # dictionary, and that the the entry corresponding
@@ -175,8 +167,6 @@ class Session:
                         subtopic = " ".join(c[i:])
                         print "TOPIC:", topic
                         print "SUBTOPIC:", subtopic
-                        if self.verbose:
-                            send("TOPIC: " + topic + "\nSUBTOPIC: " + subtopic, self.name)
 
                         # check to see if the dictionary has topic as a key
                         # and if the entry corresponding to that is also a
@@ -219,7 +209,6 @@ class Session:
                     # convert the tree structure into a string
                     topic = " ".join(top.leaves())
                     print "TOPIC:", topic
-                    if self.verbose: send("TOPIC: " + topic, self.name)
 
                     # if the topic is a key in the dictionary
                     if d.has_key(topic):
@@ -254,13 +243,12 @@ class Session:
             # tell them so
             else:
                 print "TOPIC: None found"
-                if verbose: send("TOPIC: None found", self.name)
                 ans = "Sorry, I couldn't determine the topic of what you are asking me."
 
         # print the answer out to the terminal, and send the answer
         # to the user.
         print ans
-        send(ans, self.name, v=self.verbose)
+        send(ans, self.name)
 
     def add_new_word(self, word, pos):
         """
@@ -312,14 +300,14 @@ class Session:
 
             # intransitive verb
             elif mess.find("intransitive verb") != -1:
-                send("What is the infinitive for the verb " + word + "?", name, v=self.verbose)
+                send("What is the infinitive for the verb " + word + "?", name)
                 self.memory.pop("status")
                 self.memory.push("status", "pos_verb1in")
                 self.memory.push("topic", word)
 
             # transitive verb
             elif mess.find("transitive verb") != -1:
-                send("What is the infinitive for the verb " + word + "?", name, v=self.verbose)
+                send("What is the infinitive for the verb " + word + "?", name)
                 self.memory.pop("status")
                 self.memory.push("status", "pos_verb1tr")
                 self.memory.push("topic", word)
@@ -347,7 +335,7 @@ class Session:
                 self.memory.push("status", "pos_verb2tr")
 
             self.memory.push("topic", word)
-            send("What is the present participle for the verb " + word + "?", name, v=self.verbose)
+            send("What is the present participle for the verb " + word + "?", name)
             return None
 
         # step 3, stores the present participle
@@ -362,7 +350,7 @@ class Session:
                 self.memory.push("status", "pos_verb3tr")
 
             self.memory.push("topic", word)
-            send("What is the past participle for the verb " + word + "?", name, v=self.verbose)
+            send("What is the past participle for the verb " + word + "?", name)
             return None
 
         # step 4, stores the past participle
@@ -377,7 +365,7 @@ class Session:
                 self.memory.push("status", "pos_verb4tr")
 
             self.memory.push("topic", word)
-            send("What is the 1st person singular present for the verb " + word + "?", name, v=self.verbose)
+            send("What is the 1st person singular present for the verb " + word + "?", name)
             return None
 
         # step 5, stores the present base
@@ -392,7 +380,7 @@ class Session:
                 self.memory.push("status", "pos_verb5tr")
 
             self.memory.push("topic", word)
-            send("What is the 3rd person singular present for the verb " + word + "?", name, v=self.verbose)
+            send("What is the 3rd person singular present for the verb " + word + "?", name)
             return None
 
         # step 6, stores the 3rd person singular
@@ -407,7 +395,7 @@ class Session:
                 self.memory.push("status", "pos_verb6tr")
 
             self.memory.push("topic", word)
-            send("What is the 1st person singular past for the verb " + word + "?", name, v=self.verbose)
+            send("What is the 1st person singular past for the verb " + word + "?", name)
             return None
 
         # step 7, stores the past base
@@ -441,7 +429,7 @@ class Session:
                    "Other"]
 
             send("Which of the following parts of speech is \'" + \
-                     unknown + "\'?\n" + print_list(pos), name, v=self.verbose)
+                     unknown + "\'?\n" + print_list(pos), name)
             self.memory.push("topic", unknown_all)
             self.memory.push("topic", unknown)
             self.memory.pop("status")
@@ -477,13 +465,13 @@ class Session:
         if mess.startswith("exit") or \
                 "bye" in m or \
                 "goodbye" in m:
-            send("Glad to be of help :)", name, v=self.verbose)
+            send("Glad to be of help :)", name)
             return True
 
         # if the user says "nevermind", then
         # clear the session
         if mess.find("nevermind") != -1:
-            send("Ok.", name, v=self.verbose)
+            send("Ok.", name)
             self.clear()
             return False
 
