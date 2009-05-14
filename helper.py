@@ -34,6 +34,7 @@ def tokenize(mess):
     mess = mess.replace(".", " . ")
     mess = mess.replace("?", " ? ")
     mess = mess.replace("!", " ! ")
+    mess = mess.replace("\'s ", " \'s ")
     mess = mess.split(" ")
     temp = mess
     offset = 0

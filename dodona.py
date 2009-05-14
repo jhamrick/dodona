@@ -48,12 +48,14 @@ while True:
     except:
         print traceback.format_exc()
     else:
+        print "status:", sessions[sender].memory.read("status")
+        print "exit:", exit
         # reset the session and prompt the user to
         # ask another question
-        if exit == False:
+        if exit == "reset":
             sessions[sender].clear()
             bot.send('Please ask me another question, or type \"exit\" to end the session.', sender)
         # if the user wants to exit, then delete
         # the session
-        elif exit == True:
+        elif exit == "exit":
             del sessions[sender]

@@ -2,19 +2,14 @@
 <topics>
 	<topic name="emacs" file = "doctopics/emacs.xml"/>			
 	<alias name="xemacs" to = "emacs" />
-<topic name="karl" file="doctopics/karl.xml"/>
 <topic name="zephyr" file="doctopics/zephyr.xml"/>
-<topic name="perl" file="doctopics/perl.xml"/>
-<topic name="php" file="doctopics/php.xml"/>
 <topic name="sipb" file="doctopics/SIPB.xml"/>
-<topic name="daleks" file="doctopics/Daleks.xml"/>
 <topic name="dodona" file="doctopics/dodona.xml"/>
-<topic name="ponies" file="doctopics/ponies.xml"/>
 <topic name="yaks" file="doctopics/yaks.xml"/>
+<alias name="yak" to="yaks"/>
 <topic name="mitsfs" file="doctopics/mitsfs.xml"/>
-<topic name="dinosaurs" file="doctopics/dinosaurs.xml"/>
-<topic name="motorcycles" file="doctopics/motorcycles.xml"/>
 <topic name="words" file="doctopics/words.xml"/>
+<alias name="word" to="words"/>
 <topic name="printing" file="doctopics/printing.xml"/>
 <alias name="print" to="printing"/>
 </topics>

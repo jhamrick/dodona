@@ -675,6 +675,13 @@
 1 V_Base_Pres_Tr		know
 1 V_Base_Past_Tr		knew
 1 V_3rdSing_Pres_Tr		knows
+ 
+1 V_Inf_In			know
+1 V_Pres_Part_In		knowing
+1 V_Past_Part_In		known
+1 V_Base_Pres_In		know
+1 V_Base_Past_In		knew
+1 V_3rdSing_Pres_In		knows
 
 1 V_Inf_Tr			feel
 1 V_Pres_Part_Tr		feeling
@@ -1168,3 +1175,27 @@
 
 1	Noun	document
 1	Noun	print
+1	Noun_Pl	daleks
+1	Noun	karl
+1	Noun	knowledge
+1	Noun	extermination
+1	Noun	entertainment
+1	Noun	value
+1	Noun	hatred
+1	Noun	username
+1	Noun	mitsfs
+1	Noun	perl
+1	Noun	eliza
+1	Noun	php
+1	Adj_State	evil
+1	Noun_Pl	yaks
+1	V_Inf_In	shave
+1	V_Pres_Part_In	shaving
+1	V_Past_Part_In	shaved
+1	V_Base_Pres_In	shave
+1	V_3rdSing_Pres_In	shaves
+1	V_Base_Past_In	shaved
+1	Noun	yak
+1	Noun	foo
+1	Noun	word
+1	Noun	intro

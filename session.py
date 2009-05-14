@@ -97,7 +97,11 @@ class Session:
                         print_list(d.keys())
 
         if not ans:
-            ans = "Sorry, I don't know what you're saying."
+            if "what you know" in nouns or \
+               "knowledge" in nouns:
+                ans = "I know about:\n" + print_list(self.topics.keys())
+            else:
+                ans = "Sorry, I don't know what you're saying."
 
         return ans
 
@@ -128,8 +132,7 @@ class Session:
                 self.bot.send("Sorry, I don't understand the following words: " + \
                          ", ".join(parse[1]) + ".", self.name)
                 self.memory.push("topic", list(parse[1]))
-                self.learn()
-                return
+                return self.learn()
 
             # otherwise, we just couldn't parse the sentence
             else:
@@ -167,8 +170,12 @@ class Session:
             # otherwise, we couldn't find a topic from the sentence, so
             # tell them so
             else:
-                print "TOPIC: None found"
-                ans = "Sorry, I couldn't determine the topic of what you are asking me."
+                if type == QUESTION and ques_word == "what":
+                    print "TOPIC: knowledge"
+                    ans = "I know about:\n" + print_list(self.topics.keys())
+                else:
+                    print "TOPIC: None found"
+                    ans = "Sorry, I couldn't determine the topic of what you are asking me."
 
         # print the answer out to the terminal, and send the answer
         # to the user.
@@ -341,7 +348,7 @@ class Session:
         """
         name = self.name
         unknown_all = list(self.memory.pop("topic"))[1]
-        if unknown_all:
+        if len(unknown_all) > 0:
             unknown = unknown_all[0]
             del unknown_all[0]
             pos = ["Noun", \
@@ -361,8 +368,8 @@ class Session:
             self.memory.push("status", "pos_first")
             return None
         else:
-            self.memory.pop("status")            
-            return False
+            self.memory.pop("status")
+            return "reset"
 
     def clear(self):
         """
@@ -383,7 +390,7 @@ class Session:
         m = tokenize(mess)
         mess = " ".join(m)
 
-        if mess == None: return False
+        if mess == None: return "reset"
 
         # if the user wants to exit, then
         # return True (kill the session)
@@ -391,14 +398,14 @@ class Session:
                 "bye" in m or \
                 "goodbye" in m:
             self.bot.send("Glad to be of help :)", name)
-            return True
+            return "exit"
 
         # if the user says "nevermind", then
         # clear the session
         if mess.find("nevermind") != -1:
             self.bot.send("Ok.", name)
             self.clear()
-            return False
+            return "reset"
 
         # if the user greets Dodona, then respond
         # in kind.
@@ -416,10 +423,6 @@ class Session:
         if s:
             if s.startswith("pos"):  
                 return self.part_of_speech(mess, s.split("_")[1])
-        if s == "conv_topic":  return self.conv_topic(mess)
-        if s == "subtopic":  return self.sub_topic(mess)
-        if s == "add_data_true":  return self.add_data(mess, True)
-        if s == "add_data_false":  return self.add_data(mess, False)
 
         d = self.memory.read("data")
         k = self.memory.read("topic")
@@ -430,14 +433,17 @@ class Session:
             if self.memory.read("topic"):
                 return None
             else:
-                return False
+                return "reset"
 
         # if there is a current topic, search for a subtopic
         else:
             self.AI(mess, d, k)
-            self.memory.pop("topic")
-            self.memory.pop("data")
-            return False
+            if self.memory.read("status") == "pos_first":
+                return None
+            else:
+                self.memory.pop("topic")
+                self.memory.pop("data")
+                return "reset"
  
 # -*- indent-tabs-mode: nil; tab-width: 4; -*-
 # vi: set ts=4 sw=4 et:

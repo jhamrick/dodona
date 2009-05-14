@@ -427,6 +427,9 @@
 1 VP_Inf		       Causal_Inf Adv V_Past_Part_In PP
 1 VP_Inf		       V_Inf_In_Neg
 
+1 After_Verb_Tr		       NP_Obj NP_Obj
+1 After_Verb_Tr		       NP_Obj NP_Obj PP
+1 After_Verb_Tr		       NP_Obj PP NP_Obj
 1 After_Verb_Tr		       NP_Obj
 1 After_Verb_Tr		       NP_Obj PP
 1 After_Verb_Tr		       Prep
@@ -580,6 +583,7 @@
 1 NP			       NP_1st_Pl
 1 NP			       NP_3rd_Pl
 1 NP			       NP Noun_Conj NP
+1 NP			       Interrog_Pronoun Ind_Clause
 
 1 NP_1st		       Pers_Pro_1st
 1 NP_2nd		       Pers_Pro_2nd
@@ -645,6 +649,7 @@
 1 NP_Obj		       NP_Obj Adj_Infl VP
 1 NP_Obj		       NP_Obj Adj_Infl VP_Pl
 1 NP_Obj		       NP_Obj 's NP_Obj
+1 NP_Obj		       Interrog_Pronoun Ind_Clause
 
 1 Nominal		       Noun
 1 Nominal		       CompoundNoun
