@@ -24,7 +24,7 @@ class Session:
         self.parser = Parser()
         self.bot = bot
 
-    def topic(self, top, d=None, k=None):
+    def topic(self, top, d=None, k=None, ques_word=None):
         if d == None: d = self.topics
         subtop = None
 
@@ -97,11 +97,15 @@ class Session:
                         print_list(d.keys())
 
         if not ans:
-            if "what you know" in nouns or \
+            if nouns == [] and ques_word == "what":
+                print "TOPIC: knowledge"
+                ans = "I know about:\n" + print_list(self.topics.keys())
+            elif "what you know" in nouns or \
                "knowledge" in nouns:
+                print "TOPIC: knowledge"
                 ans = "I know about:\n" + print_list(self.topics.keys())
             else:
-                ans = "Sorry, I don't know what you're saying."
+                ans = "Sorry, I don't know about " + " ".join(top.leaves()) + "."
 
         return ans
 
@@ -157,6 +161,7 @@ class Session:
             # if the sentence is a question and find_topic() found a
             # topic, then top is a tuple, and we need to store the
             # parts separately.
+            ques_word = None
             if type == QUESTION and top:
                 ques_word = top[1]
                 top = top[0]
@@ -165,7 +170,7 @@ class Session:
             # prepositional phrase.  For example, we want to be able
             # to get TOPIC=emacs, SUBTOPIC=keys from "keys in emacs"
             if top:
-                ans = self.topic(top, d=d, k=k)
+                ans = self.topic(top, d=d, k=k, ques_word=ques_word)
 
             # otherwise, we couldn't find a topic from the sentence, so
             # tell them so
@@ -191,7 +196,6 @@ class Session:
         vocab.write("\n1\t" + pos + "\t" + word)
         vocab.close()
         self.parser.add_new_vocab_rule([pos, [word]])
-        self.bot.send("Thanks!", self.name)
 
     def part_of_speech(self, mess, step):
         """

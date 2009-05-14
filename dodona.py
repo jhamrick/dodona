@@ -54,7 +54,6 @@ while True:
         # ask another question
         if exit == "reset":
             sessions[sender].clear()
-            bot.send('Please ask me another question, or type \"exit\" to end the session.', sender)
         # if the user wants to exit, then delete
         # the session
         elif exit == "exit":
