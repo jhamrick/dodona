@@ -54,7 +54,7 @@ lpr2 does not work with standard input. This means that you cannot pipe things t
 
 </answer>
 
-<answer question ="check the printer queue">
+<answer question ="checking the printer queue">
 
 The lpr command sends a copy of your job to a print server, a machine that keeps track of printing requests in a list called a print queue. Because you share a printer with other people, the print server takes the jobs submitted to it and sends them out to the printer one by one in order.
 
@@ -75,7 +75,7 @@ Specifying ajax or ajax2 shows all the jobs in line for that printer. The lpq co
 
 You might also receive Zephyr windowgrams from the print server telling you about problems. For example, if the printer runs out of paper while your job is printing, you may receive a zephyr telling you so.
 </answer>
-<answer question="to remove a print job">
+<answer question="removing a print job">
 If you want to send your file to a different printer (e.g., if the printer is down or the queue is too long), or if you sent the wrong file or no longer want the printout, you can remove your job from the queue. To remove an entry from the queue:
 
   athena% lprm jobnumber
