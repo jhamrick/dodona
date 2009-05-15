@@ -1,46 +1,46 @@
 #################### Nouns ######################
  
 # Names
-1 Name		Dodona
-1 Name		jhamrick
-1 Name		Jessica
-1 Name		Socrates
-1 Name		geofft
-1 Name		God
+1 Noun		Dodona
+1 Noun		jhamrick
+1 Noun		Jessica
+1 Noun		Socrates
+1 Noun		geofft
+1 Noun		God
  
 # Places (do not require "the")
-1 Place		Cambridge
-1 Place		Somerville
+1 Noun		Cambridge
+1 Noun		Somerville
 1 Place		MIT
 
 # Events
-1 Event		DEFCON
- 
-# Programs
-1 Program		scheme
-1 Program		emacs
-1 Program		BarnOwl
-1 Program		Google
-1 Program		Linux
-1 Program		git
-1 Program		Ubuntu
-1 Program		Athena
-1 Program		Zephyr
-1 Program		SkyNet
-1 Program		UNIX
-1 Program		Intrepid
+1 Noun		DEFCON
 
-1 Command		\def
-1 Command		\newcommand
-1 Command		^M
+# Programs
+1 Noun		scheme
+1 Noun		emacs
+1 Noun		BarnOwl
+1 Noun		Google
+1 Noun		Linux
+1 Noun		git
+1 Noun		Ubuntu
+1 Noun		Athena
+1 Noun		Zephyr
+1 Noun		SkyNet
+1 Noun		UNIX
+1 Noun		Intrepid
+
+1 Noun		\def
+1 Noun		\newcommand
+1 Noun		^M
  
 # Organizations
-1 Org		SIPB
+1 Noun		SIPB
  
 # Field of study
-1 Field		NLP
-1 Field		CS
-1 Field		EE
+1 Noun		NLP
+1 Noun		CS
+1 Noun		EE
  
 # Singular nouns
 1 Noun		green
@@ -145,6 +145,7 @@
 1 Noun		auto-fill
 1 Noun		auto-save
 1 Noun		rebound
+1 Noun		service
  
 # Plural nouns
 
@@ -242,6 +243,7 @@
 1 Noun_Pl		robots
 1 Noun_Pl		bots
 1 Noun_Pl		fills
+1 Noun_Pl		services
  
 #################### Pronouns ####################
  
@@ -513,6 +515,13 @@
 1 V_Base_Past_Tr	used
 1 V_3rdSing_Pres_Tr	uses
 
+1 V_Inf_Tr		print
+1 V_Pres_Part_Tr	printing
+1 V_Past_Part_Tr	printed
+1 V_Base_Pres_Tr	print
+1 V_Base_Past_Tr	printed
+1 V_3rdSing_Pres_Tr	prints
+
 1 V_Inf_Tr		select
 1 V_Pres_Part_Tr	selecting
 1 V_Past_Part_Tr	selected
@@ -666,6 +675,13 @@
 1 V_Base_Pres_Tr		know
 1 V_Base_Past_Tr		knew
 1 V_3rdSing_Pres_Tr		knows
+ 
+1 V_Inf_In			know
+1 V_Pres_Part_In		knowing
+1 V_Past_Part_In		known
+1 V_Base_Pres_In		know
+1 V_Base_Past_In		knew
+1 V_3rdSing_Pres_In		knows
 
 1 V_Inf_Tr			feel
 1 V_Pres_Part_Tr		feeling
@@ -1129,3 +1145,93 @@
 1	Noun	morning
 1	Noun_Pl	hamsters
 1	Noun_Pl	macs
+1	Noun	acronym
+1	Noun_Pl	dogs
+1	Noun_Pl	kitties
+1	Noun_Pl	fishies
+1	Noun	default
+1	V_Inf_Tr	read
+1	V_Pres_Part_Tr	reading
+1	V_Past_Part_Tr	read
+1	V_Base_Pres_Tr	read
+1	V_3rdSing_Pres_Tr	reads
+1	V_Base_Past_Tr	read
+1	V_Inf_In	swim
+1	V_Pres_Part_In	swimming
+1	V_Past_Part_In	swum
+1	V_Base_Pres_In	swim
+1	V_3rdSing_Pres_In	swims
+1	V_Base_Past_In	swam
+1	V_Inf_In	run
+1	V_Pres_Part_In	running
+1	V_Past_Part_In	run
+1	V_Base_Pres_In	run
+1	V_3rdSing_Pres_In	runs
+1	V_Base_Past_In	ran
+1	Noun		paste
+1	Noun_Pl		pastes
+
+1	Noun			job
+1	Noun   		queue
+1 	Noun			document
+
+1	Noun	document
+1	Noun	print
+1	Noun_Pl	daleks
+1	Noun	karl
+1	Noun	knowledge
+1	Noun	extermination
+1	Noun	entertainment
+1	Noun	value
+1	Noun	hatred
+1	Noun	username
+1	Noun	mitsfs
+1	Noun	perl
+1	Noun	eliza
+1	Noun	php
+1	Adj_State	evil
+1	Noun_Pl	yaks
+1	V_Inf_In	shave
+1	V_Pres_Part_In	shaving
+1	V_Past_Part_In	shaved
+1	V_Base_Pres_In	shave
+1	V_3rdSing_Pres_In	shaves
+1	V_Base_Past_In	shaved
+1	Noun	yak
+1	Noun	foo
+1	Noun	word
+1	Noun	intro
+1	Noun	printer
+1	Noun	double-sided
+1	Noun	print
+1	Noun	purpose
+1	Noun	vim
+1	Noun	c-x
+1	Noun	universe
+1	Noun	everything
+1	Noun	sfs
+1	V_Inf_In	stand
+1	V_Pres_Part_In	standing
+1	V_Past_Part_In	stood
+1	V_Base_Pres_In	stand
+1	V_3rdSing_Pres_In	stands
+1	V_Base_Past_In	stood
+1	V_Inf_Tr	quit
+1	V_Pres_Part_Tr	quitting
+1	V_Past_Part_Tr	quit
+1	V_Base_Pres_Tr	quit
+1	V_3rdSing_Pres_Tr	quits
+1	V_Base_Past_Tr	quit
+1	V_Inf_Tr	hate
+1	V_Pres_Part_Tr	hating
+1	V_Past_Part_Tr	hated
+1	V_Base_Pres_Tr	hate
+1	V_3rdSing_Pres_Tr	hates
+1	V_Base_Past_Tr	hated
+1	V_Inf_Tr	stab
+1	V_Pres_Part_Tr	stabbing
+1	V_Past_Part_Tr	stabbed
+1	V_Base_Pres_Tr	stab
+1	V_3rdSing_Pres_Tr	stabs
+1	V_Base_Past_Tr	stabbed
+1	Noun	csail

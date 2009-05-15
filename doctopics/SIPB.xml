@@ -1,7 +1,58 @@
 <?xml version="1.0" ?>
 <topic>
-<default>Overview of SIPB</default>
+<default>
+SIPB is MIT's volunteer student computing group, improving computing at MIT since 1969. Today, SIPB projects provide innovative services and special expertise to the MIT community. Their office is just outside the Athena cluster in the student center W20, and you are welcome to come by to ask SIPB for help or to hang around, use the computers, and maybe get involved.
+</default>
 <answer question="acronym">
 Student Information Processing Board
 </answer>
+
+<answer question="services">
+scripts.mit.edu: Get your own blog or wiki, or run any web app! 
+                 The SIPB scripts server runs CGI scripts out 
+		   of your Athena locker.
+
+xvm.mit.edu: Your own virtual server. Reliable, easy, and flexible.
+
+debathena.mit.edu: Bringing MIT's Athena environment to Debian 
+                   and Ubuntu, first for our laptops, and then 
+                   back to the clusters.
+
+linerva.mit.edu: Remote login access to Athena on a powerful 
+                 Debian GNU/Linux server running Debathena.
+
+Documentation: Helpful and informative documents about various 
+               computing topics at MIT, written by SIPB.
+
+Computer Help: Have a computing question or need some help? 
+               Come drop by our office.
+</answer>
+
+<answer question="events">
+
+IAP classes:     Teach or learn. Knowledge is power. 
+                 http://sipb.mit.edu/iap/
+
+SIPB Cluedumps:  Every year, SIPB hosts a number of computer-related 
+                 technical talks on a variety of subjects.
+
+Hackathons:      Like coding? Come work on cool projects with us 
+		   at SIPB! We're always looking for new members, 
+                 so feel free to drop by our Hackathons to help us 
+                 improve computing at MIT.
+
+SIPB Computer Tours:   At the beginning of each year, SIPB offers 
+                       tours of the MIT computing infrastructure, including 
+                       Athena server rooms, interesting labs.
+SIPB Computer Stories: Come listen to interesting computer stories 
+                       about MIT in this annual event.
+
+</answer>
+
+<answer question="contact">
+
+The SIPB office is W20-557 in the Student Center at 84 Mass Ave. You can call 617/253-7788 (x3-7788) or e-mail sipb@mit.edu with questions.
+</answer>
+
+
 </topic>

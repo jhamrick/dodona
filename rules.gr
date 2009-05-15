@@ -1,18 +1,18 @@
 1 START			       S
 
-1 S			       Name Comma Ind_Clause_Ques PuncQ
-1 S			       Name Comma Ind_Clause_Ques_Aux PuncQ
-1 S			       Name Comma Ind_Clause Punc
+1 S			       Noun Comma Ind_Clause_Ques PuncQ
+1 S			       Noun Comma Ind_Clause_Ques_Aux PuncQ
+1 S			       Noun Comma Ind_Clause Punc
 1 S			       Ind_Clause Punc
 1 S			       Ind_Clause_Ques PuncQ
 1 S			       Ind_Clause_Ques_Aux PuncQ
-1 S			       Ind_Clause Comma Name PuncQ
-1 S			       Ind_Clause_Ques Comma Name PuncQ
-1 S			       Ind_Clause_Ques_Aux Comma Name PuncQ
+1 S			       Ind_Clause Comma Noun PuncQ
+1 S			       Ind_Clause_Ques Comma Noun PuncQ
+1 S			       Ind_Clause_Ques_Aux Comma Noun PuncQ
 1 S			       Ind_Clause Comma Subord_Conj Ind_Clause Punc
-1 S			       Name Comma Ind_Clause Comma Subord_Conj Ind_Clause Punc
+1 S			       Noun Comma Ind_Clause Comma Subord_Conj Ind_Clause Punc
 1 S			       Ind_Clause Subord_Conj Ind_Clause Punc
-1 S			       Name Comma Ind_Clause Subord_Conj Ind_Clause Punc
+1 S			       Noun Comma Ind_Clause Subord_Conj Ind_Clause Punc
 
 1 Ind_Clause_Ques	       Interrog_Det VP_3rd
 1 Ind_Clause_Ques	       Interrog_Det VP_3rd Prep
@@ -427,6 +427,9 @@
 1 VP_Inf		       Causal_Inf Adv V_Past_Part_In PP
 1 VP_Inf		       V_Inf_In_Neg
 
+1 After_Verb_Tr		       NP_Obj NP_Obj
+1 After_Verb_Tr		       NP_Obj NP_Obj PP
+1 After_Verb_Tr		       NP_Obj PP NP_Obj
 1 After_Verb_Tr		       NP_Obj
 1 After_Verb_Tr		       NP_Obj PP
 1 After_Verb_Tr		       Prep
@@ -562,9 +565,14 @@
 1 Verbal_3rd_Pl_In	       Modal_Past_Neg Have Be_Past_Part V_Pres_Part_In
 
 1 Verb_As_Noun_Obj	       V_Pres_Part_Tr NP_Obj
+1 Verb_As_Noun_Obj	       V_Pres_Part_Tr
 1 Verb_As_Noun_Obj	       V_Pres_Part_In
 1 Verb_As_Noun		       V_Pres_Part_Tr NP_Obj
+1 Verb_As_Noun		       V_Pres_Part_Tr
 1 Verb_As_Noun		       V_Pres_Part_In
+1 Verb_As_Noun		       To V_Inf_Tr NP_Obj
+1 Verb_As_Noun		       To V_Inf_Tr
+1 Verb_As_Noun		       To V_Inf_In
 
 1 PP			       Prep NP_Obj
 
@@ -574,6 +582,8 @@
 1 NP			       NP_3rd
 1 NP			       NP_1st_Pl
 1 NP			       NP_3rd_Pl
+1 NP			       NP Noun_Conj NP
+1 NP			       Interrog_Pronoun Ind_Clause
 
 1 NP_1st		       Pers_Pro_1st
 1 NP_2nd		       Pers_Pro_2nd
@@ -639,6 +649,7 @@
 1 NP_Obj		       NP_Obj Adj_Infl VP
 1 NP_Obj		       NP_Obj Adj_Infl VP_Pl
 1 NP_Obj		       NP_Obj 's NP_Obj
+1 NP_Obj		       Interrog_Pronoun Ind_Clause
 
 1 Nominal		       Noun
 1 Nominal		       CompoundNoun
@@ -678,7 +689,6 @@
 1 AdjP			       Adj_State
 1 AdjP			       Adj_Dir
 1 AdjP			       Poss_Adj
-1 AdjP			       Noun PP
 
 1 Modal_Pres_Neg_Neg	       Modal_Pres_Neg Not
 1 Modal_Past_Neg	       Modal_Past Not

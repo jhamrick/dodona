@@ -1,0 +1,96 @@
+<?xml version="1.0" ?>
+<topic>
+<default>Athena provides various methods for printing documents and managaging queues. Please
+see the subtopics for more information.</default>
+
+<answer question="printing a document">
+To print a file to your default printer, type:
+
+  athena% lpr filename
+
+If you wish to use a different printer than the default:
+
+  athena% lpr -Pprintername filename
+
+For printername, use the name of the printer to which you want to send the file (look at the printer if you are uncertain of the name). For filename, use the name of the file (or files) you want to print. For example, to print the file mydoc to the printer ajax, type the following:
+
+  athena% lpr -Pajax mydoc
+
+You can also use the lpr command to send the output from another command directly to the printer without having to create a file. To do this, "pipe" the output of the command through lpr:
+
+  athena% program_name | lpr -Pprintername
+
+The | is a vertical bar, also known as a "pipe" (Shift-\ on most keyboards). A pipe takes the output from one program and sends it as the input to another program. You can use this method for any program whose output normally goes to "standard output" (i.e., your screen). For example, if you want a printed copy of the list of files in your directory, send the output from the ls command directly to the printer of your choice by typing:
+
+  athena% ls | lpr -Pprintername
+</answer>
+
+<answer question="printing double-sided">
+
+To print a document double-sided, add a numeral 2 to the regular printername in the print command. For example, to print file mydoc in duplex mode on the printer ajax, type:
+
+  athena% lpr -Pajax2 mydoc
+
+This sends the job to ajax's duplex queue (ajax2), which adds the necessary PostScript code to enable duplex mode.
+
+You can also use the 2 appendix to specify double-sided output with all other printing commands. For example:
+
+  athena% setenv PRINTER ajax2
+  athena% ls | lpr -Pajax2
+  athena% dvips -Pajax2 mydoc.dvi 
+
+By default, when duplex mode is activated, the text is read by flipping the page about a vertical axis, i.e., the top of side one and the top of side two are along the same edge. If you want this to be inverted, so that you would flip the page about a horizontal axis, this is called tumble mode. (Tumble mode is useful if you're printing in landscape orientation - that is, sideways on the paper.) Options for either of these modes are given below.
+
+To print normal text or a PostScript file, you can use the lpr2 command in the consult locker. To do so, type:
+
+  athena% add consult
+  athena% lpr2 -d -Pprinter filename
+
+The -d option turns on duplex mode for the given files. You may also use any other options associated with lpr, such as -h or -z.
+
+For tumble mode, use -m instead of -d.
+
+lpr2 does not work with standard input. This means that you cannot pipe things through lpr2 in the fashion that you can pipe them through lpr.
+
+</answer>
+
+<answer question ="checking the printer queue">
+
+The lpr command sends a copy of your job to a print server, a machine that keeps track of printing requests in a list called a print queue. Because you share a printer with other people, the print server takes the jobs submitted to it and sends them out to the printer one by one in order.
+
+If your file does not print right away, it might be waiting in line for the printer. To find out what print jobs are waiting to be printed, type lpq at your Athena prompt. For a printer different from your default, use:
+
+  athena% lpq -Pprintername
+
+For example:
+
+  athena% lpq -Pajax
+  PAPER-PUSHER.MIT.EDU...  ajax is ready and printing
+  Rank   Owner      Job  Files                        Total Size
+  active joeuser    2    report.abstract.PS           8069 bytes
+  1st    janeuser   3    letter.PS                    12841 bytes
+  2nd    joeuser    3    lab.report.PS                19942 bytes
+
+Specifying ajax or ajax2 shows all the jobs in line for that printer. The lpq command also gives limited information about the physical status of the printer. 
+
+You might also receive Zephyr windowgrams from the print server telling you about problems. For example, if the printer runs out of paper while your job is printing, you may receive a zephyr telling you so.
+</answer>
+<answer question="removing a print job">
+If you want to send your file to a different printer (e.g., if the printer is down or the queue is too long), or if you sent the wrong file or no longer want the printout, you can remove your job from the queue. To remove an entry from the queue:
+
+  athena% lprm jobnumber
+
+Here, jobnumber is the number in the "Job" column of the lpq information. For example, to remove the file lab.report.PS from the print queue for ajax, jruser would type the following command:
+
+  athena% lprm -Pajax 3
+
+If you want to remove all of your jobs on the printer, type:
+
+  athena% lprm -
+
+The final dash is important.
+
+</answer>
+</topic>
+
+

@@ -1,7 +1,8 @@
 <?xml version="1.0" ?>
 <topic>
 	<default>
-		Overview of emacs
+The GNU Emacs text editor (Athena's primary supported editor) is an extensible, customizable, self-documenting real-time
+display editor. 
 	</default>
 	<answer question="version">
 Several versions of Emacs are available on Athena. GNU Emacs 21 (version 21.1.1) is the default version as of Athena 9.1. If you login to an older Athena 9.0 workstation, the default Emacs will be GNU Emacs 20 (version 20.7) Other versions of GNU Emacs are often available in the emacs locker.
@@ -82,7 +83,7 @@ To move to the beginning of the buffer:		ESC &lt;	or   M-&lt;
 Notice how most of the commands are mnemonic.  
 	</answer>
 
-	<answer question="copy and paste using the mouse">
+	<answer question="using the mouse to copy and paste">
 The cut and paste behavior of Emacs is similar to most other standard X applications.  
 
   - Dragging with the LEFT mouse button now puts the selected region in the kill ring so you can paste it into other X applications. The old method of clicking at the beginning with the LEFT mouse button and at the end with the RIGHT mouse button still works, but the cursor will end up at the end of the region instead of at the beginning.
@@ -94,7 +95,7 @@ The cut and paste behavior of Emacs is similar to most other standard X applicat
   - As before, clicking the RIGHT mouse button in the same place kills the region selected.
 	</answer>
 
-	<answer question="copy and paste using keys">
+	<answer question="using keys to copy and paste">
 Ctrl-&lt;space&gt; or Ctrl-@:  Either of these commands will set a mark.  A mark is an or an invisible pointer which will be used to mark the starting character of the region you wish to delete or move.  If you place the mark in the wrong place, you can set it elsewhere with the same command.
 
 Ctrl-w: This command will kill all of the text between the mark location and the current emacs cursor position. This text can be retrieved with the following command unless you kill another block of text.
