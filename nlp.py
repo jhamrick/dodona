@@ -190,7 +190,7 @@ def find_topic(parse, type=None, qword=None):
             t = find_after_verb(parse[-1][-1])
             if not t:
                 t = find_PP(parse[-1][-1])
-            return t, qword
+            return t
         else:
             for subtree in parse:
                 subj = find_topic(subtree, type)

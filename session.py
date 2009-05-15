@@ -166,6 +166,7 @@ class Session:
             # we don't yet know what the subtopic is, so just set it to
             # None.
             top = find_topic(parse, type)
+            print top
 
             # if the sentence is a question and find_topic() found a
             # topic, then top is a tuple, and we need to store the
