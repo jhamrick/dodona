@@ -59,7 +59,7 @@ class Parser:
         self.cfg = ContextFreeGrammar(NT("S"), self.rules)
         self.parser = EarleyChartParser(self.cfg, trace=0)
 
-    def parse_file(self, file="examples.sen"):
+    def parse_file(self, file):
         """
         Parses sentences in a file.
         """
@@ -75,14 +75,14 @@ class Parser:
             if parse: print parse[0]
             else: print "failure"
 
-    def parse_sent(self, sen, tr=0):
+    def parse_sent(self, sen):
         """
         Parses a single sentence.  Returns the parse, or returns a
         tuple (None, foreign_words).
         """
         foreign = []
         try:
-            parse = self.parser.nbest_parse(sen.strip().split(" "), trace=tr)
+            parse = self.parser.nbest_parse(sen.strip().split(" "), trace=0)
         except:
             sen = sen.strip().split(" ")
             for word in sen:
@@ -96,7 +96,7 @@ class Parser:
             print "failure"
             return None, foreign
 
-    def parse_NP(self, sen, tr=0):
+    def parse_NP(self, sen):
         """
         Parses a partial sentence (that is, usually a noun phrase.
         Returns the parse, or returns a tuple.
@@ -114,12 +114,11 @@ class Parser:
             print "failure"
             return None
 
-    def rand_sent(self, left=None):
+    def rand_sent(self):
         """
         Creates a random sentence from self.cfg.
         """
-        if left == None: left = NT("S")
-        poss = self.cfg.productions(lhs=left)
+        poss = self.cfg.productions(lhs=NT("S"))
         if len(poss) > 1:
             index = random.randint(0,len(poss)-1)
         elif len(poss) == 1: index = 0

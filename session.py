@@ -24,7 +24,7 @@ class Session:
         self.parser = Parser()
         self.bot = bot
 
-    def topic(self, top, d=None, k=None, ques_word=None):
+    def _topic(self, top, d=None, k=None, ques_word=None):
         if d == None: d = self.topics
         subtop = None
 
@@ -109,7 +109,7 @@ class Session:
 
         return ans
 
-    def AI(self, mess, d = None, k = None):
+    def _AI(self, mess, d = None, k = None):
         """
         Parses the message, and attempts to locate a topic.  If it is
         able to find a topic, it tells the user about the topic,
@@ -136,14 +136,14 @@ class Session:
                 self.bot.send("Sorry, I don't understand the following words: " + \
                          ", ".join(parse[1]) + ".", self.name)
                 self.memory.push("topic", list(parse[1]))
-                return self.learn()
+                return self._learn()
 
             # otherwise, we just couldn't parse the sentence
             else:
                 parse = self.parser.parse_NP(mess)
                 print "NP PARSE:\n", parse
                 if parse:
-                    ans = self.topic(parse, d=d, k=k)
+                    ans = self._topic(parse, d=d, k=k)
                 else:
                     ans = "Sorry, I couldn't parse what you just said."
 
@@ -170,7 +170,7 @@ class Session:
             # prepositional phrase.  For example, we want to be able
             # to get TOPIC=emacs, SUBTOPIC=keys from "keys in emacs"
             if top:
-                ans = self.topic(top, d=d, k=k, ques_word=ques_word)
+                ans = self._topic(top, d=d, k=k, ques_word=ques_word)
 
             # otherwise, we couldn't find a topic from the sentence, so
             # tell them so
@@ -187,7 +187,7 @@ class Session:
         print ans
         self.bot.send(ans, self.name)
 
-    def add_new_word(self, word, pos):
+    def _add_new_word(self, word, pos):
         """
         Adds a new vocabulary word and rule to vocabulary.gr and
         to the ContextFreeGrammar.
@@ -197,7 +197,7 @@ class Session:
         vocab.close()
         self.parser.add_new_vocab_rule([pos, [word]])
 
-    def part_of_speech(self, mess, step):
+    def _part_of_speech(self, mess, step):
         """
         Part of Dodona's word-learning algorithm.  Learns the
         part of speech for the word, and either moves to the next step
@@ -212,27 +212,27 @@ class Session:
 
             # plural noun
             if mess.find("plural noun") != -1:
-                self.add_new_word(word, "Noun_Pl")
+                self._add_new_word(word, "Noun_Pl")
                 self.memory.pop("status")
-                return self.learn()
+                return self._learn()
 
             # noun
             elif mess.find("noun") != -1:
-                self.add_new_word(word, "Noun")
+                self._add_new_word(word, "Noun")
                 self.memory.pop("status")
-                return self.learn()
+                return self._learn()
 
             # adjective
             elif mess.find("adjective") != -1:
-                self.add_new_word(word, "Adj_State")
+                self._add_new_word(word, "Adj_State")
                 self.memory.pop("status")
-                return self.learn()
+                return self._learn()
 
             # adverb
             elif mess.find("adverb") != -1:
-                self.add_new_word(word, "Adv")
+                self._add_new_word(word, "Adv")
                 self.memory.pop("status")
-                return self.learn()
+                return self._learn()
 
             # intransitive verb
             elif mess.find("intransitive verb") != -1:
@@ -250,23 +250,23 @@ class Session:
 
             # preposition
             elif mess.find("preposition") != -1:
-                self.add_new_word(word, "Prep")
+                self._add_new_word(word, "Prep")
                 self.memory.pop("status")
-                return self.learn()
+                return self._learn()
 
             # anything else
             else:
                 self.memory.pop("status")
-                return self.learn()
+                return self._learn()
         
         # step 2, stores the infinitive
         elif step.startswith("verb1"):
             if step.endswith("in"):
-                self.add_new_word(mess, "V_Inf_In")
+                self._add_new_word(mess, "V_Inf_In")
                 self.memory.pop("status")
                 self.memory.push("status", "pos_verb2in")
             elif step.endswith("tr"):
-                self.add_new_word(mess, "V_Inf_Tr")
+                self._add_new_word(mess, "V_Inf_Tr")
                 self.memory.pop("status")
                 self.memory.push("status", "pos_verb2tr")
 
@@ -277,11 +277,11 @@ class Session:
         # step 3, stores the present participle
         elif step.startswith("verb2"):
             if step.endswith("in"):
-                self.add_new_word(mess, "V_Pres_Part_In")
+                self._add_new_word(mess, "V_Pres_Part_In")
                 self.memory.pop("status")
                 self.memory.push("status", "pos_verb3in")
             elif step.endswith("tr"):
-                self.add_new_word(mess, "V_Pres_Part_Tr")
+                self._add_new_word(mess, "V_Pres_Part_Tr")
                 self.memory.pop("status")
                 self.memory.push("status", "pos_verb3tr")
 
@@ -292,11 +292,11 @@ class Session:
         # step 4, stores the past participle
         elif step.startswith("verb3"):
             if step.endswith("in"):
-                self.add_new_word(mess, "V_Past_Part_In")
+                self._add_new_word(mess, "V_Past_Part_In")
                 self.memory.pop("status")
                 self.memory.push("status", "pos_verb4in")
             elif step.endswith("tr"):
-                self.add_new_word(mess, "V_Past_Part_Tr")
+                self._add_new_word(mess, "V_Past_Part_Tr")
                 self.memory.pop("status")
                 self.memory.push("status", "pos_verb4tr")
 
@@ -307,11 +307,11 @@ class Session:
         # step 5, stores the present base
         elif step.startswith("verb4"):
             if step.endswith("in"):
-                self.add_new_word(mess, "V_Base_Pres_In")
+                self._add_new_word(mess, "V_Base_Pres_In")
                 self.memory.pop("status")
                 self.memory.push("status", "pos_verb5in")
             elif step.endswith("tr"):
-                self.add_new_word(mess, "V_Base_Pres_Tr")
+                self._add_new_word(mess, "V_Base_Pres_Tr")
                 self.memory.pop("status")
                 self.memory.push("status", "pos_verb5tr")
 
@@ -322,11 +322,11 @@ class Session:
         # step 6, stores the 3rd person singular
         elif step.startswith("verb5"):
             if step.endswith("in"):
-                self.add_new_word(mess, "V_3rdSing_Pres_In")
+                self._add_new_word(mess, "V_3rdSing_Pres_In")
                 self.memory.pop("status")
                 self.memory.push("status", "pos_verb6in")
             elif step.endswith("tr"):
-                self.add_new_word(mess, "V_3rdSing_Pres_Tr")
+                self._add_new_word(mess, "V_3rdSing_Pres_Tr")
                 self.memory.pop("status")
                 self.memory.push("status", "pos_verb6tr")
 
@@ -337,14 +337,14 @@ class Session:
         # step 7, stores the past base
         elif step.startswith("verb6"):
             if step.endswith("in"):
-                self.add_new_word(mess, "V_Base_Past_In")
+                self._add_new_word(mess, "V_Base_Past_In")
             elif step.endswith("tr"):
-                self.add_new_word(mess, "V_Base_Past_Tr")
+                self._add_new_word(mess, "V_Base_Past_Tr")
 
             self.memory.pop("status")
-            return self.learn()
+            return self._learn()
 
-    def learn(self):
+    def _learn(self):
         """
         Begins the learning process.  Asks the user what
         part of speech the word is, and keeps track of the
@@ -423,17 +423,17 @@ class Session:
         # function if necessary
         s = self.memory.read("status")
         #if s == "unknown":  return self.unknown(mess)
-        if s == "learn":  return self.learn()
+        if s == "learn":  return self._learn()
         if s:
             if s.startswith("pos"):  
-                return self.part_of_speech(mess, s.split("_")[1])
+                return self._part_of_speech(mess, s.split("_")[1])
 
         d = self.memory.read("data")
         k = self.memory.read("topic")
         # if there is no current topic, then decipher one
         # from the most recent message.
         if k == None:
-            self.AI(mess)
+            self._AI(mess)
             if self.memory.read("topic"):
                 return None
             else:
@@ -441,7 +441,7 @@ class Session:
 
         # if there is a current topic, search for a subtopic
         else:
-            self.AI(mess, d, k)
+            self._AI(mess, d, k)
             if self.memory.read("status") == "pos_first":
                 return None
             else:
