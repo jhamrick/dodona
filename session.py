@@ -3,7 +3,7 @@ site.addsitedir('/afs/athena.mit.edu/user/b/r/broder/lib/python2.5/site-packages
 
 import zephyr
 from fuzzystack import FuzzyStack
-from helper import print_list, tokenize, integrate_lists, find_partial_key
+from helper import print_list, tokenize
 from nlp import get_sentence_type, find_topic, find_compound_noun, find_PP, find_noun, QUESTION, STATEMENT, COMMAND
 from xml_parser import update_files
 from parsetree import Parser
@@ -31,10 +31,13 @@ class Session:
         nouns = set()
         n = find_noun(top)
         while n:
-            nouns.add(" ".join(n.leaves()))
+            noun = " ".join(n.leaves())
+            nouns.add(noun)
             n = find_noun(top, nouns)
 
         nouns = list(nouns)
+        if "me" in nouns: nouns.remove("me")
+        if "you" in nouns: nouns.remove("you")
         print "Nouns: " + str(nouns)
         ans = None
 
@@ -105,7 +108,13 @@ class Session:
                 print "TOPIC: knowledge"
                 ans = "I know about:\n" + print_list(self.topics.keys())
             else:
-                ans = "Sorry, I don't know about " + " ".join(top.leaves()) + "."
+                l = nouns.pop(0)
+                if len(nouns) > 0:
+                    for n in xrange(len(nouns)-1):
+                        l += ", " + nouns[n]
+
+                    l += ", or " + nouns[-1]
+                ans = "Sorry, I don't know about " + l + "."
 
         return ans
 
@@ -416,7 +425,7 @@ class Session:
         if "hi" in m or \
                 "hey" in m or \
                 "hello" in m != -1:
-            self.bot.send("hello, " + name + "!")
+            self.bot.send("Hello, " + name + "!")
             return None
         
         # check the status, and return the corresponding

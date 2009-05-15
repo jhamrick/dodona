@@ -2,6 +2,7 @@ from nltk.parse.featurechart import EarleyChartParser
 from nltk.grammar import ContextFreeGrammar, Production
 from nltk.grammar import Nonterminal as NT
 import random
+import traceback
 
 #######################################
 # The Parser class reads in grammar
@@ -104,15 +105,15 @@ class Parser:
         try:
             cfg_temp = ContextFreeGrammar(NT("NP"), self.rules)
             parser_temp = EarleyChartParser(cfg_temp, trace=0)
-            parse = parser_temp.nbest_parse(sen.strip().split(" "), trace=tr)
+            parse = parser_temp.nbest_parse(sen.strip().split(" "), trace=0)
         except:
             print traceback.format_exc()
-        
-        if parse:
-            return parse[0]
         else:
-            print "failure"
-            return None
+            if parse:
+                return parse[0]
+                
+        print "failure"
+        return None
 
     def rand_sent(self):
         """

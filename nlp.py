@@ -152,7 +152,12 @@ def find_topic(parse, type=None, qword=None):
             rhs = tree.rhs()
             if rhs[-1] == NT("VP_3rd"):
                 print "VP_3rd"
-                return parse[-1][-1], qword
+                #return parse[-1][-1], qword
+                t = find_after_verb(parse[-1][-1])
+                if not t:
+                    t = find_PP(parse[-1][-1])
+
+                return t, qword
 
             # this acts just like a statement, so call find_topic
             # again, but specifying the type=STATEMENT
@@ -162,7 +167,10 @@ def find_topic(parse, type=None, qword=None):
 
             elif rhs[-1] == NT("Interrog_Clause"):
                 print "Interrog_Clause"
-                return find_after_verb(parse[-1][-1]), qword
+                t = find_after_verb(parse[-1][-1])
+                if not t:
+                    t = find_PP(parse[-1][-1])
+                return t, qword
 
             # this acts just like a statement, so call find_topic
             # again, but specifying the type=STATEMENT
@@ -179,7 +187,10 @@ def find_topic(parse, type=None, qword=None):
     elif type == STATEMENT:
         if tree.lhs() == NT("VP_1st") or \
            tree.lhs() == NT("VP_Inf"):
-            return find_after_verb(parse)
+            t = find_after_verb(parse[-1][-1])
+            if not t:
+                t = find_PP(parse[-1][-1])
+            return t, qword
         else:
             for subtree in parse:
                 subj = find_topic(subtree, type)
