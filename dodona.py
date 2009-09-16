@@ -24,8 +24,9 @@ cls = options.cls
 sessions = {}
 # load the data the Dodona pulls from
 topics = load_topics("doctopics/topics.xml")
+if not cls: cls = "dodona-test"
 bot = IO(cls)
-print "\nDodona successfully started!\n"
+print "\nDodona successfully started on class " + cls + "!\n"
 
 while True:
     # recieve a message and return the sender as well
